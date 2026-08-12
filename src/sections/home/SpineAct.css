@@ -1,0 +1,85 @@
+/* SpineAct — asymmetric: the argument holds the narrow column, the spine
+   diagram holds the wide one. Deliberately the tallest non-hero act. */
+
+.sp {
+  padding-block: var(--space-3xl) var(--space-2xl);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.sp-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.sp-copy {
+  min-width: 0;
+}
+
+.sp-title {
+  font-size: var(--text-display-md);
+  max-width: 16ch;
+}
+
+.sp-body {
+  margin-top: var(--space-lg);
+}
+
+.sp-proof {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.sp-proof-line {
+  padding-block: var(--space-sm);
+  border-top: 1px solid var(--rule-dark);
+  font-size: 0.6875rem;
+  color: var(--color-muted-dark);
+  opacity: 0.78;
+  overflow-wrap: anywhere;
+}
+
+.sp-proof-line:last-child {
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.sp-visual {
+  min-width: 0;
+}
+
+.sp-sources-intro {
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-muted-dark);
+  max-width: 54ch;
+}
+
+.sp-spine {
+  margin-top: var(--space-lg);
+}
+
+@media (max-width: 760px) {
+  .sp {
+    padding-block: var(--space-2xl) var(--space-xl);
+  }
+
+  .sp-grid {
+    gap: var(--space-xl);
+  }
+}
+
+@media (min-width: 1000px) {
+  .sp-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-3xl);
+    /* The argument column is much taller than the diagram; centring the
+       diagram against it keeps the act from ending in dead space. */
+    align-items: center;
+  }
+
+  .sp-sources-intro {
+    max-width: 46ch;
+  }
+}

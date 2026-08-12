@@ -1,75 +1,85 @@
-# Mercury Wealth — Offerings Map (source of truth)
+# Mercury Wealth — Offerings Map v2 (source of truth)
 
-*Locked with the owner on 2026-08-12 after the Phase 2 workshop (Gemini mockup extraction →
-critique against `one-pager.html` and `competitor-research.md` → iteration). This document
-drives the site's information architecture: nav, section order, and any solutions pages.
-Do not invent or rename offerings without the owner's sign-off. Additions go through the
-owner and land in the appropriate tier below — the map is a living document; new offerings
-(e.g. roadmap items graduating to core) are appended, not improvised.*
+*v2 locked with the owner on 2026-08-13 after the company-repositioning workshop. Supersedes
+v1 (preserved in git tag `v1` and at the `/v1/` archive URL). This document drives the
+site's information architecture. Additions go through the owner; the map is a living
+document.*
 
----
+## The repositioning (why v2 exists)
 
-## Core offerings (on the landing page)
+Mercury Wealth is a **company** — an AI-native provider of modular engines for wealth
+management firms (EAMs, private banks, brokerages, asset managers — HK & SG). The advisor
+cockpit is the **flagship product**, not the company's identity. Engines are **separately
+licensable and plug-and-play**: a client can adopt Document Intelligence alone in year one
+and subscribe to the Cockpit in year two.
 
-| # | Offering (buyer language) | One-line value prop | Persona | Proof point | Placement |
-|---|---|---|---|---|---|
-| 1 | **Morning briefing & attention feed** | Know exactly what needs your attention before your first client call | RM / advisor | Live recreation of the real briefing screen ("Good morning…, N portfolios drifted past the IPS band"), composing itself | **Hero** — the feed ticking in is the hero visual |
-| 2 | **Book-of-business cockpit** | Your whole book, every custodian, one screen, base currency | RM / firm principal | Cockpit dashboard recreation: AUM, flows, needs-attention, coming-up | Cockpit section |
-| 3 | **Mandate-aware monitoring** | Drift and concentration surface the day they emerge, not at review time | RM / compliance | Drift-breach card (IPS band vs actual, in pp) | Workflow cards |
-| 4 | **Proposals with governance + execution** | From flagged drift to signed proposal to placed order — one audit spine | RM / compliance | The proposal lifecycle thread: draft → versions → approval → e-sign → order → immutable timeline | **Own act** — the governance section; hero visual = audit timeline |
-| 5 | **AI document intelligence** | Structured-note term sheets and custodian statements become structured data, automatically | RM / ops | Term-sheet dissolve animation: PDF → clean fields (issuer, barrier, coupon, maturity) → flows into a proposal draft. **Built today; shown to prospects** | Own visual moment |
-| 6 | **Workflow automation** — "the work runs itself" | Firm processes run to completion — suitability review cycles, audit prep, document chase, client materials | RM / ops | Workflow stepper recreation (trigger → steps ticking → completed with generated artifact). Time saved is the supporting line, never the headline. **Built today** | Own section after doc intelligence |
-| 7 | **Relationship workspace** | Tasks, meetings, pipeline and client documents beside the portfolios they concern | RM | Workspace recreation | Workflow cards |
-| 8 | **Audit by default** | The compliance answer is a filter, not an archaeology project | Compliance | Immutable audit-log filter view | Trust pillars |
-| 9 | **Full instrument coverage** (equities, bonds w/ yield & duration, funds, structured notes) | Asia's structured-note-heavy books, natively | RM | Instrument specifics named on-page | Built-for-Asia section — framed as **table stakes done natively**, never as uniqueness |
+**The two traps, permanently on guard:**
+- **The Privé trap** — modularity must never read as a toolbox of parts. The counter-story:
+  *every engine runs on one data spine and writes to one audit log; each engine added
+  compounds.* This is the architecture act on the home page.
+- **The agentic trap** — "agentic AI" / "AI-powered" are banned as labels. We show the
+  artifact and the behavior ("speak your meeting; the call report files itself"), never
+  the buzzword.
 
-### Mechanism (how the AI is presented — not a headline offering)
+## The engine portfolio (descriptive names — branded names deferred)
 
-| Offering | Framing | Placement |
-|---|---|---|
-| **AI co-pilot** (ask the book, explain drift, draft a proposal) | The junior colleague who prepped overnight — the advisor decides. 3-step how-it-works (ingest → check against mandate → advisor approves). Negative-space claims allowed (e.g. zero-hallucination discipline) | How-it-works section + animated chat recreation |
+| Engine | One-liner | Status | Source of truth for assets |
+|---|---|---|---|
+| **Mercury Cockpit** (flagship) | The advisor's daily suite — briefing, book, monitoring, proposals, governance | Built, live | `../03-Fable-Mercury-V1-Application-Mock-Data` (extracted → recreations exist) |
+| **Document Intelligence** | Term sheets, statements, complex documents → structured data, stored, queryable | Built, demoed | Recreation exists (TermSheetDissolve) |
+| **Workflow Automation** | Firm processes run to completion — reviews, audit prep, materials | Built, demoed | Recreation exists (WorkflowAutomation panel) |
+| **Relationship Scribe** | Speak the meeting; the call report, CRM entries, tasks and follow-ups file themselves — in the shape SFC/MAS note-taking expects | Built (repo not shareable) | Vignette to be designed WITH owner — brainstorm before building |
+| **Book-aware Research** | Market intelligence answered against *your book*, not the market in general | Built (repo not shareable) | Vignette to be designed WITH owner |
+| **Compliance Copilot** | Suitability cycles monitored, evidence assembled, DDQ-ready exports | Ready for client demo | Vignette to be designed WITH owner |
 
-## Adjacent (on the page, light touch)
+No "in development" labels — owner confirms all six are demoable. Roadmap (off-site or one
+quiet line): Client Portal (branded client reporting), Mobile App, engines-via-API.
+**Data spine is NOT a product** — it is per-client delivery work; on the site it appears
+only as the architecture story and the integrations section.
 
-| Offering | One-liner | Placement |
-|---|---|---|
-| **Onboarding & data migration** | Custodian feeds connected → book live in N days (de-risking timeline) | Short strip; N to be confirmed by owner before publishing |
+## Site map (launch scope)
 
-## Future roadmap (NOT on the landing page)
+| Page | Job |
+|---|---|
+| **Home** | The company: who Mercury Wealth is, six engines, the spine, proof, Asia, trust |
+| **/cockpit** | The flagship product page = v1 page content, lightly re-headed ("the flagship engine"); keeps governance act, workflow panel, AI mechanism, personas, facts band |
+| **/v1/** | Frozen archive of the original single-product page (noindex). NEVER modified. |
+| /trust | Fast follow — DDQ pillars expanded into a forwardable page (home section until then) |
+| Per-engine pages | Fast follows, built from home vignettes + copy deck extensions |
 
-- Client portal / **branded client portal & client reporting**
-- **Mobile application**
-- Scenario & stress views on drift
-- API access
-- Per-firm-type solutions subpages (EAM / FO / private bank / brokerage) — revisit post-launch
+## Home page — nine acts (locked)
 
-*Roadmap items may be referenced at most as a single quiet line if ever needed; they get no
-sections until the owner promotes them.*
+1. **Hero** — company claim, concrete, no future-tense grandiosity. HK video stays.
+   Headline to be workshopped (candidates: "The engines that run the business of wealth").
+   Sub names buyers + the adoption model (one engine or the whole cockpit). Visual:
+   **engine switcher** — small live vignettes cycling (briefing composes → term sheet
+   dissolves → scribe files).
+2. **Proof strip** — real partner logos as IMAGES (UOB Kay Hian, Lizen Asset Management,
+   Cyberport, Solomon — files in `docs/gemini-build-mockup/.../public/logos/`), honest label.
+3. **The six engines** — the only catalog moment: six tight verb-first cards, one line
+   each, flagship badge on Cockpit, links to /cockpit (others anchor/faster follows).
+4. **The spine act** (anti-Privé) — "Every engine, one data spine, one audit log. Adopt
+   one; every addition compounds." Includes the **integrations bar** rebuilt as a
+   live-feeling component in our design language: sources flowing into the spine
+   (Global News, FactSet, HKEX, Google Cloud, Exchange Data, Oracle, Excel, Word —
+   "these and many more").
+5. **Flagship act** — Cockpit teased with the MorningBriefing recreation → "Explore the
+   Cockpit" → /cockpit.
+6. **Second proof act** — Document Intelligence with TermSheetDissolve (demonstrates the
+   separable-engine thesis).
+7. **Built for Asia** — elevated to company level (true of every engine; SFC/MAS/HKMA).
+8. **Trust pillars + founder statement** — condensed from v1.
+9. **Final CTA + footer** — "Open the live demo" + fluid-gradient MERCURY wordmark.
 
----
+## Standing constraints (carried from v1 + new)
 
-## Section order (locked)
-
-1. **Hero** — morning-briefing moment; pain-first headline in the advisor's voice; live attention feed ticking in; dual CTA: **"Open the live demo"** (placeholder URL for now) + no-form secondary
-2. **Credibility strip** — real partner/ecosystem logos (UOB Kay Hian, Lizen Asset Management, Cyberport, Solomon — real relationships, honest label) + domain-fluency signals
-3. **Six verb-first workflow cards** — *brief the book · catch the breach · draft the proposal · clear the approval · execute the order · log everything*
-4. **Governance act** — the proposal's life as a visual thread
-5. **Document intelligence moment** — term-sheet dissolve animation
-6. **Workflow automation** — "the work runs itself"
-7. **Built for Asia** — booking centres, HKD/SGD/USD, SFC/MAS/HKMA named, structured notes first-class
-8. **AI mechanism** — junior-colleague framing, 3-step how-it-works
-9. **Persona one-liners** — RM / firm principal / compliance (roles, not firm types)
-10. **Founder statement** — Oscar Chan (real co-founder & CEO), conviction about the problem, in the editorial quote layout — framed as a founder's statement, never as a testimonial
-11. **Trust pillars (DDQ-style, six)** — immutable audit log · versioned proposals · four-eyes approvals · e-sign trail · **HK/SG data residency** · no-training-on-client-data. Certifications stated honestly: *"SOC 2 Type II — audit underway · ISO 27001 — certification in progress"* (applied for, not yet held — never claim as granted)
-12. **Facts band** — the mockup's elegant stat layout filled with true product specifics only (no invented metrics)
-13. **Final CTA** — "Open the live demo", no form
-14. **Footer** — minimal sitemap + fluid-gradient MERCURY wordmark (monochrome pointer-reactive SVG; reduced-motion fallback)
-
-## Standing constraints (from research §4–6 + owner decisions)
-
-- Pure product-vision framing; never "demo/mock/portfolio project" in page copy
-- Never: "operating system", "powering…", "next era", "single source of truth", invented metrics, fake testimonials, abstract illustrations
-- AI is felt through **living product behavior** (streaming briefing, thinking states, dissolve animations), positioned via mechanism — not "AI-powered" sloganeering
-- Real asset source: `../03-Fable-Mercury-V1-Application-Mock-Data` (read-only) — recreations use one consistent fictional dataset across the site
-- Primary CTA everywhere: **Open the live demo** (URL = placeholder until owner supplies)
-- Hosting: Vercel
+- All v1 constraints stand: pure product-vision framing; banned vocabulary list
+  (operating system · powering · next era · single source of truth · unified platform ·
+  seamless · empower · AI-powered · **agentic** as label); no invented metrics or
+  testimonials; advisor-inner-voice copy; SFC/MAS/HKMA named; real product-style visuals
+  only; primary CTA "Open the live demo" (placeholder URL); design.md is the locked system.
+- v1 sections/components are READ-ONLY REFERENCE — new pages copy, never edit.
+- Descriptive engine names on the site; branded names deferred until earned.
+- Certifications stated honestly (SOC 2 Type II audit underway · ISO 27001 in progress).
+- Legal entity in footer: "MERCURY AI LIMITED" pending owner confirmation.
+- Repo: https://github.com/bala-subbiah/mercury-wealth-landing (tag `v1` = frozen original).

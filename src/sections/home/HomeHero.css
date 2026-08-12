@@ -1,0 +1,237 @@
+/* HomeHero — the company claim over the graded HK night video, with the
+   engine switcher standing in the right column. Video/scrim treatment is the
+   cockpit hero's, unchanged. */
+
+.home-hero {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-navy);
+  padding-block: 128px var(--space-xl);
+  overflow: hidden;
+}
+
+.home-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-color: var(--color-navy);
+}
+
+.home-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.home-hero-still {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 78% 12%, rgba(28, 46, 76, 0.85) 0%, rgba(4, 11, 21, 0) 62%),
+    radial-gradient(90% 60% at 12% 88%, rgba(18, 32, 54, 0.7) 0%, rgba(4, 11, 21, 0) 60%),
+    linear-gradient(180deg, #0a1626 0%, var(--color-navy) 72%);
+}
+
+.home-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 11, 21, 0.55) 0%,
+    rgba(4, 11, 21, 0.72) 42%,
+    rgba(4, 11, 21, 0.94) 80%,
+    var(--color-navy) 100%
+  );
+}
+
+/* ---------------------------------------------------------------------
+   Layout
+   --------------------------------------------------------------------- */
+.hh-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.hh-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  max-width: 42rem;
+  min-width: 0;
+}
+
+.hh-title {
+  margin-top: var(--space-xs);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-display-lg);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--color-ink-dark);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.hh-sub {
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--color-ink-dark);
+  opacity: 0.86;
+  max-width: 46ch;
+}
+
+.hh-ctas {
+  margin-top: var(--space-xs);
+}
+
+.hh-caption {
+  color: var(--color-muted-dark);
+  opacity: 0.85;
+  overflow-wrap: anywhere;
+}
+
+.hh-visual {
+  min-width: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Engine switcher
+   --------------------------------------------------------------------- */
+.hs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+/* The stage reserves its own height, so a swap never reflows the page under
+   it. The floors below are the measured height of the taller vignette at each
+   width; the component also grows the stage inline if a panel ever exceeds
+   them. Whichever vignette is shorter sits centred in the reserved band. */
+.hs-stage {
+  position: relative;
+  min-height: max(var(--hs-reserve, 0px), 820px);
+}
+
+.hs-layer {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline: 0;
+  transform: translate3d(0, -50%, 0);
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out);
+}
+
+.hs-layer--on {
+  opacity: 1;
+}
+
+/* Reduced motion: no crossfade at all — the swap is instant. */
+.hs-layer--static {
+  opacity: 1;
+  transition: none;
+}
+
+.hs-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.hs-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding-block: 4px;
+  font-size: 0.6875rem;
+  color: var(--color-muted-dark);
+  opacity: 0.7;
+  transition: color var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+}
+
+.hs-tab:hover {
+  opacity: 1;
+}
+
+.hs-tab--on {
+  color: var(--color-brass);
+  opacity: 1;
+}
+
+.hs-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background-color: currentColor;
+  opacity: 0.55;
+}
+
+.hs-tab--on .hs-dot {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------
+   Breakpoints
+   --------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .home-hero {
+    padding-block: 104px var(--space-lg);
+  }
+}
+
+@media (min-width: 360px) {
+  .hs-stage {
+    min-height: max(var(--hs-reserve, 0px), 750px);
+  }
+}
+
+@media (min-width: 480px) {
+  .hs-stage {
+    min-height: max(var(--hs-reserve, 0px), 660px);
+  }
+}
+
+@media (min-width: 700px) {
+  .hh-sub {
+    max-width: 52ch;
+  }
+
+  .hs-stage {
+    min-height: max(var(--hs-reserve, 0px), 600px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-hero {
+    padding-block: 160px var(--space-2xl);
+  }
+
+  .hh-grid {
+    grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .hs-stage {
+    min-height: max(var(--hs-reserve, 0px), 670px);
+  }
+}
+
+@media (min-width: 1240px) {
+  .hh-grid {
+    gap: var(--space-2xl);
+  }
+
+  .hs-stage {
+    min-height: max(var(--hs-reserve, 0px), 610px);
+  }
+}

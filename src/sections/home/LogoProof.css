@@ -1,0 +1,31 @@
+/* LogoProof — hairline-bounded, low and quiet. The band exists to be scrolled
+   past; nothing here competes with the engines below it. */
+
+.lp {
+  padding-block: var(--space-lg);
+  border-top: 1px solid var(--rule-dark);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.lp-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.lp-strip {
+  min-width: 0;
+}
+
+.lp-buyers {
+  font-size: 0.6875rem;
+  color: var(--color-muted-dark);
+  opacity: 0.6;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .lp {
+    padding-block: var(--space-md);
+  }
+}

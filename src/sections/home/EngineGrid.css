@@ -1,0 +1,168 @@
+/* EngineGrid — the catalog act. Hairline-topped cards, no icons, no tiles.
+   Seniority is expressed by width and type size, never by a coloured surface. */
+
+.eg {
+  padding-block: var(--space-2xl) var(--space-3xl);
+}
+
+.eg-head {
+  max-width: 44ch;
+}
+
+.eg-title {
+  font-size: var(--text-display-md);
+}
+
+.eg-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg) var(--space-xl);
+  margin-top: var(--space-xl);
+}
+
+.eg-card {
+  min-width: 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.eg-card--flagship {
+  border-top-color: rgba(198, 155, 78, 0.42);
+}
+
+.eg-card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-xl);
+  line-height: 1.15;
+  color: var(--color-ink-dark);
+  overflow-wrap: anywhere;
+}
+
+.eg-card-line {
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--color-ink-dark);
+  opacity: 0.9;
+  max-width: 48ch;
+}
+
+.eg-card-support {
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-muted-dark);
+  max-width: 52ch;
+}
+
+/* ---------------------------------------------------------------------
+   Flagship card
+   --------------------------------------------------------------------- */
+.eg-flagship-id {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-md);
+}
+
+.eg-badge {
+  padding: 5px 10px;
+  border: 1px solid rgba(198, 155, 78, 0.55);
+  border-radius: var(--radius-chip);
+  font-size: 0.625rem;
+  line-height: 1.2;
+  color: var(--color-brass);
+  white-space: nowrap;
+}
+
+.eg-flagship-body {
+  min-width: 0;
+}
+
+.eg-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+  padding-block: 4px;
+  border-bottom: 1px solid var(--rule-dark-strong);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink-dark);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.eg-link:hover {
+  color: var(--color-brass);
+  border-bottom-color: var(--color-brass);
+}
+
+/* ---------------------------------------------------------------------
+   Breakpoints
+   --------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  .eg {
+    padding-block: var(--space-xl) var(--space-2xl);
+  }
+}
+
+@media (min-width: 720px) and (max-width: 999px) {
+  .eg-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .eg-card--flagship {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1000px) {
+  .eg-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-2xl) var(--space-xl);
+    margin-top: var(--space-2xl);
+  }
+
+  .eg-card--12 {
+    grid-column: span 12;
+  }
+
+  .eg-card--7 {
+    grid-column: span 7;
+  }
+
+  .eg-card--5 {
+    grid-column: span 5;
+  }
+
+  .eg-card--4 {
+    grid-column: span 4;
+  }
+
+  /* The flagship reads as a spread, not a card: identity left, argument right. */
+  .eg-card--flagship {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-lg) var(--space-xl);
+    align-items: start;
+    padding-top: var(--space-lg);
+  }
+
+  .eg-card-title--lg {
+    font-size: var(--text-2xl);
+  }
+
+  .eg-card-line--lg {
+    margin-top: 0;
+    font-size: var(--text-md);
+    line-height: 1.45;
+  }
+
+  .eg-card--7 .eg-card-line,
+  .eg-card--5 .eg-card-line {
+    font-size: var(--text-base);
+  }
+}

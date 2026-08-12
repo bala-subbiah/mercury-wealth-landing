@@ -172,6 +172,12 @@
   font-size: var(--text-xs);
 }
 
+/* Same link, different destination class: a secondary CTA that leaves the page
+   points forward, not down. */
+.cta-secondary--forward::after {
+  content: "→";
+}
+
 /* ---------------------------------------------------------------------
    Scroll reveal — the page's single fade-up primitive.
    Reduced motion / no-IntersectionObserver: rendered already-revealed.

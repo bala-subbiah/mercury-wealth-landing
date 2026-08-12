@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 
 import "./Nav.css";
 
-/* Nav labels — docs/copy-deck.md §0 (five items plus the CTA, verbatim). */
-const LINKS = [
-  { label: "Cockpit", href: "#cockpit" },
-  { label: "Governance", href: "#governance" },
-  { label: "Intelligence", href: "#intelligence" },
-  { label: "Built for Asia", href: "#built-for-asia" },
-  { label: "Trust", href: "#trust" },
-];
+export interface NavLink {
+  label: string;
+  href: string;
+}
+
+export interface NavProps {
+  /** Which page is rendering the nav — drives the wordmark's destination. */
+  page: "home" | "cockpit";
+  /** Section/page links, in display order. Content lives with the caller
+   *  (App.tsx for home, CockpitApp.tsx for cockpit) — Nav only lays them out. */
+  links: NavLink[];
+}
 
 const CTA = "Open the live demo";
 const MENU = "Menu";
@@ -18,8 +22,12 @@ const MENU = "Menu";
  * Fixed header: transparent over the hero video, navy + hairline once the page
  * has scrolled past the first 60px. Below 900px the labels collapse into a
  * disclosure panel that Escape closes.
+ *
+ * Configurable per page: `links` supplies the nav items, `page` decides where
+ * the MERCURY wordmark points — an in-page scroll-to-top on the page it
+ * already is, a cross-page link back to home from anywhere else.
  */
-export default function Nav() {
+export default function Nav({ page, links }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -39,15 +47,17 @@ export default function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  const markHref = page === "home" ? "#top" : "/";
+
   return (
     <header className={["nav", scrolled || open ? "nav--scrolled" : ""].filter(Boolean).join(" ")}>
       <div className="container nav-inner">
-        <a className="nav-mark" href="#top" aria-label="Mercury — top of page">
+        <a className="nav-mark" href={markHref} aria-label="Mercury — top of page">
           MERCURY
         </a>
 
         <nav className="nav-links" aria-label="Sections">
-          {LINKS.map((link) => (
+          {links.map((link) => (
             <a key={link.href} className="nav-link" href={link.href}>
               {link.label}
             </a>
@@ -72,7 +82,7 @@ export default function Nav() {
       {open ? (
         <div className="nav-panel" id="nav-panel">
           <div className="container nav-panel-inner">
-            {LINKS.map((link) => (
+            {links.map((link) => (
               <a
                 key={link.href}
                 className="nav-panel-link"

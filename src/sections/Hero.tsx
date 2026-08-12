@@ -4,8 +4,10 @@ import { MorningBriefing } from "../components/product";
 import { useReducedMotion } from "../components/product/useReducedMotion";
 import "./Hero.css";
 
-/* Copy — docs/copy-deck.md §1, verbatim. */
-const EYEBROW = "THE ADVISOR'S COCKPIT · HONG KONG & SINGAPORE";
+/* Copy — docs/copy-deck.md §1, verbatim, except the eyebrow: re-headed for
+   the /cockpit page per docs/offerings-map.md v2 (Hero is now cockpit-only —
+   the home page has its own HomeHero in src/sections/home/). */
+const EYEBROW = "MERCURY COCKPIT · THE FLAGSHIP ENGINE";
 const HEADLINE = "Your morning, already prepared.";
 const SUBHEAD =
   "Monitor the book, advise the client, execute with governance — every custodian, every booking centre, on one screen, in your base currency.";

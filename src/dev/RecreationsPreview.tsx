@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { IntegrationsSpine, LogoStrip } from "../components/company";
 import {
   AuditTimeline,
   CockpitDashboard,
@@ -50,6 +51,14 @@ export default function RecreationsPreview() {
 
       <Block index="06" name="MorningBriefing · animate={false}" note="Static path, motion disabled.">
         <MorningBriefing animate={false} />
+      </Block>
+
+      <Block index="07" name="LogoStrip" note="Company — quiet static row, monochrome, hover for opacity.">
+        <LogoStrip />
+      </Block>
+
+      <Block index="08" name="IntegrationsSpine" note="Company — sources converge into the data spine, sequential pulse.">
+        <IntegrationsSpine />
       </Block>
     </main>
   );
