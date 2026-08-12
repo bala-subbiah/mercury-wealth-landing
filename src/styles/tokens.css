@@ -1,0 +1,103 @@
+/* Hallmark · macrostructure: Marquee Hero (video) + banded scrollytelling · theme: studied-DNA (Direction C) · studied: yes */
+
+/* Mercury Wealth — Locked Design System (Direction C · "Institutional intelligence")
+   Source of truth: /design.md — do not diverge from these values without an owner
+   sign-off recorded there first. */
+
+:root {
+  /* ---------------------------------------------------------------------
+     Surfaces
+     --------------------------------------------------------------------- */
+  --color-navy: #040b15; /* dominant dark paper */
+  --color-panel: #0a101c; /* product-UI panel surface */
+  --color-panel-2: #111622; /* nested UI cards */
+  --color-paper: #f4f5f3; /* daylight interlude paper (warm) */
+
+  /* ---------------------------------------------------------------------
+     Ink
+     --------------------------------------------------------------------- */
+  --color-ink: #1b2536; /* on light */
+  --color-body-light: #2c3546; /* body on light */
+  --color-muted-light: #5e6572; /* 5.36:1 on --color-paper (was #6a7180 @ 4.48:1) */
+  --color-ink-dark: #e6e8e4; /* primary on dark */
+  --color-muted-dark: #98a0ac;
+
+  /* ---------------------------------------------------------------------
+     Accent — marketing chrome only, <=5% footprint
+     --------------------------------------------------------------------- */
+  --color-brass: #c69b4e; /* on dark surfaces */
+  --color-brass-deep: #856223; /* on light surfaces; 5.10:1 on --color-paper (was #96702f @ 4.12:1) */
+
+  /* ---------------------------------------------------------------------
+     Hairlines
+     --------------------------------------------------------------------- */
+  --rule-dark: rgba(255, 255, 255, 0.08);
+  --rule-light: #d8dad4;
+
+  /* ---------------------------------------------------------------------
+     Luminous — ONLY inside product surfaces (panels, data strips, recreations)
+     --------------------------------------------------------------------- */
+  --ui-indigo: #6366f1;
+  --ui-emerald: #34d399;
+  --ui-amber: #f59e0b;
+  --ui-rose: #fb7185;
+
+  /* ---------------------------------------------------------------------
+     Product-surface chrome — panel radii, hairline variants, depth.
+     Used only by the product-UI recreations in src/components/product/.
+     --------------------------------------------------------------------- */
+  --radius-panel: 12px;
+  --radius-card: 8px;
+  --radius-chip: 4px;
+
+  --rule-dark-soft: rgba(255, 255, 255, 0.05);
+  --rule-dark-strong: rgba(255, 255, 255, 0.14);
+
+  --surface-hover: rgba(255, 255, 255, 0.03);
+  --surface-sunken: rgba(0, 0, 0, 0.22);
+
+  --shadow-panel: 0 24px 60px -32px rgba(0, 0, 0, 0.85);
+  --shadow-card: 0 12px 28px -20px rgba(0, 0, 0, 0.8);
+
+  /* ---------------------------------------------------------------------
+     Type families — must match @fontsource-variable package family names
+     --------------------------------------------------------------------- */
+  --font-display: "Source Serif 4 Variable", Georgia, serif; /* 400/600, ROMAN ONLY */
+  --font-body: "Inter Variable", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono Variable", monospace; /* labels UPPERCASE, ls 0.18em; tabular-nums */
+
+  /* ---------------------------------------------------------------------
+     Type scale — body/UI sizes fixed, display sizes fluid via clamp()
+     --------------------------------------------------------------------- */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-md: 1.125rem; /* 18px */
+  --text-lg: 1.25rem; /* 20px */
+  --text-xl: 1.5rem; /* 24px */
+  --text-2xl: 1.875rem; /* 30px */
+
+  --text-display-sm: clamp(1.75rem, 1.45rem + 1.3vw, 2.5rem);
+  --text-display-md: clamp(2.25rem, 1.65rem + 2.5vw, 3.5rem);
+  --text-display-lg: clamp(2.75rem, 1.85rem + 3.8vw, 4.75rem);
+  --text-display-xl: clamp(3.25rem, 1.95rem + 5.5vw, 6rem);
+
+  /* ---------------------------------------------------------------------
+     Motion
+     --------------------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 200ms;
+  --dur-med: 450ms;
+  --dur-slow: 900ms;
+
+  /* ---------------------------------------------------------------------
+     Space — 4pt scale
+     --------------------------------------------------------------------- */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 104px;
+  --space-3xl: 160px;
+}

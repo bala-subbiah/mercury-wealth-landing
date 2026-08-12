@@ -1,0 +1,65 @@
+/* Footer — a sitemap row, the fluid-gradient wordmark, a copyright line. */
+
+.footer {
+  padding-block: var(--space-2xl) var(--space-lg);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md) var(--space-lg);
+  padding-bottom: var(--space-xl);
+}
+
+.footer-tagline {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  color: var(--color-ink-dark);
+  opacity: 0.85;
+  max-width: 34ch;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+}
+
+.footer-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted-dark);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.footer-link:hover {
+  color: var(--color-ink-dark);
+  border-bottom-color: var(--color-brass);
+}
+
+.footer-mark {
+  margin-block: var(--space-md);
+}
+
+.footer-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-lg);
+  padding-top: var(--space-md);
+  color: var(--color-muted-dark);
+  opacity: 0.7;
+}
+
+.footer-foot span {
+  overflow-wrap: anywhere;
+}

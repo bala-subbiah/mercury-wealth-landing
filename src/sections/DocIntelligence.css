@@ -1,0 +1,58 @@
+/* DocIntelligence — split header (claim left, argument right), the dissolve
+   full-width beneath it. */
+
+.doc {
+  padding-block: var(--space-3xl) var(--space-2xl);
+  background-color: var(--color-navy);
+}
+
+.doc-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: end;
+}
+
+.doc-title {
+  font-size: var(--text-display-md);
+}
+
+.doc-visual {
+  margin-top: var(--space-xl);
+  min-width: 0;
+}
+
+.doc-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm) var(--space-lg);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.doc-beats {
+  color: var(--color-brass);
+  opacity: 0.8;
+  overflow-wrap: anywhere;
+}
+
+.doc-negative {
+  font-size: var(--text-sm);
+  color: var(--color-muted-dark);
+  opacity: 0.8;
+  max-width: 48ch;
+}
+
+@media (min-width: 1000px) {
+  .doc-head {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  .doc-visual {
+    margin-top: var(--space-2xl);
+  }
+}

@@ -1,0 +1,241 @@
+/* Mercury product recreation — proposal audit timeline (governance act).
+   Anatomy + entries: docs/asset-extraction-report.md §3. Tokens only. */
+
+.at-panel {
+  --at-pad: 18px;
+  --at-node: 26px;
+
+  width: 100%;
+  background-color: var(--color-panel);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+  font-family: var(--font-body);
+  color: var(--color-ink-dark);
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------
+   Header
+   --------------------------------------------------------------------- */
+
+.at-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px var(--space-sm);
+  padding: 14px var(--at-pad);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.at-head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.at-title {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-ink-dark);
+}
+
+.at-sub {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--color-muted-dark);
+}
+
+.at-count {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted-dark);
+  padding: 4px 7px;
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-chip);
+  background-color: var(--surface-sunken);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------
+   Timeline
+   --------------------------------------------------------------------- */
+
+.at-list {
+  position: relative;
+  padding: var(--space-sm) var(--at-pad) 20px;
+}
+
+/* The rail — a hairline running down the centre of the node column. */
+.at-list::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  bottom: 34px;
+  left: calc(var(--at-pad) + var(--at-node) / 2);
+  width: 1px;
+  background-color: var(--rule-dark-strong);
+}
+
+.at-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--at-node) minmax(0, 1fr);
+  gap: 12px;
+  padding-bottom: var(--space-sm);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.at-entry:last-child {
+  padding-bottom: 0;
+}
+
+.at-entry--on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.at-list--instant .at-entry {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.at-node {
+  position: relative;
+  z-index: 1;
+  width: var(--at-node);
+  height: var(--at-node);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--ui-indigo);
+  background-color: color-mix(in srgb, var(--ui-indigo) 16%, var(--color-panel));
+  border: 1px solid color-mix(in srgb, var(--ui-indigo) 55%, transparent);
+}
+
+.at-content {
+  min-width: 0;
+  padding-top: 3px;
+}
+
+.at-headline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.at-action {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-ink-dark);
+}
+
+.at-entity {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted-dark);
+  padding: 3px 5px;
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-chip);
+  line-height: 1;
+}
+
+.at-states {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.at-state {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: var(--radius-chip);
+}
+
+.at-state--before {
+  color: var(--color-muted-dark);
+  border: 1px dashed var(--rule-dark-strong);
+}
+
+.at-state--after {
+  color: var(--color-ink-dark);
+  border: 1px solid color-mix(in srgb, var(--ui-indigo) 60%, transparent);
+  background-color: color-mix(in srgb, var(--ui-indigo) 20%, transparent);
+}
+
+.at-arrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-muted-dark);
+}
+
+.at-time {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  color: var(--color-muted-dark);
+  white-space: nowrap;
+}
+
+.at-summary {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-muted-dark);
+}
+
+.at-actor {
+  color: var(--color-muted-dark);
+  opacity: 0.72;
+}
+
+/* ---------------------------------------------------------------------
+   Responsive
+   --------------------------------------------------------------------- */
+
+@media (max-width: 560px) {
+  .at-panel {
+    --at-pad: 14px;
+    --at-node: 24px;
+  }
+
+  .at-time {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Reduced motion
+   --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .at-entry {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

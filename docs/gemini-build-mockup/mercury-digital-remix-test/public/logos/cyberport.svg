@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 200" width="650" height="200">
+  <g transform="translate(10, 20)">
+    <!-- 數碼港 positioned above 'p' of Cyberport -->
+    <text x="280" y="45" font-size="48" font-weight="800" letter-spacing="2" fill="#005BAC" font-family="'PingFang HK', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif">數碼港</text>
+    <!-- Cyberport in italic -->
+    <text x="0" y="115" font-size="96" font-weight="700" font-style="italic" letter-spacing="-1" fill="#00A0E9" font-family="system-ui, -apple-system, sans-serif">Cyberport</text>
+    <!-- 4 colored bar stripes -->
+    <rect x="0" y="132" width="600" height="6" fill="#004883" />
+    <rect x="0" y="138" width="600" height="6" fill="#00A0E9" />
+    <rect x="0" y="144" width="600" height="6" fill="#78BE20" />
+    <rect x="0" y="150" width="600" height="6" fill="#D4E157" />
+  </g>
+</svg>

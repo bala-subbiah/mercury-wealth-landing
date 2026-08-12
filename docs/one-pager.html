@@ -1,0 +1,252 @@
+<title>Mercury Wealth — Product Brief</title>
+<style>
+  :root {
+    --ground: #F4F5F3;
+    --ink: #1B2536;
+    --body: #2C3546;
+    --muted: #6A7180;
+    --brass: #96702F;
+    --rule: #D8DAD4;
+    --rule-strong: #1B2536;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: -apple-system, "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0F1520;
+      --ink: #E6E8E4;
+      --body: #C3C9CF;
+      --muted: #7E8795;
+      --brass: #C69B4E;
+      --rule: #2A3242;
+      --rule-strong: #E6E8E4;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1520;
+    --ink: #E6E8E4;
+    --body: #C3C9CF;
+    --muted: #7E8795;
+    --brass: #C69B4E;
+    --rule: #2A3242;
+    --rule-strong: #E6E8E4;
+  }
+  :root[data-theme="light"] {
+    --ground: #F4F5F3;
+    --ink: #1B2536;
+    --body: #2C3546;
+    --muted: #6A7180;
+    --brass: #96702F;
+    --rule: #D8DAD4;
+    --rule-strong: #1B2536;
+  }
+
+  html { background: var(--ground); }
+  body {
+    font-family: var(--serif);
+    color: var(--body);
+    line-height: 1.62;
+    font-size: 1.0rem;
+  }
+  .brief {
+    max-width: 42.5rem;
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 3.5rem;
+  }
+
+  /* Masthead */
+  .wordmark {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    letter-spacing: 0.14em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .doc-kind {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.35rem;
+  }
+  .lede {
+    font-size: 1.12rem;
+    font-style: italic;
+    color: var(--ink);
+    text-wrap: balance;
+    margin-top: 1.4rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 2px solid var(--rule-strong);
+  }
+
+  section { margin-top: 2.4rem; }
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brass);
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1rem;
+  }
+  p + p { margin-top: 0.9rem; }
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+
+  ul.caps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  ul.caps li {
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  ul.caps li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--brass);
+  }
+
+  table.roles {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.98rem;
+  }
+  table.roles th, table.roles td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  table.roles th {
+    font-family: var(--serif);
+    font-weight: 700;
+    color: var(--ink);
+    width: 38%;
+    padding-right: 1.2rem;
+  }
+
+  .colophon {
+    margin-top: 3rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .colophon .mark { color: var(--brass); font-style: normal; }
+
+  @media (max-width: 480px) {
+    .brief { padding-top: 3rem; }
+    table.roles th { width: 44%; }
+  }
+</style>
+
+<div class="brief">
+  <header>
+    <div class="wordmark">Mercury&nbsp;Wealth</div>
+    <div class="doc-kind">Product Brief</div>
+    <p class="lede">The advisor’s cockpit for running a book of business — built for
+    external asset managers (EAMs), private banks and brokerages in Hong Kong and
+    Singapore.</p>
+  </header>
+
+  <section>
+    <h2 class="eyebrow">Why Mercury exists</h2>
+    <p>A relationship manager’s day is scattered across custodian portals,
+    spreadsheets, a CRM and email. The consequences are familiar: no single live
+    view of the book, portfolio drift discovered at quarter-end instead of the day
+    it emerged, proposals assembled by hand in slides, and an approval trail
+    spread across inboxes when compliance asks for it. Mercury replaces that
+    patchwork with one system that can answer, at any moment:
+    <strong>how is my book positioned, what needs my attention today, and where is
+    every client decision in its lifecycle?</strong></p>
+  </section>
+
+  <section>
+    <h2 class="eyebrow">What Mercury is</h2>
+    <p>Mercury is a front-office platform that unifies the three things an advisor
+    actually does — <strong>monitor the book, advise the client, and execute with
+    governance</strong> — on a single multi-custodian, multi-currency data spine
+    covering households, accounts, portfolios, holdings and activity.</p>
+  </section>
+
+  <section>
+    <h2 class="eyebrow">Key capabilities</h2>
+    <ul class="caps">
+      <li><strong>Book-of-business cockpit</strong> — one live view of every
+      household and account across custodians: AUM, flows, performance,
+      asset-class and currency exposure, all in base currency with native amounts
+      one click away.</li>
+      <li><strong>Morning briefing &amp; attention feed</strong> — the day starts
+      with a ranked list of what genuinely needs action: drift breaches,
+      concentration flags, maturing positions, pending approvals, upcoming
+      reviews.</li>
+      <li><strong>Mandate-aware portfolio monitoring</strong> — every portfolio
+      tracked against its model and risk profile, for advisory and discretionary
+      (DPM) mandates alike; drift and concentration surface as they emerge, not at
+      review time.</li>
+      <li><strong>Proposals with built-in governance</strong> — investment
+      proposals drafted, versioned, discussed and approved in one place, with
+      client sign-off (in-app or e-signature) and a complete audit timeline on
+      every proposal.</li>
+      <li><strong>From acceptance to execution</strong> — an accepted proposal
+      becomes orders; execution status is tracked on the same record the client
+      approved.</li>
+      <li><strong>Full instrument coverage</strong> — equities, bonds with yield
+      and duration analytics, funds and structured notes, across the venues and
+      access routes typical of an Asian book.</li>
+      <li><strong>Relationship workspace</strong> — tasks, meetings and
+      interaction history, a prospect pipeline, and client documents alongside the
+      portfolios they concern.</li>
+      <li><strong>Audit by default</strong> — every material action lands on an
+      immutable audit log; the compliance answer is a filter, not an archaeology
+      project.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="eyebrow">What makes it different</h2>
+    <ul class="caps">
+      <li><strong>Book-first, not account-first.</strong> Custodian portals show
+      accounts; Mercury shows the <em>business</em> — rolled up, comparable, and
+      scoped to exactly what each advisor is entitled to see.</li>
+      <li><strong>Governance is the workflow, not paperwork after it.</strong> The
+      proposal the client accepted, the approval that authorised it and the trades
+      that executed it are one linked record.</li>
+      <li><strong>Built for Asia’s operating reality.</strong> Multi-custodian,
+      multi-booking-centre and multi-currency by design — HKD/SGD/USD base
+      reporting, cross-border tax-lot awareness, and consistent numbers because
+      every derived figure is computed from base facts, never keyed in twice.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="eyebrow">Who it’s for</h2>
+    <table class="roles">
+      <tr>
+        <th>Relationship manager / advisor</th>
+        <td>The daily cockpit: book view, attention feed, proposals, tasks</td>
+      </tr>
+      <tr>
+        <th>Firm principal / team head</th>
+        <td>Firm-wide oversight across every advisor’s book</td>
+      </tr>
+      <tr>
+        <th>Compliance &amp; operations</th>
+        <td>The approval trail and audit timeline, without asking anyone</td>
+      </tr>
+    </table>
+  </section>
+
+  <p class="colophon"><span class="mark">☙</span>&nbsp; Mercury Wealth — see the
+  whole book. Act with governance. &nbsp;<span class="mark">❧</span></p>
+</div>

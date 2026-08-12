@@ -1,0 +1,43 @@
+/* FinalCta — dark, spacious, the one place the page centres itself. */
+
+.final {
+  padding-block: var(--space-3xl);
+  background-color: var(--color-navy);
+  text-align: center;
+}
+
+.final-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.final-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-display-lg);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-ink-dark);
+  max-width: 18ch;
+  overflow-wrap: anywhere;
+}
+
+.final-sub {
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--color-muted-dark);
+  max-width: 56ch;
+}
+
+.final-ctas {
+  justify-content: center;
+  margin-top: var(--space-sm);
+}
+
+.final-micro {
+  margin-top: var(--space-md);
+  color: var(--color-muted-dark);
+  opacity: 0.7;
+}

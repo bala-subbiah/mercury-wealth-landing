@@ -1,0 +1,281 @@
+/* Mercury Wealth — shared section layer.
+   Page-level primitives only: container, section rhythm, CTAs, mono labels,
+   scroll-reveal. Section-specific rules live beside their component.
+   Every value comes from tokens.css via var(). */
+
+/* ---------------------------------------------------------------------
+   Anchors — every id target clears the fixed nav
+   --------------------------------------------------------------------- */
+[id] {
+  scroll-margin-top: 96px;
+}
+
+/* ---------------------------------------------------------------------
+   Container
+   --------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+}
+
+.container--narrow {
+  max-width: 940px;
+}
+
+/* ---------------------------------------------------------------------
+   Section rhythm — paddings are set per section, never globally uniform
+   --------------------------------------------------------------------- */
+.section {
+  position: relative;
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 68ch;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--color-ink-dark);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.on-paper .section-title {
+  color: var(--color-ink);
+}
+
+.section-sub {
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--color-muted-dark);
+  max-width: 62ch;
+}
+
+.on-paper .section-sub {
+  color: var(--color-body-light);
+}
+
+.body-copy {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-muted-dark);
+  max-width: 66ch;
+}
+
+.on-paper .body-copy {
+  color: var(--color-body-light);
+}
+
+/* ---------------------------------------------------------------------
+   Mono utilities
+   --------------------------------------------------------------------- */
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.6;
+}
+
+.mono-muted {
+  color: var(--color-muted-dark);
+}
+
+.on-paper .mono-muted {
+  color: var(--color-muted-light);
+}
+
+/* ---------------------------------------------------------------------
+   CTAs — brass outline pill (primary) + anchored text link (secondary)
+   Eight-state discipline: rest / hover / active / focus-visible on both.
+   --------------------------------------------------------------------- */
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 15px 30px;
+  border: 1px solid var(--color-brass);
+  border-radius: 999px;
+  color: var(--color-brass);
+  background-color: transparent;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.cta-primary:hover {
+  background-color: rgba(198, 155, 78, 0.12);
+  border-color: #d8b26a;
+  color: #d8b26a;
+}
+
+.cta-primary:active {
+  background-color: rgba(198, 155, 78, 0.2);
+}
+
+.on-paper .cta-primary {
+  border-color: var(--color-brass-deep);
+  color: var(--color-brass-deep);
+}
+
+.on-paper .cta-primary:hover {
+  background-color: rgba(150, 112, 47, 0.1);
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding-block: 6px;
+  border-bottom: 1px solid var(--rule-dark-strong);
+  color: var(--color-ink-dark);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.cta-secondary:hover {
+  color: var(--color-brass);
+  border-bottom-color: var(--color-brass);
+}
+
+.cta-secondary::after {
+  content: "↓";
+  font-size: var(--text-xs);
+}
+
+/* ---------------------------------------------------------------------
+   Scroll reveal — the page's single fade-up primitive.
+   Reduced motion / no-IntersectionObserver: rendered already-revealed.
+   --------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal.is-static {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Skip link
+   --------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  background-color: var(--color-panel);
+  border: 1px solid var(--color-brass);
+  color: var(--color-ink-dark);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.skip-link:focus-visible,
+.skip-link:focus {
+  left: var(--space-sm);
+  top: var(--space-sm);
+}
+
+/* ---------------------------------------------------------------------
+   Small-screen rhythm — the desktop paddings (2xl/3xl) leave dead bands on a
+   phone. Scaled down here in one place, keeping the sections' relative
+   variation rather than flattening them all to one value.
+   --------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  .cred {
+    padding-block: var(--space-lg);
+  }
+
+  .wf,
+  .auto,
+  .trust {
+    padding-block: var(--space-xl) var(--space-2xl);
+  }
+
+  .gov,
+  .doc,
+  .asia,
+  .aim {
+    padding-block: var(--space-2xl) var(--space-xl);
+  }
+
+  .persona {
+    padding-block: var(--space-xl);
+  }
+
+  .founder,
+  .facts,
+  .final {
+    padding-block: var(--space-2xl);
+  }
+
+  .footer {
+    padding-block: var(--space-xl) var(--space-lg);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Inline product surface — the small panels a section builds itself.
+   Same language as src/components/product/: panel ground, hairlines,
+   mono labels; luminous status colour is allowed inside these only.
+   --------------------------------------------------------------------- */
+.surface {
+  background-color: var(--color-panel);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+  overflow: hidden;
+}

@@ -1,0 +1,70 @@
+/* GovernanceAct — the proposal's life. Copy on the left, the real audit
+   timeline on the right, the lifecycle spelled out as a mono breadcrumb. */
+
+.gov {
+  padding-block: var(--space-2xl) var(--space-3xl);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.gov-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.gov-title {
+  font-size: var(--text-display-md);
+}
+
+.gov-body {
+  margin-top: var(--space-md);
+}
+
+.gov-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px var(--space-xs);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule-dark);
+  color: var(--color-muted-dark);
+  opacity: 0.72;
+}
+
+.gov-crumb-arrow {
+  color: var(--color-brass);
+  opacity: 0.6;
+}
+
+.gov-quote {
+  margin-top: var(--space-lg);
+  padding-left: var(--space-md);
+  border-left: 1px solid var(--color-brass);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-display-sm);
+  line-height: 1.18;
+  color: var(--color-ink-dark);
+  overflow-wrap: anywhere;
+}
+
+.gov-cta {
+  margin-top: var(--space-lg);
+}
+
+.gov-visual {
+  min-width: 0;
+}
+
+@media (min-width: 1080px) {
+  .gov-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-2xl);
+  }
+
+  .gov-copy {
+    position: sticky;
+    top: 120px;
+  }
+}

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legora-style Fullscreen Hero & Adaptive Floating Navbar</title>
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. 全域 CSS Reset (強制 Zero-Margin Full Bleed)
+       ========================================================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ==========================================================================
+       2. 100% 視窗滿版 Hero 影片容器與消黑邊關鍵樣式
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+    }
+
+    /* 關鍵：徹底消除左右/上下黑邊 (Letterboxing/Pillarboxing) */
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border: none;
+      outline: none;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 影片極致質感黑色漸層遮罩 */
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        180deg, 
+        rgba(0, 0, 0, 0.45) 0%, 
+        rgba(0, 0, 0, 0.20) 40%, 
+        rgba(0, 0, 0, 0.75) 100%
+      );
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 24px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background-color: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 6vw, 76px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .hero-title strong {
+      font-weight: 700;
+    }
+
+    .hero-description {
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 680px;
+      margin: 0 auto 36px auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 32px;
+      background-color: #ffffff;
+      color: #000000;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background-color: #f0f0f0;
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 32px;
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       3. Legora 風格懸浮 & 3 態動態切換 Nav Bar 樣式 (Borderless & No Underline)
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      transition: background-color 0.4s ease, 
+                  color 0.4s ease, 
+                  padding 0.4s ease,
+                  backdrop-filter 0.4s ease;
+    }
+
+    .nav-container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      transition: all 0.4s ease;
+    }
+
+    .nav-logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      transition: color 0.4s ease;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-link {
+      text-decoration: none !important;
+      border-bottom: none !important;
+      outline: none !important;
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.55;
+      transition: opacity 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link::after,
+    .nav-link::before {
+      display: none !important;
+      content: none !important;
+    }
+
+    .nav-link:hover {
+      opacity: 0.95;
+      text-decoration: none !important;
+      border-bottom: none !important;
+    }
+
+    .nav-link.active {
+      opacity: 1.0;
+      font-weight: 600;
+      text-decoration: none !important;
+      border-bottom: none !important;
+    }
+
+    .nav-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 20px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none !important;
+      transition: all 0.4s ease;
+      border: none !important;
+      outline: none !important;
+    }
+
+    /* --- 方案 A: 全透明主題 (.nav-transparent) --- */
+    .navbar.nav-transparent {
+      background: transparent !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .navbar.nav-transparent .nav-logo-mark {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .navbar.nav-transparent .nav-logo-text {
+      color: #ffffff;
+    }
+
+    .navbar.nav-transparent .nav-link {
+      color: #ffffff;
+    }
+
+    .navbar.nav-transparent .nav-cta-btn {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .navbar.nav-transparent .nav-cta-btn:hover {
+      background-color: #e5e5e5;
+      transform: translateY(-1px);
+    }
+
+    /* --- 方案 B: 淺色黑字主題 (.nav-light-theme) --- */
+    .navbar.nav-light,
+    .navbar.nav-light-theme {
+      background: rgba(255, 255, 255, 0.9) !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+
+    .navbar.nav-light .nav-logo-mark,
+    .navbar.nav-light-theme .nav-logo-mark {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    .navbar.nav-light .nav-logo-text,
+    .navbar.nav-light-theme .nav-logo-text {
+      color: #000000;
+    }
+
+    .navbar.nav-light .nav-link,
+    .navbar.nav-light-theme .nav-link {
+      color: #000000;
+    }
+
+    .navbar.nav-light .nav-cta-btn,
+    .navbar.nav-light-theme .nav-cta-btn {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    .navbar.nav-light .nav-cta-btn:hover,
+    .navbar.nav-light-theme .nav-cta-btn:hover {
+      background-color: #262626;
+      transform: translateY(-1px);
+    }
+
+    /* --- 深色半透明狀態 (.nav-dark) --- */
+    .navbar.nav-dark {
+      background: rgba(10, 10, 10, 0.85) !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+
+    .navbar.nav-dark .nav-logo-mark {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .navbar.nav-dark .nav-logo-text {
+      color: #ffffff;
+    }
+
+    .navbar.nav-dark .nav-link {
+      color: #ffffff;
+    }
+
+    .navbar.nav-dark .nav-cta-btn {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .navbar.nav-dark .nav-cta-btn:hover {
+      background-color: #e5e5e5;
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       4. 測試 內容區塊 (Section 2 & Section 3)
+       ========================================================================== */
+    .content-section {
+      min-height: 100vh;
+      padding: 140px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Section 2: 淺色白底區域 */
+    .section-light {
+      background-color: #ffffff;
+      color: #09090b;
+    }
+
+    .section-light .section-badge {
+      padding: 6px 14px;
+      background-color: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #2563eb;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-light .section-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+
+    .section-light .section-text {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: #52525b;
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    /* Section 3: 深色黑底區域 */
+    .section-dark {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .section-dark .section-badge {
+      padding: 6px 14px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #a855f7;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-dark .section-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+
+    .section-dark .section-text {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: #a1a1aa;
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    /* RWD 響應式調整 */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 16px 20px;
+      }
+      .nav-menu {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Legora 風格懸浮動態 Nav Bar
+       ========================================================================== -->
+  <nav class="navbar nav-transparent" id="mainNavbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo-group">
+        <div class="nav-logo-mark">L</div>
+        <span class="nav-logo-text">LEGORA</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#hero" class="nav-link">Overview</a></li>
+        <li><a href="#white-section" class="nav-link">Product</a></li>
+        <li><a href="#black-section" class="nav-link">Enterprise</a></li>
+        <li><a href="#black-section" class="nav-link">Pricing</a></li>
+      </ul>
+
+      <a href="#contact" class="nav-cta-btn">Start Free Trial</a>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       Section 1: 100% 無邊框全螢幕 Hero 影片區 (data-nav-theme="transparent")
+       ========================================================================== -->
+  <section id="hero" class="hero-section" data-nav-theme="transparent">
+    <!-- 全螢幕背景影片 (object-fit: cover 消除黑邊) -->
+    <video class="hero-video" autoplay loop muted playsinline>
+      <source src="https://res.cloudinary.com/q1hzzizh/video/upload/v1785084734/HKview-2k_dbghse.mp4" type="video/mp4">
+    </video>
+
+    <!-- 視覺保護漸層遮罩 -->
+    <div class="hero-overlay"></div>
+
+    <!-- Hero 文字與按鈕內容 -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Zero-Margin Full Bleed Video
+      </div>
+      <h1 class="hero-title">
+        Legal intelligence,<br><strong>reimagined.</strong>
+      </h1>
+      <p class="hero-description">
+        Experience seamless full-bleed video canvas with Legora-inspired adaptive blur navigation that reacts to every scroll depth in real time.
+      </p>
+      <div class="hero-actions">
+        <a href="#white-section" class="btn-primary">Explore Features</a>
+        <a href="#black-section" class="btn-secondary">Watch Architecture</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Section 2: 白底內容區 (data-nav-theme="light")
+       ========================================================================== -->
+  <section id="white-section" class="content-section section-light" data-nav-theme="light">
+    <div class="section-badge">Section 2 • White Background</div>
+    <h2 class="section-title">Adaptive Light Theme Navbar</h2>
+    <p class="section-text">
+      當此白底區域滾動至頂部 Navigation Bar 位置時，Intersection Observer 會立即捕獲事件，平滑地將 Nav Bar 切換為 .nav-light 主題（白底半透明 + 毛玻璃效果 + 黑色 Logo 與文字）。
+    </p>
+  </section>
+
+  <!-- ==========================================================================
+       Section 3: 黑底內容區 (data-nav-theme="dark")
+       ========================================================================== -->
+  <section id="black-section" class="content-section section-dark" data-nav-theme="dark">
+    <div class="section-badge">Section 3 • Dark Background</div>
+    <h2 class="section-title">Immersive Dark Theme Navbar</h2>
+    <p class="section-text">
+      當滾動至此深黑底色區域時，Intersection Observer 會平滑將 Nav Bar 切換為 .nav-dark 主題（深色半透明 + 毛玻璃效果 + 純白 Logo 與文字）。
+    </p>
+  </section>
+
+  <!-- ==========================================================================
+       JavaScript: Intersection Observer 自動沉浸式變色邏輯
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.getElementById('mainNavbar');
+      const themeSections = document.querySelectorAll('[data-nav-theme]');
+
+      if (!navbar || themeSections.length === 0) return;
+
+      // 設置 IntersectionObserver threshold 與 rootMargin
+      // rootMargin 頂部設為 -5px，確保頁面頂部過渡時第一時間觸發
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -85% 0px',
+        threshold: 0
+      };
+
+      const handleThemeChange = (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const theme = entry.target.getAttribute('data-nav-theme');
+            
+            // 移除舊有主題 Class
+            navbar.classList.remove('nav-transparent', 'nav-light', 'nav-dark');
+
+            // 套用新主題 Class
+            if (theme === 'transparent') {
+              navbar.classList.add('nav-transparent');
+            } else if (theme === 'light') {
+              navbar.classList.add('nav-light');
+            } else if (theme === 'dark') {
+              navbar.classList.add('nav-dark');
+            }
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(handleThemeChange, observerOptions);
+
+      themeSections.forEach((section) => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+/* TrustPillars — six DDQ answers on a hairline-divided grid. No icons. */
+
+.trust {
+  padding-block: var(--space-2xl) var(--space-3xl);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.trust-title {
+  font-size: var(--text-display-sm);
+  max-width: 24ch;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.trust-pillar {
+  min-width: 0;
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.trust-claim {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  line-height: 1.2;
+  color: var(--color-ink-dark);
+  overflow-wrap: anywhere;
+}
+
+.trust-mech {
+  margin-top: var(--space-xs);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-muted-dark);
+  max-width: 46ch;
+}
+
+.trust-certs {
+  margin-top: var(--space-xl);
+}
+
+.trust-certs-line {
+  color: var(--color-brass);
+  opacity: 0.9;
+  overflow-wrap: anywhere;
+}
+
+.trust-honesty {
+  margin-top: var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--color-muted-dark);
+  opacity: 0.8;
+  max-width: 52ch;
+}
+
+@media (min-width: 720px) {
+  .trust-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-xl);
+  }
+}
+
+@media (min-width: 1080px) {
+  .trust-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--space-2xl);
+  }
+}

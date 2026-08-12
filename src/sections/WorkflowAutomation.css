@@ -1,0 +1,154 @@
+/* WorkflowAutomation — copy left, a modest run-log panel right. The panel is
+   a product surface: panel ground, hairlines, mono labels, luminous status. */
+
+.auto {
+  padding-block: var(--space-2xl);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.auto-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.auto-title {
+  font-size: var(--text-display-sm);
+}
+
+.auto-body {
+  margin-top: var(--space-md);
+}
+
+.auto-chips {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule-dark);
+  color: var(--color-muted-dark);
+  opacity: 0.7;
+  overflow-wrap: anywhere;
+}
+
+.auto-cta {
+  margin-top: var(--space-lg);
+}
+
+/* Run panel --------------------------------------------------------- */
+.run {
+  min-width: 0;
+}
+
+.run-head {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--rule-dark);
+  background-color: var(--surface-sunken);
+}
+
+.run-title {
+  display: block;
+  color: var(--color-ink-dark);
+  overflow-wrap: anywhere;
+}
+
+.run-meta {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted-dark);
+  opacity: 0.75;
+  letter-spacing: 0.04em;
+}
+
+.run-steps {
+  padding: var(--space-xs) 0;
+}
+
+.run-step {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-sm);
+  padding: 11px var(--space-md);
+  border-bottom: 1px solid var(--rule-dark-soft);
+}
+
+.run-step:last-child {
+  border-bottom: none;
+}
+
+.run-mark {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  color: var(--ui-emerald);
+}
+
+.run-step--waiting .run-mark {
+  color: var(--ui-amber);
+}
+
+.run-label {
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--color-ink-dark);
+  opacity: 0.86;
+  min-width: 0;
+}
+
+.run-step--waiting .run-label {
+  color: var(--ui-amber);
+  opacity: 1;
+}
+
+.run-time {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted-dark);
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.run-foot {
+  padding: var(--space-md);
+  border-top: 1px solid var(--rule-dark);
+  background-color: var(--surface-sunken);
+}
+
+.run-count {
+  display: block;
+  color: var(--color-muted-dark);
+}
+
+.run-artifact {
+  display: block;
+  margin-top: 6px;
+  color: var(--color-brass);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .run-step {
+    grid-template-columns: 18px minmax(0, 1fr);
+  }
+
+  .run-time {
+    grid-column: 2;
+  }
+}
+
+@media (min-width: 1000px) {
+  .auto {
+    padding-block: var(--space-3xl) var(--space-2xl);
+  }
+
+  .auto-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: var(--space-2xl);
+  }
+}

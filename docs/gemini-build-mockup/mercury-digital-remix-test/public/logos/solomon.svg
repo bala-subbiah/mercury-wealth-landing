@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="600" height="160">
+  <defs>
+    <linearGradient id="solomon-text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0B357C" />
+      <stop offset="60%" stop-color="#0077E6" />
+      <stop offset="100%" stop-color="#00B2FE" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(10, 20)">
+    <!-- SOLOMON S Icon -->
+    <g transform="translate(0, 10) scale(2.2)">
+      <path d="M0 10 C0 4 4 0 10 0 L28 0 C34 0 38 4 38 10 L38 16 L28 16 L28 10 C28 8 26 6 24 6 L14 6 C12 6 10 8 10 10 C10 12 12 14 14 14 L28 14 C34 14 38 18 38 24 L38 32 C38 38 34 42 28 42 L10 42 C4 42 0 38 0 32 L0 26 L10 26 L10 32 C10 34 12 36 14 36 L24 36 C26 36 28 34 28 32 C28 30 26 28 24 28 L10 28 C4 28 0 24 0 18 Z" fill="#0B357C" />
+      <polygon points="12,17 21,17 11,27 2,27" fill="#10B981" />
+      <polygon points="22,17 31,17 21,27 12,27" fill="#00B2FE" />
+    </g>
+    <!-- SOLOMON Text -->
+    <text x="110" y="80" font-size="76" font-weight="900" letter-spacing="6" fill="url(#solomon-text-grad)" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">SOLOMON</text>
+  </g>
+</svg>

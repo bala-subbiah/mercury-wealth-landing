@@ -1,0 +1,96 @@
+/* DataStrip — a product readout, not a marketing claim: panel ground, mono
+   tabular figures, one value ticking at a time. Deliberately thin. */
+
+.strip {
+  background-color: var(--color-panel);
+  border-top: 1px solid var(--rule-dark);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.strip-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xs) var(--space-lg);
+  padding-block: 13px;
+}
+
+.strip-stamp {
+  color: var(--color-muted-dark);
+  opacity: 0.72;
+  white-space: nowrap;
+}
+
+.strip-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xs) var(--space-lg);
+  margin-inline-start: auto;
+}
+
+.strip-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+  white-space: nowrap;
+}
+
+.strip-label {
+  color: var(--color-muted-dark);
+  opacity: 0.68;
+}
+
+.strip-value {
+  color: var(--color-ink-dark);
+  font-variant-numeric: tabular-nums;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.strip-value--dim {
+  opacity: 0.25;
+}
+
+.strip-value--up {
+  color: var(--ui-emerald);
+}
+
+.strip-value--down {
+  color: var(--ui-rose);
+}
+
+.strip-value--watch {
+  color: var(--ui-amber);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strip-value--dim {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 860px) {
+  .strip-items {
+    margin-inline-start: 0;
+  }
+}
+
+/* Below the wrap point the strip stays a strip: one nowrap row that scrolls
+   inside itself, so the page never scrolls sideways and nothing is clipped. */
+@media (max-width: 760px) {
+  .strip-inner {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: var(--space-md);
+    scrollbar-width: none;
+  }
+
+  .strip-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .strip-items {
+    flex-wrap: nowrap;
+    gap: var(--space-md);
+  }
+}
