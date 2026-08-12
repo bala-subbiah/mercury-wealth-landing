@@ -1,0 +1,371 @@
+/* Mercury product recreation — spoken note → filed artifacts.
+   Cast and dates: docs/asset-extraction-report.md §Canonical dataset.
+   Colour, type and motion come from src/styles/tokens.css — no raw values. */
+
+.rs-panel {
+  --rs-pad: 18px;
+
+  width: 100%;
+  background-color: var(--color-panel);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+  font-family: var(--font-body);
+  color: var(--color-ink-dark);
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------
+   Panel chrome
+   --------------------------------------------------------------------- */
+
+.rs-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 14px var(--rs-pad) 6px;
+}
+
+.rs-chrome-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.rs-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--ui-emerald);
+  flex: none;
+}
+
+.rs-label,
+.rs-stamp,
+.rs-advisor,
+.rs-mono-label,
+.rs-artifact-kind,
+.rs-artifact-stamp,
+.rs-footer {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+.rs-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--color-ink-dark);
+}
+
+.rs-stamp {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--color-muted-dark);
+  white-space: nowrap;
+}
+
+.rs-advisor {
+  padding: 0 var(--rs-pad) 12px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--color-muted-dark);
+  border-bottom: 1px solid var(--rule-dark);
+  text-transform: none;
+}
+
+/* ---------------------------------------------------------------------
+   Stage
+   --------------------------------------------------------------------- */
+
+.rs-stage {
+  opacity: 1;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.rs-stage--dim {
+  opacity: 0;
+}
+
+.rs-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+  align-items: start;
+}
+
+.rs-said,
+.rs-filed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--space-sm) var(--rs-pad);
+  min-width: 0;
+}
+
+.rs-filed {
+  border-left: 1px solid var(--rule-dark);
+}
+
+.rs-mono-label {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--color-muted-dark);
+}
+
+/* ---------------------------------------------------------------------
+   Left — the recording and its transcript
+   --------------------------------------------------------------------- */
+
+.rs-wave {
+  width: 100%;
+  height: 32px;
+  color: var(--color-muted-dark);
+}
+
+.rs-wave-bar {
+  fill: currentColor;
+  opacity: 0.34;
+}
+
+.rs-wave-bar--shimmer {
+  animation: rs-shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes rs-shimmer {
+  0%,
+  100% {
+    opacity: 0.34;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.rs-transcript {
+  font-size: 12.5px;
+  line-height: 1.62;
+  color: var(--color-muted-dark);
+  max-width: 46ch;
+}
+
+.rs-word {
+  opacity: 0;
+  transition: opacity 110ms var(--ease-out);
+}
+
+.rs-word--on {
+  opacity: 1;
+}
+
+.rs-word--figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.92em;
+  color: var(--color-ink-dark);
+}
+
+/* Zero-width caret: it paints outside its own (empty) inline box, so the
+   transcript never shifts when it moves or disappears. */
+.rs-caret {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  vertical-align: baseline;
+}
+
+.rs-caret::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  bottom: -0.1em;
+  width: 1.5px;
+  height: 1em;
+  background-color: var(--ui-indigo);
+  animation: rs-blink 1.05s steps(1, end) infinite;
+}
+
+@keyframes rs-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Right — what the firm keeps
+   --------------------------------------------------------------------- */
+
+.rs-artifacts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rs-artifact {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 9px 11px 10px;
+  background-color: var(--color-panel-2);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-card);
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.rs-artifact--on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rs-artifact-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.rs-artifact-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.rs-artifact-dot--indigo {
+  background-color: var(--ui-indigo);
+}
+
+.rs-artifact-dot--amber {
+  background-color: var(--ui-amber);
+}
+
+.rs-artifact-dot--emerald {
+  background-color: var(--ui-emerald);
+}
+
+.rs-artifact-dot--neutral {
+  background-color: var(--color-muted-dark);
+}
+
+.rs-artifact-kind {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  color: var(--color-ink-dark);
+  white-space: nowrap;
+}
+
+.rs-artifact-stamp {
+  margin-left: auto;
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: var(--color-muted-dark);
+  white-space: nowrap;
+}
+
+.rs-artifact-stamp--badge {
+  border: 1px solid var(--rule-dark-strong);
+  border-radius: var(--radius-chip);
+  padding: 3px 5px;
+}
+
+.rs-artifact-title {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--color-ink-dark);
+}
+
+.rs-artifact-sub {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--color-muted-dark);
+}
+
+/* ---------------------------------------------------------------------
+   Footer
+   --------------------------------------------------------------------- */
+
+.rs-footer {
+  padding: 11px var(--rs-pad) 13px;
+  border-top: 1px solid var(--rule-dark);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--color-muted-dark);
+}
+
+/* ---------------------------------------------------------------------
+   Narrow panels — the split stacks
+   --------------------------------------------------------------------- */
+
+@media (max-width: 560px) {
+  .rs-panel {
+    --rs-pad: 14px;
+  }
+
+  .rs-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rs-filed {
+    border-left: none;
+    border-top: 1px solid var(--rule-dark);
+    padding-top: 14px;
+  }
+
+  .rs-said {
+    padding-bottom: 14px;
+  }
+
+  .rs-transcript {
+    max-width: none;
+  }
+
+  .rs-artifact-head {
+    flex-wrap: wrap;
+    row-gap: 5px;
+  }
+
+  .rs-artifact-stamp {
+    margin-left: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Reduced motion — the component already renders its completed state; this
+   removes the residual shimmer, caret and reveal transitions.
+   --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-caret {
+    display: none;
+  }
+
+  .rs-wave-bar--shimmer {
+    animation: none;
+  }
+
+  .rs-stage,
+  .rs-word,
+  .rs-artifact {
+    transition: none;
+  }
+
+  .rs-artifact {
+    opacity: 1;
+    transform: none;
+  }
+}

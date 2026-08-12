@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "./Nav.css";
 
@@ -30,6 +30,7 @@ const MENU = "Menu";
 export default function Nav({ page, links }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -41,7 +42,12 @@ export default function Nav({ page, links }: NavProps) {
   useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        // Escape is a keyboard-only close — return focus to the control that
+        // opened the panel instead of dropping it back to <body>.
+        toggleRef.current?.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -70,6 +76,7 @@ export default function Nav({ page, links }: NavProps) {
 
         <button
           type="button"
+          ref={toggleRef}
           className="nav-toggle"
           aria-expanded={open}
           aria-controls="nav-panel"
@@ -79,30 +86,31 @@ export default function Nav({ page, links }: NavProps) {
         </button>
       </div>
 
-      {open ? (
-        <div className="nav-panel" id="nav-panel">
-          <div className="container nav-panel-inner">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                className="nav-panel-link"
-                href={link.href}
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
+      {/* Always mounted (not conditionally rendered) so aria-controls always
+         resolves to a real element; `hidden` — not a ternary — hides it when
+         closed. */}
+      <div className="nav-panel" id="nav-panel" hidden={!open}>
+        <div className="container nav-panel-inner">
+          {links.map((link) => (
             <a
-              className="cta-primary nav-panel-cta"
-              href="#demo-placeholder"
-              data-demo-cta
+              key={link.href}
+              className="nav-panel-link"
+              href={link.href}
               onClick={() => setOpen(false)}
             >
-              {CTA}
+              {link.label}
             </a>
-          </div>
+          ))}
+          <a
+            className="cta-primary nav-panel-cta"
+            href="#demo-placeholder"
+            data-demo-cta
+            onClick={() => setOpen(false)}
+          >
+            {CTA}
+          </a>
         </div>
-      ) : null}
+      </div>
     </header>
   );
 }

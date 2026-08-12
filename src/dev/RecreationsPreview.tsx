@@ -4,8 +4,11 @@ import { IntegrationsSpine, LogoStrip } from "../components/company";
 import {
   AuditTimeline,
   CockpitDashboard,
+  ComplianceEvidence,
   DriftChat,
   MorningBriefing,
+  RelationshipScribe,
+  ResearchAnswer,
   TermSheetDissolve,
 } from "../components/product";
 import "./RecreationsPreview.css";
@@ -59,6 +62,30 @@ export default function RecreationsPreview() {
 
       <Block index="08" name="IntegrationsSpine" note="Company — sources converge into the data spine, sequential pulse.">
         <IntegrationsSpine />
+      </Block>
+
+      <Block index="09" name="RelationshipScribe" note="Relationships — spoken note files itself, loops.">
+        <RelationshipScribe />
+      </Block>
+
+      <Block index="10" name="ResearchAnswer" note="Research — book-wide question answered as a ranked table, loops.">
+        <ResearchAnswer />
+      </Block>
+
+      <Block index="11" name="ComplianceEvidence" note="Compliance — the quarter assembles into an inspection pack, loops.">
+        <ComplianceEvidence />
+      </Block>
+
+      <Block index="12" name="RelationshipScribe · animate={false}" note="Static path, motion disabled.">
+        <RelationshipScribe animate={false} />
+      </Block>
+
+      <Block index="13" name="ResearchAnswer · animate={false}" note="Static path, motion disabled.">
+        <ResearchAnswer animate={false} />
+      </Block>
+
+      <Block index="14" name="ComplianceEvidence · animate={false}" note="Static path, motion disabled.">
+        <ComplianceEvidence animate={false} />
       </Block>
     </main>
   );

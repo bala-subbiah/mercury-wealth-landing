@@ -112,12 +112,13 @@
 }
 
 /* The stage reserves its own height, so a swap never reflows the page under
-   it. The floors below are the measured height of the taller vignette at each
-   width; the component also grows the stage inline if a panel ever exceeds
-   them. Whichever vignette is shorter sits centred in the reserved band. */
+   it. The floors below are the measured height of the tallest of the three
+   vignettes at each width (the scribe throughout); the component also grows
+   the stage inline if a panel ever exceeds them. Whichever vignette is
+   shorter sits centred in the reserved band. */
 .hs-stage {
   position: relative;
-  min-height: max(var(--hs-reserve, 0px), 820px);
+  min-height: max(var(--hs-reserve, 0px), 900px);
 }
 
 .hs-layer {
@@ -190,13 +191,13 @@
 
 @media (min-width: 360px) {
   .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 750px);
+    min-height: max(var(--hs-reserve, 0px), 760px);
   }
 }
 
 @media (min-width: 480px) {
   .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 660px);
+    min-height: max(var(--hs-reserve, 0px), 705px);
   }
 }
 
@@ -206,7 +207,7 @@
   }
 
   .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 600px);
+    min-height: max(var(--hs-reserve, 0px), 570px);
   }
 }
 
@@ -222,7 +223,7 @@
   }
 
   .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 670px);
+    min-height: max(var(--hs-reserve, 0px), 650px);
   }
 }
 
@@ -232,6 +233,6 @@
   }
 
   .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 610px);
+    min-height: max(var(--hs-reserve, 0px), 615px);
   }
 }

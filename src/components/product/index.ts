@@ -16,3 +16,12 @@ export type { TermSheetDissolveProps } from "./TermSheetDissolve";
 
 export { default as DriftChat } from "./DriftChat";
 export type { DriftChatProps } from "./DriftChat";
+
+export { default as RelationshipScribe } from "./RelationshipScribe";
+export type { RelationshipScribeProps } from "./RelationshipScribe";
+
+export { default as ResearchAnswer } from "./ResearchAnswer";
+export type { ResearchAnswerProps } from "./ResearchAnswer";
+
+export { default as ComplianceEvidence } from "./ComplianceEvidence";
+export type { ComplianceEvidenceProps } from "./ComplianceEvidence";

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties, ReactNode } from "react";
 
-import { DriftChat, MorningBriefing } from "../../components/product";
+import { MorningBriefing, RelationshipScribe, ResearchAnswer } from "../../components/product";
 import { useReducedMotion } from "../../components/product/useReducedMotion";
 import "./HomeHero.css";
 
@@ -17,16 +17,17 @@ const CAPTION = "SIX ENGINES · ONE SPINE · NO FORM · NO SALES CALL";
 /* ---------------------------------------------------------------------------
    Engine switcher
    ---------------------------------------------------------------------------
-   Two vignettes, not three: the deck's third switcher state is the Relationship
-   Scribe, which has no designed screen yet ("Do not invent a scribe screen to
-   fill the third slot", deck §1), and the term-sheet dissolve is given its own
-   act further down the page rather than being played twice. Labels are the
-   deck's engine names.
+   Three vignettes, in the deck's switcher order (§1). The term-sheet dissolve
+   is deliberately absent — it gets its own act further down the page rather
+   than being played twice. The drift conversation stays on /cockpit; the
+   home's research slot is the book-wide ranked answer.
    --------------------------------------------------------------------------- */
 
 interface Vignette {
   id: string;
   label: string;
+  /** How long this vignette holds before the switcher advances. */
+  dwell: number;
   render: (animate: boolean) => ReactNode;
 }
 
@@ -34,18 +35,31 @@ const VIGNETTES: Vignette[] = [
   {
     id: "cockpit",
     label: "MERCURY COCKPIT",
+    /* The self-composing briefing is the design system's signature behaviour
+       (design.md hard rule 6), so it plays here too. Its script runs ~13.1s —
+       5.1s to compose, then an 8s hold — and the swap lands just before it
+       would dim and restart itself. Static under reduced motion, via the
+       component's own hook. */
+    dwell: 13000,
     render: (animate) => <MorningBriefing animate={animate} />,
   },
   {
     id: "research",
     label: "BOOK-AWARE RESEARCH",
-    render: (animate) => <DriftChat animate={animate} />,
+    /* Its own script runs ~13.5s (assemble ~5.8s, then a 7s hold); the swap
+       lands just before it would restart itself. */
+    dwell: 13400,
+    render: (animate) => <ResearchAnswer animate={animate} />,
+  },
+  {
+    id: "scribe",
+    label: "RELATIONSHIP SCRIBE",
+    /* Same shape: transcript types, artifacts file, then a 7s hold. */
+    dwell: 13400,
+    render: (animate) => <RelationshipScribe animate={animate} />,
   },
 ];
 
-/** Each vignette holds long enough to finish composing itself (the drift
-    conversation's own script runs ~7.1s) and then be read for a beat. */
-const DWELL_MS = 9500;
 const FADE_MS = 320;
 /** A click on a label parks the switcher on that engine for 20s. */
 const PAUSE_MS = 20000;
@@ -98,7 +112,7 @@ function EngineSwitcher() {
         setIndex((current) => (current + 1) % VIGNETTES.length);
         setVisible(true);
       }, FADE_MS);
-    }, DWELL_MS);
+    }, VIGNETTES[index].dwell);
 
     return () => {
       window.clearTimeout(hold);
@@ -145,7 +159,7 @@ function EngineSwitcher() {
         </div>
       </div>
 
-      <div className="hs-tabs" role="group" aria-label="Choose an engine to preview">
+      <div className="hs-tabs" role="group" aria-label="Engine demonstrations">
         {VIGNETTES.map((vignette, position) => {
           const on = position === index;
           return (

@@ -1,0 +1,368 @@
+/* Mercury product recreation — one question across the whole book, answered
+   as a ranked table. Cast: docs/asset-extraction-report.md §Canonical dataset.
+   Colour, type and motion come from src/styles/tokens.css — no raw values. */
+
+.ra-panel {
+  --ra-pad: 18px;
+  --ra-role: 76px;
+
+  width: 100%;
+  background-color: var(--color-panel);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+  font-family: var(--font-body);
+  color: var(--color-ink-dark);
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.ra-panel--dim {
+  opacity: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Chrome
+   --------------------------------------------------------------------- */
+
+.ra-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 13px var(--ra-pad);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.ra-label,
+.ra-stamp {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.ra-label {
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--color-ink-dark);
+}
+
+.ra-stamp {
+  letter-spacing: 0.1em;
+  color: var(--color-muted-dark);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------
+   Thread
+   --------------------------------------------------------------------- */
+
+.ra-thread {
+  padding: var(--space-sm) var(--ra-pad) 20px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ra-turn {
+  display: grid;
+  grid-template-columns: var(--ra-role) minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 10px;
+  align-items: start;
+}
+
+.ra-turn > .ra-role {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.ra-turn > *:not(.ra-role) {
+  grid-column: 2;
+}
+
+.ra-role {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted-dark);
+  padding-top: 3px;
+}
+
+.ra-role--mercury {
+  color: var(--ui-indigo);
+}
+
+.ra-said {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--color-muted-dark);
+  max-width: 62ch;
+  font-variant-numeric: tabular-nums;
+}
+
+.ra-turn:first-child > .ra-said {
+  color: var(--color-ink-dark);
+}
+
+/* Reveal — opacity and a short lift, nothing else. */
+.ra-reveal {
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.ra-reveal--on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Working notes ------------------------------------------------------- */
+
+.ra-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ra-check {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted-dark);
+}
+
+.ra-spin {
+  width: 11px;
+  height: 11px;
+  flex: none;
+  color: var(--ui-indigo);
+  opacity: 0.85;
+}
+
+.ra-spin--active {
+  animation: ra-rotate 1.6s linear infinite;
+}
+
+@keyframes ra-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The ranked answer --------------------------------------------------- */
+
+.ra-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 11px 12px 10px;
+  background-color: var(--color-panel-2);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-card);
+  max-width: 480px;
+}
+
+.ra-card-title {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ui-indigo);
+}
+
+.ra-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.ra-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.25fr) 76px;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 11.5px;
+}
+
+.ra-row + .ra-row {
+  border-top: 1px solid var(--rule-dark-soft);
+}
+
+.ra-row--head {
+  padding-top: 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.ra-col {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-muted-dark);
+  white-space: nowrap;
+}
+
+.ra-col:last-child {
+  text-align: right;
+}
+
+.ra-household {
+  color: var(--color-ink-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ra-exposure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 10.5px;
+  color: var(--color-muted-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ra-impact {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ra-impact--rose {
+  color: var(--ui-rose);
+}
+
+.ra-impact--emerald {
+  color: var(--ui-emerald);
+}
+
+.ra-impact--muted {
+  color: var(--color-muted-dark);
+}
+
+/* Actions ------------------------------------------------------------- */
+
+.ra-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ra-action {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 8px 11px;
+  border-radius: var(--radius-chip);
+  border: 1px solid var(--rule-dark-strong);
+  color: var(--color-muted-dark);
+}
+
+.ra-action:first-child {
+  color: var(--color-ink-dark);
+  border-color: color-mix(in srgb, var(--ui-indigo) 60%, transparent);
+  background-color: color-mix(in srgb, var(--ui-indigo) 16%, transparent);
+}
+
+/* ---------------------------------------------------------------------
+   Responsive
+   --------------------------------------------------------------------- */
+
+@media (max-width: 560px) {
+  .ra-panel {
+    --ra-pad: 14px;
+  }
+
+  .ra-turn {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ra-turn > .ra-role,
+  .ra-turn > *:not(.ra-role) {
+    grid-column: 1;
+  }
+
+  .ra-turn > .ra-role {
+    grid-row: auto;
+  }
+
+  .ra-row {
+    grid-template-columns: minmax(0, 1fr) 58px;
+    row-gap: 2px;
+    column-gap: 8px;
+  }
+
+  .ra-col:nth-child(2) {
+    display: none;
+  }
+
+  .ra-household {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .ra-exposure {
+    grid-row: 2;
+    grid-column: 1;
+    white-space: normal;
+  }
+
+  .ra-impact {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+
+/* The chrome's label is the longest in the set; below ~400px its stamp would
+   otherwise run under the panel edge. */
+@media (max-width: 400px) {
+  .ra-chrome {
+    gap: var(--space-xs);
+  }
+
+  .ra-stamp {
+    font-size: 9px;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Reduced motion
+   --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ra-panel,
+  .ra-reveal {
+    transition: none;
+  }
+
+  .ra-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ra-spin--active {
+    animation: none;
+  }
+}

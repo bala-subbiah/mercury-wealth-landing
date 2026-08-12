@@ -64,8 +64,8 @@ export default function App() {
         <HomeFinalCta />
       </main>
 
-      {/* Footer — reused as-is; page-agnostic sitemap + fluid-gradient MERCURY wordmark */}
-      <Footer />
+      {/* Footer — page-aware sitemap (home anchors) + fluid-gradient MERCURY wordmark */}
+      <Footer page="home" />
     </div>
   );
 }

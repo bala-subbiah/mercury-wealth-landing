@@ -5,6 +5,12 @@
 offerings-map order. Everything in a `> ` blockquote or fenced block is **final copy — lift it
 verbatim**. Everything in italics is build guidance, not page text.*
 
+> **Scope note (2026-08-13, v2 repositioning):** this deck now governs the `/v1/` archive and
+> the unchanged sections of `/cockpit/` only. The cockpit page's re-headed hero eyebrow, its
+> `<title>`/metadata, and everything on the company home page are governed by
+> `docs/offerings-map.md` (v2) and `docs/copy-deck-v2-home.md`. Where this deck and the live
+> `/cockpit/` page differ on those items, the page is right and this deck is historical.
+
 ## How to use this deck
 
 - **Lift verbatim.** Blockquotes and code fences are the page strings. Do not paraphrase,

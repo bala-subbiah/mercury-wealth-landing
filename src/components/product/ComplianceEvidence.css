@@ -1,0 +1,379 @@
+/* Mercury product recreation — review cycle → inspection-ready evidence pack.
+   Cast and cycle: docs/asset-extraction-report.md §Canonical dataset.
+   Colour, type and motion come from src/styles/tokens.css — no raw values. */
+
+.ce-panel {
+  --ce-pad: 18px;
+
+  width: 100%;
+  background-color: var(--color-panel);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+  font-family: var(--font-body);
+  color: var(--color-ink-dark);
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------
+   Panel chrome
+   --------------------------------------------------------------------- */
+
+.ce-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 13px var(--ce-pad);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.ce-chrome-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ce-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--ui-emerald);
+  flex: none;
+}
+
+.ce-label,
+.ce-stamp,
+.ce-mono-label,
+.ce-cycle-status,
+.ce-cycle-footer,
+.ce-item-count,
+.ce-ready-line,
+.ce-ready-note {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+.ce-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--color-ink-dark);
+}
+
+.ce-stamp {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--color-muted-dark);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------
+   Stage
+   --------------------------------------------------------------------- */
+
+.ce-stage {
+  opacity: 1;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.ce-stage--dim {
+  opacity: 0;
+}
+
+.ce-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr);
+  align-items: stretch;
+}
+
+.ce-cycle,
+.ce-pack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--space-sm) var(--ce-pad);
+  min-width: 0;
+}
+
+.ce-pack {
+  border-left: 1px solid var(--rule-dark);
+  gap: 12px;
+}
+
+.ce-mono-label {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--color-muted-dark);
+}
+
+.ce-mono-label--pack {
+  color: var(--color-ink-dark);
+}
+
+/* ---------------------------------------------------------------------
+   Left — the cycle it watches
+   --------------------------------------------------------------------- */
+
+.ce-cycle-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.ce-cycle-row {
+  display: grid;
+  grid-template-columns: 5px minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 8px;
+  row-gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule-dark-soft);
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.ce-cycle-row--on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ce-cycle-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  align-self: center;
+}
+
+.ce-cycle-dot--amber {
+  background-color: var(--ui-amber);
+}
+
+.ce-cycle-dot--emerald {
+  background-color: var(--ui-emerald);
+}
+
+.ce-cycle-dot--neutral {
+  background-color: var(--color-muted-dark);
+}
+
+.ce-cycle-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-ink-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ce-cycle-status {
+  grid-column: 2;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  color: var(--color-muted-dark);
+}
+
+.ce-cycle-footer {
+  margin-top: auto;
+  padding-top: 4px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--color-muted-dark);
+}
+
+/* ---------------------------------------------------------------------
+   Right — the evidence it produces
+   --------------------------------------------------------------------- */
+
+.ce-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.ce-item {
+  display: grid;
+  grid-template-columns: 13px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule-dark-soft);
+}
+
+.ce-item-label {
+  font-size: 12.5px;
+  color: var(--color-muted-dark);
+  transition: color var(--dur-med) var(--ease-out);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ce-item--on .ce-item-label {
+  color: var(--color-ink-dark);
+}
+
+.ce-item-count {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-muted-dark);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out);
+}
+
+.ce-item--on .ce-item-count {
+  opacity: 1;
+}
+
+/* The check draws in: the clip box slides right across a mark that
+   counter-translates, so the mark itself never moves. Transform only. */
+.ce-tick {
+  display: block;
+  width: 13px;
+  height: 13px;
+  overflow: hidden;
+  color: var(--ui-emerald);
+  transform: translateX(-100%);
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.ce-tick > svg {
+  width: 13px;
+  height: 13px;
+  transform: translateX(100%);
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.ce-tick--on,
+.ce-tick--on > svg {
+  transform: translateX(0);
+}
+
+/* Completion ---------------------------------------------------------- */
+
+.ce-ready {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 11px 12px 10px;
+  background-color: var(--color-panel-2);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-card);
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out);
+}
+
+.ce-ready--on {
+  opacity: 1;
+  transform: translateY(0);
+  border-color: color-mix(in srgb, var(--ui-emerald) 42%, transparent);
+}
+
+.ce-ready-track {
+  display: block;
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--rule-dark-strong);
+  overflow: hidden;
+}
+
+.ce-ready-fill {
+  display: block;
+  height: 100%;
+  background-color: var(--ui-emerald);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.ce-ready--on .ce-ready-fill {
+  transform: scaleX(1);
+}
+
+.ce-ready-line {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  color: var(--ui-emerald);
+}
+
+.ce-ready-note {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--color-muted-dark);
+}
+
+/* ---------------------------------------------------------------------
+   Narrow panels — the split stacks, pack first is not needed: the cycle is
+   short enough that reading order stays natural.
+   --------------------------------------------------------------------- */
+
+@media (max-width: 560px) {
+  .ce-panel {
+    --ce-pad: 14px;
+  }
+
+  .ce-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ce-pack {
+    border-left: none;
+    border-top: 1px solid var(--rule-dark);
+  }
+
+  .ce-cycle-footer {
+    margin-top: 0;
+  }
+
+  .ce-item {
+    grid-template-columns: 13px minmax(0, 1fr) auto;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Reduced motion — the component already renders its completed state; this
+   removes the residual reveal transitions.
+   --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ce-stage,
+  .ce-cycle-row,
+  .ce-item-label,
+  .ce-item-count,
+  .ce-tick,
+  .ce-tick > svg,
+  .ce-ready,
+  .ce-ready-fill {
+    transition: none;
+  }
+
+  .ce-cycle-row,
+  .ce-ready {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ce-item-count {
+    opacity: 1;
+  }
+
+  .ce-tick,
+  .ce-tick > svg {
+    transform: none;
+  }
+
+  .ce-ready-fill {
+    transform: scaleX(1);
+  }
+}

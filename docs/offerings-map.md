@@ -52,8 +52,10 @@ only as the architecture story and the integrations section.
 1. **Hero** — company claim, concrete, no future-tense grandiosity. HK video stays.
    Headline to be workshopped (candidates: "The engines that run the business of wealth").
    Sub names buyers + the adoption model (one engine or the whole cockpit). Visual:
-   **engine switcher** — small live vignettes cycling (briefing composes → term sheet
-   dissolves → scribe files).
+   **engine switcher** — three live vignettes cycling (briefing composes → book-aware
+   research answers → scribe files). *Amended 2026-08-13: the term-sheet dissolve moved
+   out of the switcher into act 6, where it has room to breathe — avoids duplicating the
+   same vignette twice on one page.*
 2. **Proof strip** — real partner logos as IMAGES (UOB Kay Hian, Lizen Asset Management,
    Cyberport, Solomon — files in `docs/gemini-build-mockup/.../public/logos/`), honest label.
 3. **The six engines** — the only catalog moment: six tight verb-first cards, one line
