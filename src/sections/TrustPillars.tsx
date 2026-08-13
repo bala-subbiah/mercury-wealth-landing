@@ -1,12 +1,26 @@
 import Reveal from "../components/Reveal";
 import "./TrustPillars.css";
 
-/* Copy — docs/copy-deck.md §11, verbatim. The certifications line and the
-   honesty note beneath it are exact and must never be upgraded. */
+/* Copy — docs/copy-deck.md §11, verbatim except the residency mechanism. The
+   certifications line and the honesty note beneath it are exact and must never
+   be upgraded.
+
+   The residency pillar used to state in-region storage and processing as a
+   present-tense deployed fact while home and /trust hedged the same claim as a
+   design commitment, so a reader of two pages caught the site contradicting
+   itself (docs/critique-v2.md P0-4). It now carries the AsiaTrustBand wording
+   word for word; if one moves, move the other. */
+/* The headline used to be /trust's, word for word, on the highest-intent page
+   (docs/critique-v2.md P1-9). /trust keeps that sentence, because the whole
+   page is the answer; this act is one band inside the cockpit page, so it
+   names what the band actually shows: six claims, each with the mechanism
+   underneath it. The subhead's old "six questions every due-diligence
+   questionnaire gets to" made a universal claim about questionnaires out of
+   Mercury's own pillar count (P1-11); six is what Mercury answers. */
 const EYEBROW = "GOVERNANCE & SECURITY";
-const TITLE = "Answers, in the form your compliance officer asks for them.";
+const TITLE = "Governance, with the mechanism attached.";
 const SUBHEAD =
-  "Six questions every due-diligence questionnaire gets to. Here they are, answered plainly.";
+  "The six answers a due-diligence reviewer opens with, each one naming the mechanism rather than the intention.";
 
 const PILLARS = [
   {
@@ -32,12 +46,12 @@ const PILLARS = [
   {
     claim: "Hong Kong and Singapore data residency.",
     mechanism:
-      "Client data is stored and processed in-region, so cross-border data questions have a one-line answer.",
+      "Built for in-region deployment in Hong Kong and Singapore, so client data does not have to leave the region it is regulated in.",
   },
   {
     claim: "No training on client data.",
     mechanism:
-      "Your clients' data is never used to train models, and is never pooled with any other firm’s.",
+      "Your clients’ data is never used to train models, and is never pooled with any other firm’s.",
   },
 ];
 

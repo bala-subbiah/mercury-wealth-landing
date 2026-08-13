@@ -1,4 +1,5 @@
-import { AuditTimeline, CockpitDashboard } from "../../components/product";
+import AuditTimeline from "../../components/product/AuditTimeline";
+import CockpitDashboard from "../../components/product/CockpitDashboard";
 import Reveal from "../../components/Reveal";
 import "./FlagshipAct.css";
 
@@ -15,8 +16,14 @@ import "./FlagshipAct.css";
    as everywhere else. */
 const EYEBROW = "THE FLAGSHIP · MERCURY COCKPIT";
 const TITLE = "From the drift to the order, without leaving the screen.";
+/* Trimmed for the home word-count gate (docs/critique-v2.md P1-13). The
+   proposal → sign-off → order chain came out of the prose because the audit
+   panel directly below renders it as data, entry by entry; narrating it above
+   the panel was the page saying twice what it then shows. Base currency went
+   for the same reason: the Asia band on this page states it outright
+   ("Base-currency reporting across booking centres"). */
 const BODY =
-  "The cockpit opens on a briefing written before anyone arrived: what drifted overnight, what breached, what matures next week, what is waiting on an approval. Ranked across every custodian, in the client’s base currency. The position, the proposal, the sign-off and the order then hang off one record, and every step lands on the log beneath it.";
+  "The cockpit opens on a briefing written before anyone arrived: what drifted, what breached, what matures, what waits on approval. Ranked across every custodian. Everything that follows lands on the log beneath it.";
 const LINK = "Explore the Cockpit";
 
 export default function FlagshipAct() {
@@ -45,8 +52,12 @@ export default function FlagshipAct() {
           </Reveal>
         </div>
 
+        {/* The summary crop, not the whole screen: /cockpit renders the full
+            panel, and until now the "Explore the Cockpit" journey ended on the
+            visual it started from (docs/critique-v2.md P1-7). Same book, same
+            figures, fewer panes. */}
         <Reveal className="fl-panel" delay={40}>
-          <CockpitDashboard />
+          <CockpitDashboard variant="summary" />
         </Reveal>
 
         <Reveal className="fl-audit" delay={60}>

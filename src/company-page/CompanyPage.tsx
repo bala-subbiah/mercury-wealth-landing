@@ -23,8 +23,8 @@ import "./CompanyPage.css";
 const EYEBROW = "COMPANY";
 const TITLE = "Why we built Mercury.";
 const STANDFIRST =
-  "Front-office software for external asset managers, private banks and " +
-  "brokerages in Hong Kong and Singapore.";
+  "Front-office software for external asset managers, private banks, " +
+  "brokerages and family offices in Hong Kong and Singapore.";
 
 export default function CompanyPage() {
   return (

@@ -1,4 +1,4 @@
-import { DriftChat } from "../components/product";
+import DriftChat from "../components/product/DriftChat";
 import Reveal from "../components/Reveal";
 import "./AiMechanism.css";
 
@@ -43,7 +43,7 @@ const NEGATIVE = [
   },
   {
     claim: "It won’t learn from your clients.",
-    body: "Your data is never used to train models, yours or anyone else’s.",
+    body: "Your data is never used to train models. Not yours, not anyone else’s.",
   },
 ];
 

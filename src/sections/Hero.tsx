@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { ResearchAnswer } from "../components/product";
+import ResearchAnswer from "../components/product/ResearchAnswer";
 import { useReducedMotion } from "../components/product/useReducedMotion";
 import { DEMO_LINK_PROPS } from "../links";
 import "./Hero.css";
@@ -20,7 +20,7 @@ const HEADLINE = "Every custodian. One cockpit.";
 const SUBHEAD =
   "Monitor the book, advise the client, execute with governance. Every booking centre on one screen, in your base currency.";
 const SUPPORT =
-  "Drift, breaches, maturities, pending approvals and today’s reviews, ranked before you sit down. One book, so a question about all of it has one answer.";
+  "Drift, breaches, maturities, pending approvals and today’s reviews. Ranked before you sit down. One book, so a question about all of it has one answer.";
 const CTA_PRIMARY = "Open the live demo";
 const CTA_SECONDARY = "See how it works";
 const CAPTION = "NO FORM · NO SIGN-UP · THE REAL PRODUCT";

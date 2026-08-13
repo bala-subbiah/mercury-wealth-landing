@@ -10,14 +10,17 @@ import "./HomeFinalCta.css";
    quota is two sitewide (docs/v2-plan.md §4.6) and the cards two acts above
    have already established what "one" means. */
 const TITLE = "Start with one. Or open all of it.";
+/* Trimmed for the home word-count gate (docs/critique-v2.md P1-13): the
+   colon list restated what the flagship act one screen above had just shown
+   live. The offer itself is unchanged and still ungated. */
 const SUBHEAD =
-  "There is no form and no sign-up. The demo is the product itself, running on a full book: drift already in it, proposals in flight, the audit trail written as you go.";
+  "No form, no sign-up. The demo is the product itself, on a full book.";
 const CTA_PRIMARY = "Open the live demo";
 const CTA_SECONDARY = "Explore the Cockpit";
-const ASIDE_LEAD = "Look first, on your own. If you would rather talk it through, ";
+const ASIDE_LEAD = "Look first, on your own. Or ";
 const ASIDE_LINK = "request a conversation";
 const ASIDE_TAIL = ".";
-const MICRO = "SIX ENGINES · ONE SPINE · HONG KONG · SINGAPORE";
+const MICRO = "HONG KONG · SINGAPORE";
 
 export default function HomeFinalCta() {
   return (

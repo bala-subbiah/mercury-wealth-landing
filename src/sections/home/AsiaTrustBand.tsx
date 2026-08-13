@@ -20,8 +20,13 @@ import "./AsiaTrustBand.css";
    "See all six answers" goes. */
 const EYEBROW = "ASIA’S OPERATING REALITY · GOVERNANCE";
 const TITLE = "Built here. Answerable here.";
+/* Trimmed for the home word-count gate (docs/critique-v2.md P1-13). The
+   residency line is NOT trimmed: it is mirrored word for word in
+   src/sections/TrustPillars.tsx per critique-v2 P0-4, and if one moves the
+   other must move with it. The certifications line and the honesty note are
+   exact and untouched. */
 const LEAD =
-  "The assumptions are the region’s: several custodians and booking centres per client, base currencies that differ from the assets under them.";
+  "The region’s assumptions: several custodians per client, base currencies that differ from the assets.";
 
 const ASIA_LABEL = "BUILT FOR ASIA";
 const TRUST_LABEL = "ASKED FIRST BY COMPLIANCE";
@@ -34,22 +39,22 @@ interface Pillar {
 const ASIA: Pillar[] = [
   {
     term: "SFC · MAS · HKMA",
-    line: "Evidence captured as the work happens, in the shape a supervised firm is expected to produce it.",
+    line: "Evidence captured as the work happens, in the shape a supervised firm must produce it.",
   },
   {
     term: "HKD · SGD · USD",
-    line: "Base-currency reporting across booking centres, with native amounts one click away.",
+    line: "Base-currency reporting across booking centres, native amounts one click away.",
   },
   {
     term: "MULTI-CUSTODIAN",
-    line: "Live feeds and hand-keyed statements, read into one book rather than reconciled by hand.",
+    line: "Live feeds and hand-keyed statements read into one book, not reconciled by hand.",
   },
 ];
 
 const TRUST: Pillar[] = [
   {
     term: "IMMUTABLE AUDIT LOG",
-    line: "Every material action written once: actor, timestamp, before and after. Filtered and exported, never edited or deleted.",
+    line: "Every material action written once: actor, timestamp, before and after. Never edited, never deleted.",
   },
   {
     term: "HK / SG DATA RESIDENCY",
@@ -57,7 +62,7 @@ const TRUST: Pillar[] = [
   },
   {
     term: "NO TRAINING ON CLIENT DATA",
-    line: "Your clients' data never trains a model, and is never pooled with another firm’s.",
+    line: "Never used to train a model. Never pooled with another firm’s.",
   },
 ];
 

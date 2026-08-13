@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mercury-wealth-site.vercel.app/sitemap.xml
+# Base URL must match VITE_SITE_URL in .env (static file, no env replacement).
+Sitemap: https://mercury-wealth-landing.vercel.app/sitemap.xml

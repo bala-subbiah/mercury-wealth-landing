@@ -9,10 +9,15 @@ import "./AuditTimeline.css";
    proposal lifecycle thread": PRP-2026-0002, the Lim Income & Credit rebalance,
    seven events ending the day before the 19 Jun 2026 as-of stamp.
 
-   Three actors, all from the sanctioned cast, and the point of the panel: the
-   advisor who drafts it (Lau Ka-Ming) is never the person who clears it. The
-   four-eyes node is a separate record with a separate approver — Wong Mei-Ling,
-   desk head — and execution is booked by the dealing desk (Sean Donnelly).
+   Four actors, all from the sanctioned cast, and the point of the panel: no
+   one signs their own work. The advisor who drafts it (Lau Ka-Ming) is never
+   the person who clears it; the four-eyes node is a separate record with a
+   separate approver (Wong Mei-Ling, desk head); the acceptance is the client's
+   own, recorded when the Lim Family Office accepts in the portal; and only
+   then does the dealing desk (Sean Donnelly) book it. Entry 5 used to carry
+   Sean Donnelly, who then executed entries 6 and 7 — a separation-of-duties
+   contradiction on the panel built to demonstrate separation of duties
+   (docs/critique-v2.md P1-8).
    --------------------------------------------------------------------------- */
 
 const PANEL_TITLE = "Audit trail · every state change, confirmed & logged";
@@ -79,7 +84,7 @@ const ENTRIES: AuditEntry[] = [
     before: null,
     after: "Accepted",
     summary: "Client approval recorded in-app",
-    actor: "Sean Donnelly",
+    actor: "Lim Family Office · client",
     timestamp: "18 Jun · 09:20",
   },
   {

@@ -14,8 +14,11 @@ import "./ProblemAct.css";
    is the company speaking, not the product working. */
 const EYEBROW = "WHY MERCURY EXISTS";
 const TITLE = "The book is scattered before the day starts.";
+/* The third sentence ran to 58 words and buried its own two hits under one
+   comma (docs/critique-v2.md P1-10). It is three sentences now; the fragment
+   is deliberate. */
 const BODY =
-  "A relationship manager’s day runs across custodian portals, a CRM, an inbox, and the spreadsheet that holds the real numbers. None of it answers how the book is positioned right now. So drift is found at quarter-end instead of the day it emerged, and the approval trail is spread across inboxes on the morning compliance asks for it.";
+  "A relationship manager’s day runs across custodian portals, a CRM, an inbox and the spreadsheet holding the real numbers. None of it answers how the book is positioned right now. So drift is found at quarter-end. Not the day it emerged. And the approval trail sits in inboxes on the morning compliance asks for it.";
 
 /** The page's daylight interlude, and its only act with no product in it. */
 export default function ProblemAct() {

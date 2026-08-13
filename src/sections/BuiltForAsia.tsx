@@ -16,7 +16,7 @@ interface Row {
 const ROWS: Row[] = [
   {
     term: "EVERY CUSTODIAN · ONE COCKPIT",
-    body: "Assets sit where the client’s relationships put them: a Hong Kong custodian, a Singapore custodian, a statement that still arrives as a PDF. Mercury takes all of it, live feeds and hand-keyed statements alike, and reports one book across it.",
+    body: "Assets sit where the client’s relationships put them: a Hong Kong custodian, a Singapore custodian, a statement that still arrives as a PDF. Mercury reads all of it, live feeds and hand-keyed statements alike. What comes out is one book across every custodian.",
   },
   {
     term: "HKD · SGD · USD BASE REPORTING · NATIVE AMOUNTS ONE CLICK AWAY",

@@ -1,9 +1,12 @@
-import { CockpitDashboard } from "../components/product";
+import CockpitDashboard from "../components/product/CockpitDashboard";
 import Reveal from "../components/Reveal";
 import "./WorkflowCards.css";
 
-/* Copy — docs/copy-deck.md §3, verbatim. */
-const EYEBROW = "THE DAY, END TO END";
+/* Copy — docs/copy-deck.md §3, verbatim except the eyebrow: the deck's version
+   carried the banned lifecycle cliché in an uppercase, unhyphenated spelling the
+   validation grep missed (docs/critique-v2.md P0-2). The label keeps the claim the
+   title makes anyway. */
+const EYEBROW = "THE DAY";
 const TITLE = "Six things you do every day. One place to do them.";
 const SUBHEAD = "Not six tools, six logins and a spreadsheet holding it together.";
 

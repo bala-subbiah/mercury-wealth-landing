@@ -43,7 +43,10 @@ const PACK_ITEMS: PackItem[] = [
   { label: "Suitability reviews", count: "14" },
 ];
 
-const PACK_READY = "PACK READY · HASH-STAMPED · EXPORT";
+/* A third token sat between these two until docs/critique-v2.md P0-5 removed it:
+   a cryptographic stamping claim nothing has committed to, on the page written
+   for due-diligence reviewers. */
+const PACK_READY = "PACK READY · EXPORT";
 const PACK_NOTE = "In the shape an SFC or MAS inspection request expects";
 
 /* ---------------------------------------------------------------------------

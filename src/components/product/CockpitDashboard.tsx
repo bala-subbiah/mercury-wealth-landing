@@ -202,21 +202,42 @@ const AGENDA_FOOTER = "Scheduled items. Exceptions live in the feed.";
 
 /* --------------------------------------------------------------------------- */
 
+/** How much of the panel to render. See the note on the component. */
+export type CockpitDashboardVariant = "summary" | "full";
+
 export interface CockpitDashboardProps {
   className?: string;
+  variant?: CockpitDashboardVariant;
 }
+
+/** The summary crop keeps the two stat cards the home page's argument needs. */
+const SUMMARY_STAT_LABELS = ["TOTAL AUM", "TODAY"];
 
 /**
  * The book-of-business home screen — the advisor's cockpit at rest.
  *
  * Deliberately static: this panel is evidence, not theatre. The only motion is
  * a hover state on the feed and agenda rows, which is how the real screen
- * behaves under a pointer.
+ * behaves under a pointer. Nothing here animates, so there is no reduced-motion
+ * branch to take.
+ *
+ * Two variants, one dataset (docs/critique-v2.md P1-7: the panel was the hero
+ * moment of both home and /cockpit, so the highest-intent journey repeated
+ * itself). `full` is the whole screen and belongs to /cockpit. `summary` is a
+ * crop of it, not a different panel: the same head, the first two stat cards
+ * and the same ranked feed, with the remaining stat cards and the coming-up
+ * rail left off. Every figure that survives the crop is the figure the full
+ * panel shows.
  */
-export default function CockpitDashboard({ className }: CockpitDashboardProps) {
+export default function CockpitDashboard({ className, variant = "full" }: CockpitDashboardProps) {
+  const isSummary = variant === "summary";
+  const stats = isSummary ? STATS.filter((stat) => SUMMARY_STAT_LABELS.includes(stat.label)) : STATS;
+
   return (
     <section
-      className={["cd-panel", className].filter(Boolean).join(" ")}
+      className={["cd-panel", isSummary ? "cd-panel--summary" : null, className]
+        .filter(Boolean)
+        .join(" ")}
       aria-label="Mercury book of business"
     >
       <header className="cd-head">
@@ -237,7 +258,7 @@ export default function CockpitDashboard({ className }: CockpitDashboardProps) {
       </header>
 
       <ul className="cd-stats">
-        {STATS.map((stat) => (
+        {stats.map((stat) => (
           <li className="cd-stat" key={stat.label}>
             <span className="cd-stat-label">
               {stat.dot ? <span className={`cd-dot cd-dot--${stat.dot}`} aria-hidden="true" /> : null}
@@ -245,7 +266,7 @@ export default function CockpitDashboard({ className }: CockpitDashboardProps) {
             </span>
             <span className={toneClass("cd-stat-value", stat.tone)}>{stat.value}</span>
             <span className="cd-stat-sub">{stat.sub}</span>
-            {stat.spark ? <Sparkline points={stat.spark} tone={stat.tone} /> : null}
+            {stat.spark ? <Sparkline points={stat.spark} tone={stat.tone} wide={isSummary} /> : null}
           </li>
         ))}
       </ul>
@@ -293,39 +314,7 @@ export default function CockpitDashboard({ className }: CockpitDashboardProps) {
           </footer>
         </section>
 
-        <aside className="cd-agenda" aria-label="Coming up">
-          <header className="cd-section-head cd-section-head--rail">
-            <h3 className="cd-section-title">Coming up</h3>
-            <span className="cd-rail-meta">FRI 19 JUN · NEXT 45D</span>
-          </header>
-
-          {AGENDA.map((group) => (
-            <div className="cd-agenda-group" key={group.heading}>
-              <h4 className="cd-agenda-heading">{group.heading}</h4>
-              {group.items.length === 0 ? (
-                <p className="cd-agenda-empty">{group.empty}</p>
-              ) : (
-                <ul>
-                  {group.items.map((item) => (
-                    <li className="cd-agenda-row" key={item.date + item.detail}>
-                      <span className="cd-agenda-when">
-                        <span className="cd-agenda-date">{item.date}</span>
-                        <span className="cd-agenda-offset">{item.offset}</span>
-                      </span>
-                      <AgendaIcon kind={item.kind} />
-                      <span className="cd-agenda-text">
-                        <span className="cd-agenda-entity">{item.entity}</span>
-                        <span className="cd-agenda-detail">{item.detail}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
-
-          <footer className="cd-agenda-footer">{AGENDA_FOOTER}</footer>
-        </aside>
+        {isSummary ? null : <AgendaRail />}
       </div>
     </section>
   );
@@ -334,6 +323,45 @@ export default function CockpitDashboard({ className }: CockpitDashboardProps) {
 /* ---------------------------------------------------------------------------
    Pieces
    --------------------------------------------------------------------------- */
+
+/** The coming-up rail. Full variant only; the summary crop stops at the feed. */
+function AgendaRail() {
+  return (
+    <aside className="cd-agenda" aria-label="Coming up">
+      <header className="cd-section-head cd-section-head--rail">
+        <h3 className="cd-section-title">Coming up</h3>
+        <span className="cd-rail-meta">FRI 19 JUN · NEXT 45D</span>
+      </header>
+
+      {AGENDA.map((group) => (
+        <div className="cd-agenda-group" key={group.heading}>
+          <h4 className="cd-agenda-heading">{group.heading}</h4>
+          {group.items.length === 0 ? (
+            <p className="cd-agenda-empty">{group.empty}</p>
+          ) : (
+            <ul>
+              {group.items.map((item) => (
+                <li className="cd-agenda-row" key={item.date + item.detail}>
+                  <span className="cd-agenda-when">
+                    <span className="cd-agenda-date">{item.date}</span>
+                    <span className="cd-agenda-offset">{item.offset}</span>
+                  </span>
+                  <AgendaIcon kind={item.kind} />
+                  <span className="cd-agenda-text">
+                    <span className="cd-agenda-entity">{item.entity}</span>
+                    <span className="cd-agenda-detail">{item.detail}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+
+      <footer className="cd-agenda-footer">{AGENDA_FOOTER}</footer>
+    </aside>
+  );
+}
 
 function toneClass(base: string, tone?: Tone) {
   return tone && tone !== "neutral" ? `${base} ${base}--${tone}` : base;
@@ -350,9 +378,9 @@ function DriftBar({ weight, target }: { weight: number; target: number }) {
   );
 }
 
-function Sparkline({ points, tone }: { points: number[]; tone?: Tone }) {
-  const width = 72;
-  const height = 20;
+function Sparkline({ points, tone, wide }: { points: number[]; tone?: Tone; wide?: boolean }) {
+  const width = wide ? 240 : 72;
+  const height = wide ? 34 : 20;
   const max = Math.max(...points);
   const min = Math.min(...points);
   const span = max - min || 1;

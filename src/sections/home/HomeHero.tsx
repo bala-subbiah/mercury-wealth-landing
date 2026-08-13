@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { MorningBriefing } from "../../components/product";
+import MorningBriefing from "../../components/product/MorningBriefing";
 import { useReducedMotion } from "../../components/product/useReducedMotion";
 import { DEMO_LINK_PROPS } from "../../links";
 import "./HomeHero.css";
@@ -16,13 +16,20 @@ import "./HomeHero.css";
    two screens below it. */
 const EYEBROW = "ENGINES FOR WEALTH FIRMS · HONG KONG & SINGAPORE";
 const HEADLINE = "The engines that run your wealth business.";
+/* Trimmed for the home word-count gate (docs/critique-v2.md P1-13). The
+   subhead's adoption sentence was cut, not lost: the engine act's intro says
+   "License one, several, or all six" and the final act's headline is "Start
+   with one. Or open all of it." The caption's "SIX ENGINES · ONE SPINE" was
+   the lede's own words repeated two lines below it. The named segment list
+   stays at three per docs/v2-plan.md §6 #11 — family offices join the
+   who-it's-for layer, not the hero. */
 const LEDE =
   "Six licensable engines: briefing, documents, workflows, meetings, research, compliance. Each valuable alone, one spine underneath.";
 const SUBHEAD =
-  "Built for external asset managers, private banks and brokerages in Hong Kong and Singapore. Start with one, add the rest as they earn their place, or run the whole cockpit from day one.";
+  "Built for external asset managers, private banks and brokerages in Hong Kong and Singapore.";
 const CTA_PRIMARY = "Open the live demo";
 const CTA_SECONDARY = "See the engines";
-const CAPTION = "SIX ENGINES · ONE SPINE · NO FORM · NO SIGN-UP";
+const CAPTION = "NO FORM · NO SIGN-UP";
 const VISUAL_LABEL = "Mercury Cockpit: the morning briefing, live view";
 
 const SMALL_SCREEN = "(max-width: 640px)";

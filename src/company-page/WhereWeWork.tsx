@@ -1,4 +1,4 @@
-import { LogoStrip } from "../components/company";
+import LogoStrip from "../components/company/LogoStrip";
 import Reveal from "../components/Reveal";
 
 /* Where we work: the presence line from the footer (docs/v2-plan.md §6 #2:

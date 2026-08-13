@@ -12,8 +12,11 @@ import "./EngineGrid.css";
    the modularity question is actually raised. */
 const EYEBROW = "THE ENGINES";
 const TITLE = "Six engines. Each does a real job on its own.";
+/* Trimmed for the home word-count gate (docs/critique-v2.md P1-13). The
+   modularity answer is intact: license any number, each works alone, and the
+   spine is the shared book and the shared log. Only the restatement went. */
 const SUBHEAD =
-  "License one, several, or all six. Adopt one and it works alone; add another and both get sharper, because every engine reads and writes the same book and lands on the same audit log.";
+  "License one, several, or all six. Each works alone; together they compound on one book, one audit log.";
 const FLAGSHIP = "FLAGSHIP";
 const COCKPIT_LINK = "Explore the Cockpit";
 

@@ -1,4 +1,4 @@
-import { TermSheetDissolve } from "../../components/product";
+import TermSheetDissolve from "../../components/product/TermSheetDissolve";
 import Reveal from "../../components/Reveal";
 import "./DiExtraction.css";
 

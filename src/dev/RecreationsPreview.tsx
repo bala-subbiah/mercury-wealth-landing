@@ -1,16 +1,20 @@
 import type { ReactNode } from "react";
 
-import { IntegrationsSpine, LogoStrip } from "../components/company";
-import {
-  AuditTimeline,
-  CockpitDashboard,
-  ComplianceEvidence,
-  DriftChat,
-  MorningBriefing,
-  RelationshipScribe,
-  ResearchAnswer,
-  TermSheetDissolve,
-} from "../components/product";
+/* Direct file imports, like every other consumer: each recreation's module has
+   a top-level `import "./X.css"`, so a barrel would put all eight stylesheets
+   in one chunk and ship it to every page that renders any one of them
+   (docs/critique-v2.md P1-12). This page is the only surface that legitimately
+   wants all of them, and it is dev-only. */
+import IntegrationsSpine from "../components/company/IntegrationsSpine";
+import LogoStrip from "../components/company/LogoStrip";
+import AuditTimeline from "../components/product/AuditTimeline";
+import CockpitDashboard from "../components/product/CockpitDashboard";
+import ComplianceEvidence from "../components/product/ComplianceEvidence";
+import DriftChat from "../components/product/DriftChat";
+import MorningBriefing from "../components/product/MorningBriefing";
+import RelationshipScribe from "../components/product/RelationshipScribe";
+import ResearchAnswer from "../components/product/ResearchAnswer";
+import TermSheetDissolve from "../components/product/TermSheetDissolve";
 import "./RecreationsPreview.css";
 
 /**

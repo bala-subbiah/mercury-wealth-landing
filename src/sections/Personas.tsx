@@ -1,9 +1,14 @@
 import Reveal from "../components/Reveal";
 import "./Personas.css";
 
-/* Copy — docs/copy-deck.md §9, verbatim. */
+/* Copy — docs/copy-deck.md §9, verbatim, plus the fourth row added per the
+   owner decision recorded in docs/v2-plan.md §6 #11: a multi-family office
+   runs an EAM's book under an EAM's evidence expectations, so the story ports
+   without a new claim. It belongs on the who-it's-for layer, not in the hero's
+   named segment list, which stays at three. The title counts the rows, so it
+   moved with them. */
 const EYEBROW = "WHO IT’S FOR";
-const TITLE = "Three jobs. One record between them.";
+const TITLE = "Four jobs. One record between them.";
 
 const PERSONAS = [
   {
@@ -21,6 +26,12 @@ const PERSONAS = [
     line: "The approval trail, without asking anyone for it.",
     support:
       "Filter the immutable log by client, advisor, action or date and export what the reviewer wants.",
+  },
+  {
+    role: "FAMILY OFFICE PRINCIPAL",
+    line: "The whole family’s book, across every custodian, without asking anyone to prepare it.",
+    support:
+      "A multi-family office runs an EAM’s book under the same suitability evidence expectations, and often one person holds the advisor, principal and compliance seats at once.",
   },
 ];
 

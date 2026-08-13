@@ -1,4 +1,4 @@
-import { LogoStrip } from "../../components/company";
+import LogoStrip from "../../components/company/LogoStrip";
 import Reveal from "../../components/Reveal";
 import "./LogoProof.css";
 
