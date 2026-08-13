@@ -17,35 +17,66 @@
   background-color: var(--color-navy);
 }
 
+/* The skyline is meant to be seen (docs/v2-plan.md §6 #14). It was carrying a
+   0.5 opacity and a 0.55→0.94 scrim on top of it, which left a smear; the file
+   is now a 1280x720 encode and the grade below is tuned so the buildings and
+   the harbour read at both widths. Legibility is bought back by the scrim's
+   left-hand pass rather than by flattening the whole frame. */
 .home-hero-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.5;
+  opacity: 0.78;
 }
 
 .home-hero-still {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(120% 80% at 78% 12%, rgba(28, 46, 76, 0.85) 0%, rgba(4, 11, 21, 0) 62%),
-    radial-gradient(90% 60% at 12% 88%, rgba(18, 32, 54, 0.7) 0%, rgba(4, 11, 21, 0) 60%),
-    linear-gradient(180deg, #0a1626 0%, var(--color-navy) 72%);
+    radial-gradient(120% 80% at 78% 12%, rgba(38, 60, 96, 0.85) 0%, rgba(11, 18, 32, 0) 62%),
+    radial-gradient(90% 60% at 12% 88%, rgba(26, 42, 68, 0.7) 0%, rgba(11, 18, 32, 0) 60%),
+    linear-gradient(180deg, var(--color-hero-grad-top) 0%, var(--color-navy) 72%);
 }
 
+/* Two passes: a vertical one that lands the section on the page ground, and a
+   horizontal one that keeps the copy column dark enough for AA while the right
+   half of the frame stays open. */
 .home-hero-scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(
-    180deg,
-    rgba(4, 11, 21, 0.55) 0%,
-    rgba(4, 11, 21, 0.72) 42%,
-    rgba(4, 11, 21, 0.94) 80%,
-    var(--color-navy) 100%
-  );
+  background:
+    linear-gradient(
+      100deg,
+      rgba(11, 18, 32, 0.82) 0%,
+      rgba(11, 18, 32, 0.62) 34%,
+      rgba(11, 18, 32, 0.18) 62%,
+      rgba(11, 18, 32, 0.1) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(11, 18, 32, 0.24) 0%,
+      rgba(11, 18, 32, 0.34) 42%,
+      rgba(11, 18, 32, 0.8) 82%,
+      var(--color-navy) 100%
+    );
+}
+
+/* Below the two-column breakpoint the copy sits over the whole frame, so the
+   horizontal pass has nothing to protect and would only grey the skyline out.
+   It flattens to an even, lighter veil there. */
+@media (max-width: 1023px) {
+  .home-hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(11, 18, 32, 0.58) 0%,
+      rgba(11, 18, 32, 0.66) 42%,
+      rgba(11, 18, 32, 0.88) 82%,
+      var(--color-navy) 100%
+    );
+  }
 }
 
 /* ---------------------------------------------------------------------
@@ -79,12 +110,21 @@
   overflow-wrap: anywhere;
 }
 
-.hh-sub {
-  font-size: var(--text-md);
-  line-height: 1.6;
+/* The orienting clause. Sits one step above the subhead in the hierarchy: it
+   is the sentence that has to land if nothing else does. */
+.hh-lede {
+  font-size: var(--text-lg);
+  line-height: 1.45;
   color: var(--color-ink-dark);
-  opacity: 0.86;
-  max-width: 46ch;
+  max-width: 44ch;
+  text-wrap: pretty;
+}
+
+.hh-sub {
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-muted-dark);
+  max-width: 50ch;
 }
 
 .hh-ctas {
@@ -102,85 +142,6 @@
 }
 
 /* ---------------------------------------------------------------------
-   Engine switcher
-   --------------------------------------------------------------------- */
-.hs {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  min-width: 0;
-}
-
-/* The stage reserves its own height, so a swap never reflows the page under
-   it. The floors below are the measured height of the tallest of the three
-   vignettes at each width (the scribe throughout); the component also grows
-   the stage inline if a panel ever exceeds them. Whichever vignette is
-   shorter sits centred in the reserved band. */
-.hs-stage {
-  position: relative;
-  min-height: max(var(--hs-reserve, 0px), 900px);
-}
-
-.hs-layer {
-  position: absolute;
-  inset-block-start: 50%;
-  inset-inline: 0;
-  transform: translate3d(0, -50%, 0);
-  opacity: 0;
-  transition: opacity var(--dur-med) var(--ease-out);
-}
-
-.hs-layer--on {
-  opacity: 1;
-}
-
-/* Reduced motion: no crossfade at all — the swap is instant. */
-.hs-layer--static {
-  opacity: 1;
-  transition: none;
-}
-
-.hs-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs) var(--space-md);
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--rule-dark);
-}
-
-.hs-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding-block: 4px;
-  font-size: 0.6875rem;
-  color: var(--color-muted-dark);
-  opacity: 0.7;
-  transition: color var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
-}
-
-.hs-tab:hover {
-  opacity: 1;
-}
-
-.hs-tab--on {
-  color: var(--color-brass);
-  opacity: 1;
-}
-
-.hs-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 999px;
-  background-color: currentColor;
-  opacity: 0.55;
-}
-
-.hs-tab--on .hs-dot {
-  opacity: 1;
-}
-
-/* ---------------------------------------------------------------------
    Breakpoints
    --------------------------------------------------------------------- */
 @media (max-width: 640px) {
@@ -189,25 +150,9 @@
   }
 }
 
-@media (min-width: 360px) {
-  .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 760px);
-  }
-}
-
-@media (min-width: 480px) {
-  .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 705px);
-  }
-}
-
 @media (min-width: 700px) {
   .hh-sub {
-    max-width: 52ch;
-  }
-
-  .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 570px);
+    max-width: 54ch;
   }
 }
 
@@ -221,18 +166,10 @@
     gap: var(--space-xl);
     align-items: center;
   }
-
-  .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 650px);
-  }
 }
 
 @media (min-width: 1240px) {
   .hh-grid {
     gap: var(--space-2xl);
-  }
-
-  .hs-stage {
-    min-height: max(var(--hs-reserve, 0px), 615px);
   }
 }

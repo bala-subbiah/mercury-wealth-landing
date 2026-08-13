@@ -5,8 +5,22 @@
   padding-block: var(--space-3xl);
 }
 
+.facts-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-sm);
+}
+
 .facts-label {
   color: var(--color-brass-deep);
+}
+
+/* The domain-fluency line inherited from the retired Credibility band. It is a
+   signal, not a heading: quieter than the label beside it, and never wider
+   than the grid it introduces. */
+.facts-domain {
+  color: var(--color-muted-light);
+  overflow-wrap: anywhere;
 }
 
 .facts-grid {
@@ -67,6 +81,12 @@
 }
 
 @media (min-width: 1080px) {
+  /* The line is long enough that a label column would orphan its last token;
+     it gets the full measure and sits on one line instead. */
+  .facts-head {
+    gap: var(--space-md);
+  }
+
   .facts-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0 var(--space-lg);

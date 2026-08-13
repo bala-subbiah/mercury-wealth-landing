@@ -49,6 +49,12 @@
   margin-top: var(--space-xl);
 }
 
+/* The audit strip is the second half of the same sentence, so it sits closer
+   to the book panel than the panel sits to the copy above it. */
+.fl-audit {
+  margin-top: var(--space-md);
+}
+
 @media (max-width: 760px) {
   .fl {
     padding-block: var(--space-lg) var(--space-xl);

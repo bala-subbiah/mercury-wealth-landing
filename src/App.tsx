@@ -1,31 +1,18 @@
-import Nav from "./components/Nav";
-import type { NavLink } from "./components/Nav";
+import Nav, { HOME_NAV_LINKS } from "./components/Nav";
 
 import HomeHero from "./sections/home/HomeHero";
+import ProblemAct from "./sections/home/ProblemAct";
 import LogoProof from "./sections/home/LogoProof";
 import EngineGrid from "./sections/home/EngineGrid";
-import SpineAct from "./sections/home/SpineAct";
 import FlagshipAct from "./sections/home/FlagshipAct";
-import DocIntelAct from "./sections/home/DocIntelAct";
-import AsiaCompany from "./sections/home/AsiaCompany";
-import TrustCondensed from "./sections/home/TrustCondensed";
+import AsiaTrustBand from "./sections/home/AsiaTrustBand";
 import HomeFinalCta from "./sections/home/HomeFinalCta";
 import Footer from "./sections/Footer";
 
 import "./styles/sections.css";
 
-/* Home nav — docs/offerings-map.md v2, "Home page — nine acts". */
-const NAV_LINKS: NavLink[] = [
-  { label: "Engines", href: "#engines" },
-  { label: "The Spine", href: "#spine" },
-  { label: "Built for Asia", href: "#built-for-asia" },
-  { label: "Trust", href: "#trust" },
-  { label: "Cockpit", href: "/cockpit/" },
-];
-
-// Company home. Nine acts, locked by docs/offerings-map.md v2 ("Home page —
-// nine acts"). Every section below is a stub pending the home copy deck and
-// home build task — do not reorder without an owner sign-off.
+// Company home — seven acts, per docs/v2-plan.md §3. The order is the argument
+// (problem, then proof, then offer) and does not change without owner sign-off.
 export default function App() {
   return (
     <div id="top">
@@ -33,39 +20,35 @@ export default function App() {
         Skip to main content
       </a>
 
-      <Nav page="home" links={NAV_LINKS} />
+      {/* Sitewide nav (docs/v2-plan.md §2); home takes the same-page #engines
+          variant of the shared set */}
+      <Nav page="home" links={HOME_NAV_LINKS} />
 
       <main id="main">
-        {/* 1. HomeHero — company claim + engine switcher visual; HK video stays */}
+        {/* 1. Hero — the company claim over the HK video, MorningBriefing beside it */}
         <HomeHero />
 
-        {/* 2. LogoProof — real partner logos, honest label */}
+        {/* 2. ProblemAct — daylight interlude: what is broken, before any product */}
+        <ProblemAct />
+
+        {/* 3. LogoProof — real partner logos, honest label */}
         <LogoProof />
 
-        {/* 3. EngineGrid — the six engines, verb-first cards, flagship badge on Cockpit */}
+        {/* 4. EngineGrid — the six engines; the cut spine act's argument lives in its intro */}
         <EngineGrid />
 
-        {/* 4. SpineAct — anti-Privé: one data spine, one audit log, integrations bar */}
-        <SpineAct />
-
-        {/* 5. FlagshipAct — Cockpit teaser via MorningBriefing -> /cockpit */}
+        {/* 5. FlagshipAct — the book panel and the audit trail it writes -> /cockpit */}
         <FlagshipAct />
 
-        {/* 6. DocIntelAct — second proof act: Document Intelligence, TermSheetDissolve */}
-        <DocIntelAct />
+        {/* 6. AsiaTrustBand — Asia's operating reality and the governance answers, in one band */}
+        <AsiaTrustBand />
 
-        {/* 7. AsiaCompany — Built for Asia, elevated to company level */}
-        <AsiaCompany />
-
-        {/* 8. TrustCondensed — trust pillars + founder statement, condensed from v1 */}
-        <TrustCondensed />
-
-        {/* 9. HomeFinalCta — "Open the live demo" */}
+        {/* 7. HomeFinalCta — "Open the live demo" */}
         <HomeFinalCta />
       </main>
 
-      {/* Footer — page-aware sitemap (home anchors) + fluid-gradient MERCURY wordmark */}
-      <Footer page="home" />
+      {/* Footer — the sitewide sitemap + fluid-gradient MERCURY wordmark */}
+      <Footer />
     </div>
   );
 }

@@ -13,7 +13,7 @@
 }
 
 .nav--scrolled {
-  background-color: rgba(4, 11, 21, 0.9);
+  background-color: rgba(11, 18, 32, 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom-color: var(--rule-dark);
@@ -53,6 +53,7 @@
 .nav-link {
   position: relative;
   padding-block: 4px;
+  white-space: nowrap;
   font-size: var(--text-sm);
   color: var(--color-muted-dark);
   border-bottom: 1px solid transparent;
@@ -74,6 +75,17 @@
   display: none;
   padding: 10px 20px;
   font-size: var(--text-xs);
+}
+
+/* Compact mobile CTA — the bar's only conversion affordance below 900px.
+   Sits between the wordmark and the menu control; the desktop pill takes
+   over at 900px and this one leaves. */
+.nav .nav-cta-compact {
+  display: inline-flex;
+  margin-inline-start: auto;
+  padding: 9px 15px;
+  font-size: var(--text-xs);
+  white-space: nowrap;
 }
 
 /* Mobile disclosure -------------------------------------------------- */
@@ -108,7 +120,7 @@
 
 .nav-panel {
   border-top: 1px solid var(--rule-dark);
-  background-color: rgba(4, 11, 21, 0.97);
+  background-color: rgba(11, 18, 32, 0.97);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -137,6 +149,26 @@
   align-self: flex-start;
 }
 
+/* Three items in a 375px bar: tighten the gap and let the pill and the menu
+   control sit as a pair on the right. */
+@media (max-width: 899px) {
+  .nav-inner {
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 379px) {
+  .nav .nav-cta-compact {
+    padding-inline: 12px;
+  }
+
+  .nav-toggle {
+    padding-inline: 12px;
+  }
+}
+
+/* From 900px the four labels live in the bar itself: no disclosure control
+   above the mobile breakpoint (docs/v2-plan.md §2). */
 @media (min-width: 900px) {
   .nav .nav-links,
   .nav .nav-cta {
@@ -144,6 +176,7 @@
   }
 
   .nav .nav-toggle,
+  .nav .nav-cta-compact,
   .nav .nav-panel {
     display: none;
   }

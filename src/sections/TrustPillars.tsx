@@ -5,7 +5,8 @@ import "./TrustPillars.css";
    honesty note beneath it are exact and must never be upgraded. */
 const EYEBROW = "GOVERNANCE & SECURITY";
 const TITLE = "Answers, in the form your compliance officer asks for them.";
-const SUBHEAD = "Six questions every due-diligence questionnaire asks. Here they are, answered plainly.";
+const SUBHEAD =
+  "Six questions every due-diligence questionnaire gets to. Here they are, answered plainly.";
 
 const PILLARS = [
   {
@@ -36,12 +37,12 @@ const PILLARS = [
   {
     claim: "No training on client data.",
     mechanism:
-      "Your clients' data is never used to train models, and is never pooled with any other firm's.",
+      "Your clients' data is never used to train models, and is never pooled with any other firm’s.",
   },
 ];
 
-const CERTS = "SOC 2 TYPE II — AUDIT UNDERWAY · ISO 27001 — CERTIFICATION IN PROGRESS";
-const HONESTY = "Applied for and in progress. Neither is held today; we'll say so the day they are.";
+const CERTS = "SOC 2 TYPE II: AUDIT UNDERWAY · ISO 27001: CERTIFICATION IN PROGRESS";
+const HONESTY = "Applied for and in progress. Neither is held today; we’ll say so the day they are.";
 
 export default function TrustPillars() {
   return (

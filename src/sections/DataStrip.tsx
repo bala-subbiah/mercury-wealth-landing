@@ -19,10 +19,10 @@ interface Item {
 }
 
 const ITEMS: Item[] = [
-  { label: "TOTAL AUM", values: ["US$57.7M", "US$57.8M"] },
-  { label: "TODAY", values: ["+US$165k", "+US$171k"], tone: "up" },
-  { label: "NNM MTD", values: ["−US$250k"], tone: "down" },
-  { label: "HOUSEHOLDS", values: ["4"] },
+  { label: "TOTAL AUM", values: ["US$342.6M", "US$342.8M"] },
+  { label: "TODAY", values: ["+US$994k", "+US$978k"], tone: "up" },
+  { label: "NNM MTD", values: ["−US$2.4M"], tone: "down" },
+  { label: "HOUSEHOLDS", values: ["44"] },
   { label: "NEEDS ATTENTION", values: ["14", "13"], tone: "watch" },
 ];
 

@@ -12,10 +12,10 @@ import "./ResearchAnswer.css";
 const PANEL_LABEL = "COPILOT · BOOK RESEARCH";
 const PANEL_STAMP = "FRI 19 JUN 2026 · 20:15 HKT";
 
-const QUESTION = "The Fed decides tonight — who in my book is exposed if they hold?";
+const QUESTION = "The Fed decides tonight. Who in my book is exposed if they hold?";
 
 const CHECKS = [
-  "reading 20 households · 47 accounts",
+  "reading 44 households · 118 accounts",
   "mapping rate sensitivity · USD duration & funding currency",
 ];
 

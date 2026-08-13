@@ -3,13 +3,20 @@ import "./FactsBand.css";
 
 /* Copy — docs/copy-deck.md §12, verbatim, verified rows only. The deck's
    BOOKING CENTRES / CUSTODIAN FEEDS / UPTIME rows carry [VERIFY] and are cut
-   rather than softened. §13's numberless variant closes the band. */
+   rather than softened. §13's numberless variant closes the band.
+
+   DOMAIN_LINE is the one line kept from the retired Credibility band
+   (docs/v2-plan.md §4.10): the logo row itself is the home page's now, but the
+   domain-fluency signal belongs with the specifics it introduces. Verbatim
+   from the deck's §2, claiming nothing the rows below do not carry. */
 const LABEL = "THE SPECIFICS";
+const DOMAIN_LINE =
+  "MULTI-CUSTODIAN · HKD · SGD · USD BASE REPORTING · ADVISORY & DPM MANDATES · SFC · MAS · HKMA";
 
 const FACTS = [
   {
     stat: "CUSTODIANS",
-    line: "Multi-custodian by design — live feeds and hand-keyed statements in one book",
+    line: "Multi-custodian by design: live feeds and hand-keyed statements in one book",
   },
   { stat: "BASE REPORTING", line: "HKD · SGD · USD, with native amounts one click away" },
   {
@@ -20,19 +27,20 @@ const FACTS = [
   { stat: "DATA SPINE", line: "Households · accounts · portfolios · holdings · activity" },
   { stat: "TAX LOTS", line: "Cross-border tax-lot awareness, including specific-ID cost basis" },
   { stat: "AUDIT", line: "Every material action on an immutable log, as it happens" },
-  { stat: "DERIVED FIGURES", line: "Computed from base facts — never keyed in twice" },
+  { stat: "DERIVED FIGURES", line: "Computed from base facts, never keyed in twice" },
 ];
 
 const LIVE_LABEL = "GETTING LIVE";
 const LIVE_LINE =
-  "Custodian feeds connected, history loaded, and your book live — before the first quarter-end you'd have spent reconciling it.";
+  "Custodian feeds connected, history loaded, and your book live, before the first quarter-end you’d have spent reconciling it.";
 
 export default function FactsBand() {
   return (
     <section className="section facts on-paper" aria-label="The specifics">
       <div className="container">
-        <Reveal>
+        <Reveal className="facts-head">
           <span className="mono facts-label">{LABEL}</span>
+          <p className="mono facts-domain">{DOMAIN_LINE}</p>
         </Reveal>
 
         <dl className="facts-grid">

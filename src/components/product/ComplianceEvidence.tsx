@@ -13,7 +13,7 @@ const PANEL_LABEL = "COMPLIANCE COPILOT";
 const PANEL_STAMP = "Q2 2026 CYCLE";
 
 const CYCLE_LABEL = "REVIEW CYCLE";
-const PACK_LABEL = "INSPECTION PACK · Q2 2026 — ASSEMBLING";
+const PACK_LABEL = "INSPECTION PACK · Q2 2026 · ASSEMBLING";
 
 type CycleTone = "amber" | "emerald" | "neutral";
 
@@ -24,12 +24,12 @@ interface CycleRow {
 }
 
 const CYCLE_ROWS: CycleRow[] = [
-  { household: "Zhang Family", status: "due 26 JUN", tone: "amber" },
-  { household: "Lim Family Office", status: "filed 12 JUN", tone: "emerald" },
+  { household: "Lim Family Office", status: "due 26 JUN", tone: "amber" },
+  { household: "Zhang Family", status: "filed 12 JUN", tone: "emerald" },
   { household: "Okonkwo Family", status: "due 08 JUL", tone: "neutral" },
 ];
 
-const CYCLE_FOOTER = "0 OVERDUE";
+const CYCLE_FOOTER = "44 HOUSEHOLDS · 0 OVERDUE";
 
 interface PackItem {
   label: string;
@@ -37,10 +37,10 @@ interface PackItem {
 }
 
 const PACK_ITEMS: PackItem[] = [
-  { label: "Call reports", count: "12" },
-  { label: "Proposal approvals", count: "8" },
-  { label: "Audit-log extracts", count: "3 accounts" },
-  { label: "Suitability reviews", count: "6" },
+  { label: "Call reports", count: "96" },
+  { label: "Proposal approvals", count: "41" },
+  { label: "Audit-log extracts", count: "118 accounts" },
+  { label: "Suitability reviews", count: "14" },
 ];
 
 const PACK_READY = "PACK READY · HASH-STAMPED · EXPORT";

@@ -1,0 +1,81 @@
+/* DiAdoption — the page's one daylight band. Claim left, the offer right. */
+
+/* Rhythm: the register changes here, so the band is set evenly and generously.
+   The daylight interlude reads as an interruption, not as a continuation. */
+.di-ad {
+  padding-block: var(--space-2xl);
+}
+
+.di-ad-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.di-ad-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Display tier from .section-title (which takes its ink from .on-paper); only
+   the size step is local. */
+.di-ad-title {
+  font-size: var(--text-display-sm);
+}
+
+.di-ad-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
+
+.di-ad-lead {
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--color-ink);
+  max-width: 46ch;
+}
+
+.di-ad-offer {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-body-light);
+  max-width: 52ch;
+}
+
+.di-ad-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule-light);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.di-ad-link:hover {
+  color: var(--color-brass-deep);
+  border-bottom-color: var(--color-brass-deep);
+}
+
+@media (min-width: 900px) {
+  .di-ad-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+}
+
+@media (max-width: 760px) {
+  .di-ad {
+    padding-block: var(--space-xl);
+  }
+}

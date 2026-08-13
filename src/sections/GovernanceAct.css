@@ -1,5 +1,7 @@
-/* GovernanceAct — the proposal's life. Copy on the left, the real audit
-   timeline on the right, the lifecycle spelled out as a mono breadcrumb. */
+/* GovernanceAct — the proposal's life. The AuditTimeline recreation moved to
+   the home page (docs/v2-plan.md §3.5), so the act is a single measured column
+   with the lifecycle thread carried full width beneath it, rather than a
+   two-column layout with an empty right-hand side. */
 
 .gov {
   padding-block: var(--space-2xl) var(--space-3xl);
@@ -17,24 +19,12 @@
   font-size: var(--text-display-md);
 }
 
+.gov-argument {
+  min-width: 0;
+}
+
 .gov-body {
-  margin-top: var(--space-md);
-}
-
-.gov-crumb {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px var(--space-xs);
-  margin-top: var(--space-lg);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--rule-dark);
-  color: var(--color-muted-dark);
-  opacity: 0.72;
-}
-
-.gov-crumb-arrow {
-  color: var(--color-brass);
-  opacity: 0.6;
+  max-width: 68ch;
 }
 
 .gov-quote {
@@ -53,18 +43,60 @@
   margin-top: var(--space-lg);
 }
 
-.gov-visual {
+/* The thread the record travels — this act's own visual now that the timeline
+   recreation lives on the home page. Same content as the old breadcrumb, given
+   the room the panel used to take. */
+.gov-thread {
   min-width: 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.gov-thread-label {
+  display: block;
+  color: var(--color-brass);
+  opacity: 0.85;
+}
+
+.gov-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px var(--space-sm);
+  margin-top: var(--space-md);
+  color: var(--color-muted-dark);
+}
+
+.gov-crumb-step {
+  padding: 7px 12px;
+  border: 1px solid var(--rule-dark);
+  border-radius: 2px;
+  background-color: var(--color-panel);
+  color: var(--color-ink-dark);
+  white-space: nowrap;
+}
+
+.gov-crumb-arrow {
+  color: var(--color-brass);
+  opacity: 0.7;
 }
 
 @media (min-width: 1080px) {
   .gov-grid {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: var(--space-2xl);
+    gap: var(--space-2xl) var(--space-2xl);
   }
 
-  .gov-copy {
+  .gov-head {
     position: sticky;
     top: 120px;
+  }
+
+  .gov-thread {
+    grid-column: 1 / -1;
+  }
+
+  .gov-crumb {
+    gap: 12px var(--space-md);
   }
 }

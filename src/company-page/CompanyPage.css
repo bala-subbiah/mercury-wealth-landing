@@ -1,0 +1,230 @@
+/* /company/: one stylesheet for the whole page.
+   Every section below the masthead shares one paper ground and one type
+   rhythm (design.md amendment 1: paper is the register the company speaks in),
+   so splitting these rules across five files would only scatter a single
+   system. Tokens only, no literal values except optical nudges. */
+
+/* ---------------------------------------------------------------------
+   Masthead: the page's only dark band.
+   Structural, not decorative: the fixed nav is transparent until 60px of
+   scroll, so the first band has to be navy for the wordmark to read.
+   --------------------------------------------------------------------- */
+.co-head {
+  padding-block: calc(76px + var(--space-2xl)) var(--space-xl);
+  background-color: var(--color-navy);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.co-title {
+  margin-top: var(--space-md);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-display-md);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-ink-dark);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.co-standfirst {
+  margin-top: var(--space-sm);
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--color-muted-dark);
+  max-width: 52ch;
+}
+
+/* ---------------------------------------------------------------------
+   Paper bands: rhythm varies section to section, never uniform.
+   --------------------------------------------------------------------- */
+.co-band {
+  background-color: var(--color-paper);
+}
+
+.co-founder {
+  padding-block: var(--space-2xl) var(--space-xl);
+}
+
+.co-why,
+.co-exists {
+  padding-block: var(--space-xl) var(--space-2xl);
+}
+
+.co-where {
+  padding-block: var(--space-xl);
+}
+
+.co-contact {
+  padding-block: var(--space-2xl) var(--space-2xl);
+}
+
+.co-heading {
+  font-size: var(--text-2xl);
+}
+
+/* ---------------------------------------------------------------------
+   The founder statement: the page's centre of gravity.
+   Serif, one measure, a single brass hairline holding the left edge.
+   --------------------------------------------------------------------- */
+.co-statement {
+  border-left: 1px solid var(--color-brass-deep);
+  padding-left: var(--space-md);
+  max-width: 58ch;
+}
+
+.co-statement p {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-lg);
+  line-height: 1.62;
+  color: var(--color-ink);
+}
+
+.co-byline {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: var(--space-md);
+  padding-left: calc(var(--space-md) + 1px);
+}
+
+.co-byline-name {
+  align-self: flex-start;
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+.co-byline-role {
+  color: var(--color-muted-light);
+}
+
+/* ---------------------------------------------------------------------
+   Label + prose rows: the shared structure of "why now" and "what exists".
+   --------------------------------------------------------------------- */
+.co-rows {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.co-row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule-light);
+}
+
+.co-row-label {
+  /* Optical: the mono cap-height sits high against a 1.7 body line. */
+  padding-top: 3px;
+}
+
+.co-row-body {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-body-light);
+  max-width: 60ch;
+}
+
+.co-honesty {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-muted-light);
+}
+
+/* ---------------------------------------------------------------------
+   Where we work
+   --------------------------------------------------------------------- */
+.co-presence {
+  margin-top: var(--space-md);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+.co-where-body {
+  margin-top: var(--space-sm);
+}
+
+/* The shared LogoStrip is monochromed white for the dark home page. On paper
+   it has to invert: same component, same assets, opposite end of the filter.
+   Left-aligned here to sit with the prose rather than centring itself. */
+.co-logos {
+  align-items: flex-start;
+  margin-top: var(--space-lg);
+}
+
+.co-logos .ls-label {
+  color: var(--color-muted-light);
+}
+
+.co-logos .ls-row {
+  justify-content: flex-start;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.co-logos .ls-logo {
+  filter: brightness(0);
+  opacity: 0.55;
+}
+
+.co-logos .ls-logo:hover,
+.co-logos .ls-logo:focus-visible {
+  opacity: 0.9;
+}
+
+/* ---------------------------------------------------------------------
+   Contact
+   --------------------------------------------------------------------- */
+.co-contact-body {
+  margin-top: var(--space-sm);
+}
+
+.co-contact-row {
+  margin-top: var(--space-lg);
+}
+
+/* ---------------------------------------------------------------------
+   Small screens: the label column stops being a column.
+   --------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  .co-head {
+    padding-block: calc(68px + var(--space-xl)) var(--space-lg);
+  }
+
+  .co-founder,
+  .co-contact {
+    padding-block: var(--space-xl);
+  }
+
+  .co-why,
+  .co-exists,
+  .co-where {
+    padding-block: var(--space-lg) var(--space-xl);
+  }
+
+  .co-statement {
+    padding-left: var(--space-sm);
+  }
+
+  .co-statement p {
+    font-size: var(--text-md);
+  }
+
+  .co-byline {
+    padding-left: calc(var(--space-sm) + 1px);
+  }
+
+  .co-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xs);
+  }
+
+  .co-row-label {
+    padding-top: 0;
+  }
+}

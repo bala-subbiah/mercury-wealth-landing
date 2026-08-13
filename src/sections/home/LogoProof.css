@@ -17,13 +17,6 @@
   min-width: 0;
 }
 
-.lp-buyers {
-  font-size: 0.6875rem;
-  color: var(--color-muted-dark);
-  opacity: 0.6;
-  overflow-wrap: anywhere;
-}
-
 @media (max-width: 760px) {
   .lp {
     padding-block: var(--space-md);

@@ -14,6 +14,13 @@
   padding-bottom: var(--space-xl);
 }
 
+.footer-lead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
 .footer-tagline {
   font-family: var(--font-display);
   font-size: var(--text-md);
@@ -22,10 +29,17 @@
   max-width: 34ch;
 }
 
+.footer-cta {
+  padding: 12px 24px;
+  font-size: var(--text-sm);
+}
+
+/* Three columns, one of them six items deep — the column gap stays below 2xl
+   so the set still fits beside the lead block on a laptop. */
 .footer-sitemap {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-lg) var(--space-2xl);
+  gap: var(--space-lg) var(--space-xl);
 }
 
 .footer-column {
@@ -40,13 +54,16 @@
   opacity: 0.7;
 }
 
-.footer-legal-static {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-muted-dark);
-  opacity: 0.55;
+/* The contact column carries an address and a sentence, so it keeps the mono
+   face but drops the uppercase idiom — a shouted mailbox is unreadable. */
+.footer-column--contact {
+  min-width: 15rem;
+}
+
+.footer .footer-column--contact .footer-link {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
 }
 
 .footer-links {
@@ -73,6 +90,19 @@
   border-bottom-color: var(--color-brass);
 }
 
+/* The four engines without pages of their own. Same list, same face, no link
+   affordance: a hover underline on something that goes nowhere is a lie. */
+.footer-item {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted-dark);
+  opacity: 0.62;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+
 .footer-mark {
   margin-block: var(--space-md);
 }
@@ -85,6 +115,14 @@
   padding-top: var(--space-md);
   color: var(--color-muted-dark);
   opacity: 0.7;
+}
+
+/* The foot row renders its two strings literally: the presence line is
+   already set in caps, and the entity line must read "© Mercury Wealth" as
+   written. Doubled up so it beats .mono regardless of which entry point
+   decides the stylesheet order. */
+.footer .footer-foot {
+  text-transform: none;
 }
 
 .footer-foot span {

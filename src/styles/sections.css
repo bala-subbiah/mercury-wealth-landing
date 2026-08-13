@@ -128,8 +128,8 @@
 
 .cta-primary:hover {
   background-color: rgba(198, 155, 78, 0.12);
-  border-color: #d8b26a;
-  color: #d8b26a;
+  border-color: var(--color-brass-bright);
+  color: var(--color-brass-bright);
 }
 
 .cta-primary:active {
@@ -176,6 +176,35 @@
    points forward, not down. */
 .cta-secondary--forward::after {
   content: "→";
+}
+
+/* ---------------------------------------------------------------------
+   Inline text link — the quiet third path (a mailto inside a sentence).
+   Never competes with the CTA pill above it: it is body-weight, underlined
+   by a hairline, brass only on hover.
+   --------------------------------------------------------------------- */
+.text-link {
+  color: var(--color-ink-dark);
+  border-bottom: 1px solid var(--rule-dark-strong);
+  padding-bottom: 1px;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.text-link:hover {
+  color: var(--color-brass);
+  border-bottom-color: var(--color-brass);
+}
+
+.on-paper .text-link {
+  color: var(--color-ink);
+  border-bottom-color: var(--rule-light);
+}
+
+.on-paper .text-link:hover {
+  color: var(--color-brass-deep);
+  border-bottom-color: var(--color-brass-deep);
 }
 
 /* ---------------------------------------------------------------------
@@ -239,20 +268,18 @@
    Small-screen rhythm — the desktop paddings (2xl/3xl) leave dead bands on a
    phone. Scaled down here in one place, keeping the sections' relative
    variation rather than flattening them all to one value.
+
+   Scope: the /cockpit acts and the sitewide footer. Every v2 section (home,
+   /document-intelligence, /trust, /company, /legal) carries its own small-screen
+   rhythm beside its own rules, so nothing is listed here twice.
    --------------------------------------------------------------------- */
 @media (max-width: 760px) {
-  .cred {
-    padding-block: var(--space-lg);
-  }
-
   .wf,
-  .auto,
   .trust {
     padding-block: var(--space-xl) var(--space-2xl);
   }
 
   .gov,
-  .doc,
   .asia,
   .aim {
     padding-block: var(--space-2xl) var(--space-xl);
@@ -262,7 +289,6 @@
     padding-block: var(--space-xl);
   }
 
-  .founder,
   .facts,
   .final {
     padding-block: var(--space-2xl);

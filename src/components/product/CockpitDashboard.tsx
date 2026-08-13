@@ -5,7 +5,9 @@ import "./CockpitDashboard.css";
    ---------------------------------------------------------------------------
    Anatomy: docs/asset-extraction-report.md §1 (pulse strip, attention feed,
    coming-up rail) and §2 (book summary strip).
-   Figures: the canonical dataset in the same report, as-of Fri 19 Jun 2026.
+   Figures: the reconciled book, as-of Fri 19 Jun 2026 — US$342.6M · 44
+   households · 118 accounts. Every recreation on the site describes this same
+   book; the named rows below are a ranked subset of it, never the whole of it.
    Attention rows: docs/copy-deck.md §1, which is final copy and outranks the
    report's advisor-specific row set. Advisor persona is the copy deck's
    Lau Ka-Ming, Hong Kong.
@@ -24,10 +26,10 @@ interface SummaryItem {
 }
 
 const SUMMARY: SummaryItem[] = [
-  { label: "Book", value: "US$57.7M" },
-  { label: "Households", value: "4" },
-  { label: "With open alerts", value: "4" },
-  { label: "NNM MTD", value: "−US$250k", tone: "down" },
+  { label: "Book", value: "US$342.6M" },
+  { label: "Households", value: "44" },
+  { label: "With open alerts", value: "9" },
+  { label: "NNM MTD", value: "−US$2.4M", tone: "down" },
 ];
 
 interface StatCard {
@@ -42,28 +44,28 @@ interface StatCard {
 const STATS: StatCard[] = [
   {
     label: "TOTAL AUM",
-    value: "US$57.7M",
-    sub: "4 households · 7 clients",
+    value: "US$342.6M",
+    sub: "44 households · 118 accounts",
     spark: [10, 16, 14, 20, 18, 23, 21, 26, 24, 30, 27, 31, 29, 33, 30, 34],
   },
   {
     label: "TODAY",
-    value: "+US$165k",
+    value: "+US$994k",
     sub: "+0.29% vs last close",
     tone: "up",
     spark: [6, 8, 12, 11, 15, 13, 18, 16, 21, 19, 24, 22, 27, 26, 30, 28],
   },
   {
     label: "NET NEW MONEY · MTD",
-    value: "−US$250k",
-    sub: "withdrawal · Tanaka",
+    value: "−US$2.4M",
+    sub: "withdrawal · Lim Family Office",
     tone: "down",
     spark: [31, 27, 26, 21, 22, 17, 18, 14, 15, 12, 13, 10, 12, 9, 11, 10],
   },
   {
     label: "NEEDS ATTENTION",
     value: "14",
-    sub: "6 urgent · 8 watch",
+    sub: "5 urgent · 6 watch · 3 suggestions",
     dot: "watch",
   },
 ];
@@ -188,15 +190,15 @@ const AGENDA: AgendaGroup[] = [
         offset: "+43d",
         kind: "task",
         entity: "Task",
-        detail: "Prepare onboarding proposal — Oberoi Family Office",
+        detail: "Prepare onboarding proposal · Ho Family",
       },
     ],
   },
 ];
 
-const FEED_MORE = "+9 more — view the full list in Book of Business";
-const FEED_FOOTER = "Actions create proposals — nothing executes without approval.";
-const AGENDA_FOOTER = "Scheduled items — exceptions live in the feed.";
+const FEED_MORE = "+9 more · view the full list in Book of Business";
+const FEED_FOOTER = "Actions create proposals. Nothing executes without approval.";
+const AGENDA_FOOTER = "Scheduled items. Exceptions live in the feed.";
 
 /* --------------------------------------------------------------------------- */
 

@@ -1,0 +1,50 @@
+/* Compact navy head. Same construction as .legal-head: a dark first band so the
+   pre-scroll nav reads, sized down because this page's argument starts
+   immediately below it. */
+
+.th {
+  padding-block: calc(76px + var(--space-xl)) var(--space-xl);
+  background-color: var(--color-navy);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.th-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.th-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-display-md);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-ink-dark);
+  max-width: 20ch;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.th-lead {
+  font-size: var(--text-md);
+  line-height: 1.65;
+  color: var(--color-muted-dark);
+  max-width: 64ch;
+}
+
+.th-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px var(--space-md);
+  margin-top: var(--space-xs);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--rule-dark);
+  color: var(--color-muted-dark);
+}
+
+@media (max-width: 760px) {
+  .th {
+    padding-block: calc(68px + var(--space-lg)) var(--space-lg);
+  }
+}

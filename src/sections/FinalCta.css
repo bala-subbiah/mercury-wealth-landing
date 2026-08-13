@@ -36,6 +36,16 @@
   margin-top: var(--space-sm);
 }
 
+/* The offered-not-required path. Sits below the CTA pair, deliberately
+   quieter than both. */
+.final-aside {
+  margin-top: var(--space-xs);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-muted-dark);
+  max-width: 52ch;
+}
+
 .final-micro {
   margin-top: var(--space-md);
   color: var(--color-muted-dark);

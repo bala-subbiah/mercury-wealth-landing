@@ -11,6 +11,9 @@ import "./styles/tokens.css";
 import "./styles/base.css";
 
 import App from "./App.tsx";
+import { initAnalytics } from "./lib/analytics.ts";
+
+initAnalytics();
 
 const root = createRoot(document.getElementById("root")!);
 

@@ -1,14 +1,19 @@
 import Reveal from "../../components/Reveal";
 import "./EngineGrid.css";
 
-/* Copy — docs/copy-deck-v2-home.md §3, verbatim. Only the Cockpit card links:
-   per-engine pages do not exist yet, and a "see it in the demo" or "talk to
-   us" label on the other five would be an overclaim (deck §3, card link
-   treatment). Do not add CTAs to the other five. */
+/* Card copy — docs/copy-deck-v2-home.md §3, verbatim. Two cards link, and
+   only two: Cockpit and Document Intelligence are the engines with pages
+   (docs/v2-plan.md §2). The remaining four carry no CTA, because a "see it in
+   the demo" or "talk to us" label on an engine with nowhere to go would be an
+   overclaim (deck §3, card link treatment). Do not add CTAs to them.
+
+   The subhead is the one line that changed: the standalone spine act was cut
+   from the home page (docs/v2-plan.md §3) and its argument lands here, where
+   the modularity question is actually raised. */
 const EYEBROW = "THE ENGINES";
 const TITLE = "Six engines. Each does a real job on its own.";
 const SUBHEAD =
-  "License one, several, or all six. The cockpit is the flagship — not a prerequisite for the rest.";
+  "License one, several, or all six. Adopt one and it works alone; add another and both get sharper, because every engine reads and writes the same book and lands on the same audit log.";
 const FLAGSHIP = "FLAGSHIP";
 const COCKPIT_LINK = "Explore the Cockpit";
 
@@ -18,11 +23,13 @@ interface Engine {
   support: string;
   /** 12-column span at desktop — the grid is deliberately uneven. */
   span: 12 | 7 | 5 | 4;
+  /** Set only on the engines that have a page of their own. */
+  link?: { label: string; href: string };
 }
 
 const FLAGSHIP_ENGINE: Engine = {
   title: "Mercury Cockpit",
-  line: "Run the whole book — briefing, monitoring, proposals, approvals, orders, audit.",
+  line: "Run the whole book: briefing, monitoring, proposals, approvals, orders, audit.",
   support:
     "One live view of every household and account across every custodian, with the proposal, the approval and the order that follow attached to the same record.",
   span: 12,
@@ -35,10 +42,11 @@ const ENGINES: Engine[] = [
     support:
       "Every extracted field is shown next to the clause it came from, and nothing moves until someone approves it.",
     span: 7,
+    link: { label: "Explore Document Intelligence", href: "/document-intelligence/" },
   },
   {
     title: "Workflow Automation",
-    line: "Run your firm's processes to completion — reviews, audit prep, client materials.",
+    line: "Run your firm’s processes to completion: reviews, audit prep, client materials.",
     support:
       "A process is defined once and then it runs, pausing only where a human decision is genuinely required.",
     span: 5,
@@ -47,7 +55,7 @@ const ENGINES: Engine[] = [
     title: "Relationship Scribe",
     line: "Speak the meeting; the call report, the CRM entries and the follow-ups file themselves.",
     support:
-      "The record is written while the conversation is still accurate — not from memory on Friday — and in the shape an SFC- or MAS-supervised firm is expected to keep it.",
+      "The record is written while the conversation is still accurate, not from memory on Friday, and in the shape an SFC- or MAS-supervised firm is expected to keep it.",
     span: 4,
   },
   {
@@ -109,6 +117,12 @@ export default function EngineGrid() {
               <h3 className="eg-card-title">{engine.title}</h3>
               <p className="eg-card-line">{engine.line}</p>
               <p className="eg-card-support">{engine.support}</p>
+              {engine.link ? (
+                <a className="eg-link" href={engine.link.href}>
+                  {engine.link.label}
+                  <span aria-hidden="true">→</span>
+                </a>
+              ) : null}
             </Reveal>
           ))}
         </div>

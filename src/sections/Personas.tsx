@@ -2,18 +2,18 @@ import Reveal from "../components/Reveal";
 import "./Personas.css";
 
 /* Copy — docs/copy-deck.md §9, verbatim. */
-const EYEBROW = "WHO IT'S FOR";
+const EYEBROW = "WHO IT’S FOR";
 const TITLE = "Three jobs. One record between them.";
 
 const PERSONAS = [
   {
     role: "RELATIONSHIP MANAGER",
     line: "Your book, briefed and ranked, before the first call of the day.",
-    support: "Cockpit, attention feed, proposals, tasks and meetings — the whole day in one place.",
+    support: "Cockpit, attention feed, proposals, tasks and meetings: the whole day in one place.",
   },
   {
     role: "FIRM PRINCIPAL / TEAM HEAD",
-    line: "Every advisor's book, on the same terms, without asking for a spreadsheet.",
+    line: "Every advisor’s book, on the same terms, without asking for a spreadsheet.",
     support: "Firm-wide oversight of AUM, flows, drift and open approvals, scoped by entitlement.",
   },
   {

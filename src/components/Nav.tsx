@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
+import { DEMO_LINK_PROPS } from "../links";
 import "./Nav.css";
 
 export interface NavLink {
@@ -9,19 +10,41 @@ export interface NavLink {
 
 export interface NavProps {
   /** Which page is rendering the nav — drives the wordmark's destination. */
-  page: "home" | "cockpit";
-  /** Section/page links, in display order. Content lives with the caller
-   *  (App.tsx for home, CockpitApp.tsx for cockpit) — Nav only lays them out. */
+  page: "home" | "cockpit" | "legal";
+  /** Page links, in display order. Content lives with the caller — Nav only
+   *  lays them out. Every page passes SITE_NAV_LINKS (or HOME_NAV_LINKS on
+   *  the home page), so the bar reads identically everywhere. */
   links: NavLink[];
 }
 
+/* The sitewide nav, locked in docs/v2-plan.md §2: four destinations plus the
+   standing demo CTA, which Nav renders itself. Every item is a page that
+   exists; the nav promises nothing that is not built, and no page carries its
+   own section anchors here any more. */
+export const SITE_NAV_LINKS: NavLink[] = [
+  { label: "Cockpit", href: "/cockpit/" },
+  { label: "Engines", href: "/#engines" },
+  { label: "Trust", href: "/trust/" },
+  { label: "Company", href: "/company/" },
+];
+
+/** The same four, with the engines link as a same-page hash. Home only. */
+export const HOME_NAV_LINKS: NavLink[] = SITE_NAV_LINKS.map((link) =>
+  link.href === "/#engines" ? { ...link, href: "#engines" } : link,
+);
+
 const CTA = "Open the live demo";
+/* Below 900px the bar has room for the wordmark, one pill and the menu
+   control. The short label is a subset of the full CTA, so the accessible
+   name still contains the visible text (WCAG 2.5.3). */
+const CTA_SHORT = "Live demo";
 const MENU = "Menu";
 
 /**
  * Fixed header: transparent over the hero video, navy + hairline once the page
- * has scrolled past the first 60px. Below 900px the labels collapse into a
- * disclosure panel that Escape closes.
+ * has scrolled past the first 60px. The four links sit in the bar at 900px and
+ * up; below that they collapse into a disclosure panel that Escape closes,
+ * leaving the compact demo pill and the menu control in the bar.
  *
  * Configurable per page: `links` supplies the nav items, `page` decides where
  * the MERCURY wordmark points — an in-page scroll-to-top on the page it
@@ -58,11 +81,15 @@ export default function Nav({ page, links }: NavProps) {
   return (
     <header className={["nav", scrolled || open ? "nav--scrolled" : ""].filter(Boolean).join(" ")}>
       <div className="container nav-inner">
-        <a className="nav-mark" href={markHref} aria-label="Mercury — top of page">
+        <a
+          className="nav-mark"
+          href={markHref}
+          aria-label={page === "home" ? "Mercury, top of page" : "Mercury, home page"}
+        >
           MERCURY
         </a>
 
-        <nav className="nav-links" aria-label="Sections">
+        <nav className="nav-links" aria-label="Primary">
           {links.map((link) => (
             <a key={link.href} className="nav-link" href={link.href}>
               {link.label}
@@ -70,8 +97,20 @@ export default function Nav({ page, links }: NavProps) {
           ))}
         </nav>
 
-        <a className="cta-primary nav-cta" href="#demo-placeholder" data-demo-cta>
+        <a className="cta-primary nav-cta" {...DEMO_LINK_PROPS} data-demo-cta>
           {CTA}
+        </a>
+
+        {/* The mobile bar's own conversion affordance: the desktop pill is
+            hidden below 900px, so this compact one stands in and stays visible
+            whether or not the disclosure panel is open. */}
+        <a
+          className="cta-primary nav-cta-compact"
+          {...DEMO_LINK_PROPS}
+          data-demo-cta
+          aria-label={CTA}
+        >
+          {CTA_SHORT}
         </a>
 
         <button
@@ -103,7 +142,7 @@ export default function Nav({ page, links }: NavProps) {
           ))}
           <a
             className="cta-primary nav-panel-cta"
-            href="#demo-placeholder"
+            {...DEMO_LINK_PROPS}
             data-demo-cta
             onClick={() => setOpen(false)}
           >

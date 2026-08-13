@@ -151,7 +151,7 @@ export interface IntegrationsSpineProps {
  */
 export default function IntegrationsSpine({
   animate = true,
-  caption = "AND MANY MORE — SOURCES CONNECT ONCE, EVERY ENGINE BENEFITS",
+  caption = "AND MANY MORE · SOURCES CONNECT ONCE, EVERY ENGINE BENEFITS",
   className,
 }: IntegrationsSpineProps) {
   const reducedMotion = useReducedMotion();

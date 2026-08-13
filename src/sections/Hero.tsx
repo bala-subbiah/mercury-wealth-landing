@@ -1,26 +1,36 @@
 import { useEffect, useState } from "react";
 
-import { MorningBriefing } from "../components/product";
+import { ResearchAnswer } from "../components/product";
 import { useReducedMotion } from "../components/product/useReducedMotion";
+import { DEMO_LINK_PROPS } from "../links";
 import "./Hero.css";
 
-/* Copy — docs/copy-deck.md §1, verbatim, except the eyebrow: re-headed for
-   the /cockpit page per docs/offerings-map.md v2 (Hero is now cockpit-only —
-   the home page has its own HomeHero in src/sections/home/). */
+/* Copy — docs/copy-deck.md §1, re-cut for v2 (docs/v2-plan.md §4.10, §5 "no
+   signature visual repeats on the home → /cockpit path").
+
+   The morning-briefing recreation and the line it carried, "Your morning,
+   already prepared.", are the home hero's: a reader arriving here from home
+   would have met both one click earlier. This hero takes the line the plan
+   reserves for exactly this page instead (§6 #10, "Every custodian. One
+   cockpit.") and puts the book itself beside it, answering a question that
+   spans all of it. The support line keeps the attention-feed sentence, which
+   is what the cockpit does whatever panel is on screen. */
 const EYEBROW = "MERCURY COCKPIT · THE FLAGSHIP ENGINE";
-const HEADLINE = "Your morning, already prepared.";
+const HEADLINE = "Every custodian. One cockpit.";
 const SUBHEAD =
-  "Monitor the book, advise the client, execute with governance — every custodian, every booking centre, on one screen, in your base currency.";
+  "Monitor the book, advise the client, execute with governance. Every booking centre on one screen, in your base currency.";
 const SUPPORT =
-  "Drift, breaches, maturities, pending approvals and today's reviews — ranked before you sit down.";
+  "Drift, breaches, maturities, pending approvals and today’s reviews, ranked before you sit down. One book, so a question about all of it has one answer.";
 const CTA_PRIMARY = "Open the live demo";
 const CTA_SECONDARY = "See how it works";
-const CAPTION = "NO FORM · NO SALES CALL · THE REAL PRODUCT";
+const CAPTION = "NO FORM · NO SIGN-UP · THE REAL PRODUCT";
+const VISUAL_LABEL = "Mercury: one question asked against the whole book, answered by exposure";
 
 const SMALL_SCREEN = "(max-width: 640px)";
 
 /**
- * The morning-briefing moment.
+ * The cockpit claim: one book across every custodian, close enough to hand
+ * that a question about all of it has a single answer.
  *
  * The video is only mounted on pointer-class widths with motion allowed — on
  * phones and under `prefers-reduced-motion` a static navy gradient stands in
@@ -80,7 +90,7 @@ export default function Hero() {
           <p className="hero-sub">{SUBHEAD}</p>
 
           <div className="cta-row hero-ctas">
-            <a className="cta-primary" href="#demo-placeholder" data-demo-cta>
+            <a className="cta-primary" {...DEMO_LINK_PROPS} data-demo-cta>
               {CTA_PRIMARY}
             </a>
             <a className="cta-secondary" href="#how-it-works">
@@ -92,8 +102,8 @@ export default function Hero() {
           <p className="mono hero-caption">{CAPTION}</p>
         </div>
 
-        <div className="hero-visual">
-          <MorningBriefing />
+        <div className="hero-visual" role="group" aria-label={VISUAL_LABEL}>
+          <ResearchAnswer animate={!reducedMotion} />
         </div>
       </div>
     </section>

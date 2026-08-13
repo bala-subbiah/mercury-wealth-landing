@@ -6,7 +6,7 @@ import "./AiMechanism.css";
 const EYEBROW = "HOW IT WORKS";
 const TITLE = "The colleague who prepped overnight.";
 const SUBHEAD =
-  "Think of it as a very well-organised junior who read everything before you came in — the statements, the term sheets, the mandates, the overnight moves — and left a briefing on your desk. It prepares. You decide. That order never reverses.";
+  "Think of it as a very well-organised junior who read everything before you came in: the statements, the term sheets, the mandates, the overnight moves. They left a briefing on your desk. It prepares. You decide. That order never reverses.";
 
 const STEPS = [
   {
@@ -17,7 +17,7 @@ const STEPS = [
   {
     num: "02",
     label: "CHECK AGAINST THE MANDATE",
-    body: "Every portfolio is measured against its own model, IPS bands, concentration caps and risk profile. What breached, what's about to, what matured, what's waiting — ranked by what changed.",
+    body: "Every portfolio is measured against its own model, IPS bands, concentration caps and risk profile. What breached, what’s about to, what matured, what’s waiting. Ranked by what changed.",
   },
   {
     num: "03",
@@ -26,24 +26,24 @@ const STEPS = [
   },
 ];
 
-const NEGATIVE_LABEL = "WHAT IT WON'T DO";
+const NEGATIVE_LABEL = "WHAT IT WON’T DO";
 
 const NEGATIVE = [
   {
-    claim: "It won't place an order.",
+    claim: "It won’t place an order.",
     body: "Execution requires an accepted proposal and a human authorisation, every time.",
   },
   {
-    claim: "It won't invent a number.",
+    claim: "It won’t invent a number.",
     body: "Every figure it shows traces to a position, a document or a feed you can open.",
   },
   {
-    claim: "It won't approve anything.",
+    claim: "It won’t approve anything.",
     body: "Four-eyes means two humans; the system is neither of them.",
   },
   {
-    claim: "It won't learn from your clients.",
-    body: "Your data is never used to train models — yours or anyone else's.",
+    claim: "It won’t learn from your clients.",
+    body: "Your data is never used to train models, yours or anyone else’s.",
   },
 ];
 

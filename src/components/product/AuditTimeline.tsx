@@ -5,13 +5,18 @@ import { useReducedMotion } from "./useReducedMotion";
 import "./AuditTimeline.css";
 
 /* ---------------------------------------------------------------------------
-   Content — docs/asset-extraction-report.md §3, "Audit timeline … the
-   governance act money shot". The six entries below are the captured sequence
-   for the canonical proposal PRP-2026-0003, reproduced verbatim.
+   Content — the canonical proposal lifecycle, docs/copy-deck.md §"In-UI text —
+   proposal lifecycle thread": PRP-2026-0002, the Lim Income & Credit rebalance,
+   seven events ending the day before the 19 Jun 2026 as-of stamp.
+
+   Three actors, all from the sanctioned cast, and the point of the panel: the
+   advisor who drafts it (Lau Ka-Ming) is never the person who clears it. The
+   four-eyes node is a separate record with a separate approver — Wong Mei-Ling,
+   desk head — and execution is booked by the dealing desk (Sean Donnelly).
    --------------------------------------------------------------------------- */
 
 const PANEL_TITLE = "Audit trail · every state change, confirmed & logged";
-const PANEL_SUB = "PRP-2026-0003 · Okonkwo Family → Okonkwo Thematic Equity";
+const PANEL_SUB = "PRP-2026-0002 · Lim Family Office → Lim Income & Credit";
 
 type ActionKind = "created" | "sent" | "approved" | "executed" | "updated";
 
@@ -33,19 +38,39 @@ const ENTRIES: AuditEntry[] = [
     entity: "PROPOSAL",
     before: null,
     after: "Draft",
-    summary: "Created proposal PRP-2026-0003 (Thematic de-concentration)",
-    actor: "Tan Wei-Jie",
-    timestamp: "10 May · 09:00",
+    summary: "Created PRP-2026-0002 from IPS breach · fixed income +11.4pp",
+    actor: "Lau Ka-Ming",
+    timestamp: "16 Jun · 09:00",
+  },
+  {
+    action: "Submitted",
+    kind: "sent",
+    entity: "PROPOSAL",
+    before: "Draft",
+    after: "Pending approval",
+    summary: "Submitted for four-eyes review · 3 lines changed since v1",
+    actor: "Lau Ka-Ming",
+    timestamp: "16 Jun · 16:40",
+  },
+  {
+    action: "Cleared",
+    kind: "approved",
+    entity: "APPROVAL",
+    before: null,
+    after: "Cleared",
+    summary: "Four-eyes review cleared · released for sending",
+    actor: "Wong Mei-Ling · desk head",
+    timestamp: "17 Jun · 10:05",
   },
   {
     action: "Sent",
     kind: "sent",
     entity: "PROPOSAL",
-    before: "Draft",
+    before: "Pending approval",
     after: "Sent",
-    summary: "Sent PRP-2026-0003 for e-signature",
-    actor: "Tan Wei-Jie",
-    timestamp: "11 May · 09:00",
+    summary: "Delivered to client for acceptance",
+    actor: "Lau Ka-Ming",
+    timestamp: "17 Jun · 11:00",
   },
   {
     action: "Approved",
@@ -53,9 +78,9 @@ const ENTRIES: AuditEntry[] = [
     entity: "APPROVAL",
     before: null,
     after: "Accepted",
-    summary: "Recorded client approval (e-signature) for PRP-2026-0003",
-    actor: "Tan Wei-Jie",
-    timestamp: "15 May · 15:00",
+    summary: "Client approval recorded in-app",
+    actor: "Sean Donnelly",
+    timestamp: "18 Jun · 09:20",
   },
   {
     action: "Executed",
@@ -63,9 +88,9 @@ const ENTRIES: AuditEntry[] = [
     entity: "REBALANCE",
     before: null,
     after: "Executing",
-    summary: "Rebalance handed off to OMS",
-    actor: "Tan Wei-Jie",
-    timestamp: "16 May · 10:00",
+    summary: "Handed to OMS · 6 lines",
+    actor: "Sean Donnelly",
+    timestamp: "18 Jun · 09:30",
   },
   {
     action: "Updated",
@@ -73,19 +98,9 @@ const ENTRIES: AuditEntry[] = [
     entity: "REBALANCE",
     before: "Executing",
     after: "Completed",
-    summary: "OMS confirmed all fills — rebalance Completed",
-    actor: "Tan Wei-Jie",
-    timestamp: "18 May · 10:00",
-  },
-  {
-    action: "Updated",
-    kind: "updated",
-    entity: "PROPOSAL",
-    before: "Accepted",
-    after: "Executed",
-    summary: "Proposal marked Executed",
-    actor: "Tan Wei-Jie",
-    timestamp: "18 May · 10:05",
+    summary: "All fills confirmed · rebalance closed",
+    actor: "Sean Donnelly",
+    timestamp: "18 Jun · 17:04",
   },
 ];
 
@@ -150,7 +165,7 @@ export default function AuditTimeline({ revealOnScroll = true, className }: Audi
               </div>
               <p className="at-summary">
                 {entry.summary}
-                <span className="at-actor"> — {entry.actor}</span>
+                <span className="at-actor"> · {entry.actor}</span>
               </p>
             </div>
           </li>

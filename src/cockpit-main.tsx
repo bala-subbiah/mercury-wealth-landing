@@ -11,6 +11,9 @@ import "./styles/tokens.css";
 import "./styles/base.css";
 
 import CockpitApp from "./CockpitApp.tsx";
+import { initAnalytics } from "./lib/analytics.ts";
+
+initAnalytics();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

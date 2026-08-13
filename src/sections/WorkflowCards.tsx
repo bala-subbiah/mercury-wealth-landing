@@ -26,7 +26,7 @@ const CARDS: Card[] = [
   {
     label: "CATCH THE BREACH",
     title: "Drift finds you. Not the reverse.",
-    body: "Every portfolio is tracked against its model and risk profile, advisory and discretionary alike. Drift and concentration surface the day they emerge — not at quarter-end, not in the review pack.",
+    body: "Every portfolio is tracked against its model and risk profile, advisory and discretionary alike. Drift and concentration surface the day they emerge, not at quarter-end, not in the review pack.",
     caption: "IPS BANDS · CONCENTRATION CAPS · MANDATE RULES",
     width: "narrow",
   },
@@ -40,7 +40,7 @@ const CARDS: Card[] = [
   {
     label: "CLEAR THE APPROVAL",
     title: "Approvals stop living in inboxes.",
-    body: "Four-eyes sign-off, client acceptance in-app or by e-signature, and every comment on the record it belongs to. When compliance asks who approved what, you don't go looking.",
+    body: "Four-eyes sign-off, client acceptance in-app or by e-signature, and every comment on the record it belongs to. When compliance asks who approved what, you don’t go looking.",
     caption: "FOUR-EYES · IN-APP OR E-SIGN · TIMESTAMPED",
     width: "wide",
   },
@@ -53,8 +53,11 @@ const CARDS: Card[] = [
   },
   {
     label: "LOG EVERYTHING",
-    title: "The audit trail writes itself.",
-    body: "Every material action lands on an immutable log as it happens — who, what, when, before and after. The compliance answer is a filter, not an archaeology project.",
+    /* The line this card used to carry is now the GovernanceAct headline two
+       sections below (docs/v2-plan.md §4.6); the card keeps its own body's
+       sharpest phrase instead, so the page never says either one twice. */
+    title: "Compliance stops being archaeology.",
+    body: "Every material action lands on an immutable log as it happens: who, what, when, before and after. The compliance answer is a filter, not an archaeology project.",
     caption: "IMMUTABLE · WHO · WHAT · WHEN · BEFORE → AFTER",
     width: "narrow",
   },

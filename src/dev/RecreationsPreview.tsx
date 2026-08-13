@@ -32,23 +32,23 @@ export default function RecreationsPreview() {
         </p>
       </header>
 
-      <Block index="01" name="MorningBriefing" note="Hero — self-composing briefing, loops.">
+      <Block index="01" name="MorningBriefing" note="Hero: self-composing briefing, loops.">
         <MorningBriefing />
       </Block>
 
-      <Block index="02" name="CockpitDashboard" note="Book of business — static, hover the rows.">
+      <Block index="02" name="CockpitDashboard" note="Book of business: static, hover the rows.">
         <CockpitDashboard />
       </Block>
 
-      <Block index="03" name="AuditTimeline" note="Governance act — reveals on scroll.">
+      <Block index="03" name="AuditTimeline" note="Governance act: reveals on scroll.">
         <AuditTimeline />
       </Block>
 
-      <Block index="04" name="TermSheetDissolve" note="Document intelligence — loops in view.">
+      <Block index="04" name="TermSheetDissolve" note="Document intelligence: loops in view.">
         <TermSheetDissolve />
       </Block>
 
-      <Block index="05" name="DriftChat" note="AI mechanism — conversation replay, loops.">
+      <Block index="05" name="DriftChat" note="AI mechanism: conversation replay, loops.">
         <DriftChat />
       </Block>
 
@@ -56,23 +56,23 @@ export default function RecreationsPreview() {
         <MorningBriefing animate={false} />
       </Block>
 
-      <Block index="07" name="LogoStrip" note="Company — quiet static row, monochrome, hover for opacity.">
+      <Block index="07" name="LogoStrip" note="Company: quiet static row, monochrome, hover for opacity.">
         <LogoStrip />
       </Block>
 
-      <Block index="08" name="IntegrationsSpine" note="Company — sources converge into the data spine, sequential pulse.">
+      <Block index="08" name="IntegrationsSpine" note="Company: sources converge into the data spine, sequential pulse.">
         <IntegrationsSpine />
       </Block>
 
-      <Block index="09" name="RelationshipScribe" note="Relationships — spoken note files itself, loops.">
+      <Block index="09" name="RelationshipScribe" note="Relationships: spoken note files itself, loops.">
         <RelationshipScribe />
       </Block>
 
-      <Block index="10" name="ResearchAnswer" note="Research — book-wide question answered as a ranked table, loops.">
+      <Block index="10" name="ResearchAnswer" note="Research: book-wide question answered as a ranked table, loops.">
         <ResearchAnswer />
       </Block>
 
-      <Block index="11" name="ComplianceEvidence" note="Compliance — the quarter assembles into an inspection pack, loops.">
+      <Block index="11" name="ComplianceEvidence" note="Compliance: the quarter assembles into an inspection pack, loops.">
         <ComplianceEvidence />
       </Block>
 

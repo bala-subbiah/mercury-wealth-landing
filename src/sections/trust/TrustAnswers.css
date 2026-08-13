@@ -1,0 +1,90 @@
+/* Six answers as a ruled document: claim on the left, mechanism and its
+   consequence on the right. Hairlines only, no cards — this page is read the
+   way a questionnaire is read, top to bottom. */
+
+.ta {
+  padding-block: var(--space-2xl) var(--space-xl);
+}
+
+.ta-head {
+  margin-bottom: var(--space-xl);
+}
+
+.ta-title {
+  font-size: var(--text-display-sm);
+}
+
+.ta-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule-light);
+}
+
+.ta-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  gap: var(--space-sm) var(--space-lg);
+  padding-block: var(--space-md);
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.ta-lead-cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ta-index {
+  color: var(--color-brass-deep);
+}
+
+.ta-claim {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-xl);
+  line-height: 1.2;
+  color: var(--color-ink);
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.ta-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ta-mech {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-body-light);
+  max-width: 60ch;
+}
+
+.ta-more {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-muted-light);
+  max-width: 60ch;
+}
+
+@media (max-width: 860px) {
+  .ta {
+    padding-block: var(--space-xl) var(--space-lg);
+  }
+
+  .ta-head {
+    margin-bottom: var(--space-lg);
+  }
+
+  .ta-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .ta-claim {
+    font-size: var(--text-lg);
+    max-width: none;
+  }
+}

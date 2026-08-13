@@ -10,12 +10,19 @@ import "./TermSheetDissolve.css";
    Field labels, values and source tags: docs/copy-deck.md §5 "In-UI text —
    term-sheet dissolve" (final copy, verbatim).
    Barrier/autocall scale and the observation-date row: the real NoteTerms
-   drawer, docs/asset-extraction-report.md §5, for the canonical
-   UBS Autocallable Note on Tencent 2027.
+   drawer, docs/asset-extraction-report.md §5, for the canonical Phoenix
+   Autocallable Note on Tencent 2027.
+
+   The issuer is invented on purpose. This is a specimen document, so it does
+   not carry a real bank's name; the ISIN is likewise specimen, but structurally
+   valid (ISO 6166 check digit verified) rather than obviously fake. Real
+   institutions appear on this site only as custodians, which they are.
    --------------------------------------------------------------------------- */
 
+const ISSUER = "Rheinwald Structured Products AG";
+
 const DOC_LABEL = "TERM SHEET · PHOENIX AUTOCALLABLE NOTE";
-const DOC_META = "UBS AG · ISIN CH1234567890 · 6 pages";
+const DOC_META = `${ISSUER} · ISIN CH1382044167 · 6 pages`;
 
 interface Field {
   label: string;
@@ -24,7 +31,7 @@ interface Field {
 }
 
 const FIELDS: Field[] = [
-  { label: "ISSUER", value: "UBS AG", source: "p.1 §Issuer" },
+  { label: "ISSUER", value: ISSUER, source: "p.1 §Issuer" },
   { label: "UNDERLYING", value: "Tencent Holdings (0700.HK)", source: "p.1 §Underlying" },
   { label: "STRUCTURE", value: "Phoenix autocall, down-and-in put", source: "p.2 §Payoff" },
   { label: "BARRIER", value: "65% · down-and-in", source: "p.2 §Barrier" },
@@ -46,7 +53,7 @@ const CLAUSES: Clause[] = [
   {
     heading: "§ 1  ISSUER",
     rows: [
-      [20, { text: "UBS AG", field: 0 }, 26],
+      [10, { text: ISSUER, field: 0 }],
       [58, 22],
     ],
   },

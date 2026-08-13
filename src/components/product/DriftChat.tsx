@@ -7,7 +7,7 @@ import "./DriftChat.css";
    Content — docs/copy-deck.md §8 "In-UI text — streaming co-pilot chat"
    (verbatim), with the drift card from §3 card 2 "In-UI (drift-breach card)".
    The rebalance card's targets are the ones the reply states: equity to 61.2%,
-   BYD to 9.4%. The "INTENT — NOT ORDERS" badge is the app's own
+   BYD to 9.4%. The "INTENT · NOT ORDERS" badge is the app's own
    (docs/asset-extraction-report.md §3).
    --------------------------------------------------------------------------- */
 
@@ -24,14 +24,14 @@ const DRIFT_CARD = {
     { name: "Equity", weight: "68.4%", target: "target 60.0%", delta: "+8.4pp", over: true },
     { name: "Fixed income", weight: "19.2%", target: "target 25.0%", delta: "−5.8pp", over: false },
   ],
-  footer: "BAND ±5.0pp · GROWTH MODEL · BREACHED 18 JUN 07:02 HKT",
+  footer: "BAND ±5.0pp · GROWTH MODEL · BREACHED 19 JUN 07:02 HKT",
 };
 
 const ANSWER_ONE =
-  "Equity is 68.4% against a 60.0% target — 8.4pp over, breached at 07:02 HKT after yesterday's HK rally. Fixed income is 5.8pp under. BYD alone is 11.2% of the portfolio, above the 10% single-position cap.";
+  "Equity is 68.4% against a 60.0% target: 8.4pp over, breached at 07:02 HKT after yesterday's HK rally. Fixed income is 5.8pp under. BYD alone is 11.2% of the portfolio, above the 10% single-position cap.";
 
 const ANSWER_TWO =
-  "I've drafted a rebalance that brings equity to 61.2% and BYD to 9.4%. It's a draft — nothing is placed.";
+  "I've drafted a rebalance that brings equity to 61.2% and BYD to 9.4%. It's a draft. Nothing is placed.";
 
 const PROPOSAL_CARD = {
   title: "DRAFT · ZHANG FAMILY · ASIA SATELLITE",
@@ -40,7 +40,7 @@ const PROPOSAL_CARD = {
     { name: "Equity", from: "68.4%", to: "61.2%", delta: "−7.2pp" },
     { name: "BYD", from: "11.2%", to: "9.4%", delta: "−1.8pp" },
   ],
-  footer: "INTENT — NOT ORDERS",
+  footer: "INTENT · NOT ORDERS",
 };
 
 const ACTIONS = ["REVIEW DRAFT", "SHOW WORKING"];

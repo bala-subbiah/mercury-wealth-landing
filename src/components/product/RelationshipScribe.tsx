@@ -17,7 +17,7 @@ const NOTE_LABEL = "SPOKEN NOTE · 0:41";
 const FILED_LABEL = "FILED · 5 ARTIFACTS";
 
 const TRANSCRIPT =
-  "Met Mrs. Lim at three — she's worried about the Hong Kong concentration, wants a rebalance option before Chinese New Year. Remind me to send the Q2 review pack, and her son's account opening is still waiting on the passport copy.";
+  "Met Mrs. Lim at three. She's worried about the Hong Kong concentration, wants a rebalance option before Chinese New Year. Remind me to send the Q2 review pack, and her son's account opening is still waiting on the passport copy.";
 
 type ArtifactTone = "indigo" | "amber" | "neutral" | "emerald";
 
@@ -37,32 +37,32 @@ const ARTIFACTS: Artifact[] = [
     kind: "CALL REPORT",
     tone: "indigo",
     title: "Lim Family Office · Review meeting",
-    sub: "Attendees: Lau Ka-Ming · Mrs. Lim — concentration risk discussed · rebalance requested",
+    sub: "Attendees: Lau Ka-Ming · Mrs. Lim. Concentration risk discussed · rebalance requested",
     stamp: "SUITABILITY-SHAPED · 15:12",
     badge: true,
   },
   {
     kind: "TASK",
     tone: "amber",
-    title: "Send Q2 review pack — Lim Family Office",
+    title: "Send Q2 review pack · Lim Family Office",
     stamp: "DUE 23 JUN",
   },
   {
     kind: "TASK",
     tone: "amber",
-    title: "Chase passport copy — Lim account opening",
+    title: "Chase passport copy · Lim account opening",
     stamp: "DUE 20 JUN",
   },
   {
     kind: "REMINDER",
     tone: "neutral",
-    title: "Present rebalance option — ahead of CNY",
+    title: "Present rebalance option · ahead of CNY",
     stamp: "SET",
   },
   {
     kind: "PROPOSAL",
     tone: "emerald",
-    title: "Draft rebalance · HK concentration — Lim Family Office",
+    title: "Draft rebalance · HK concentration · Lim Family Office",
     stamp: "QUEUED IN COCKPIT",
     badge: true,
   },
