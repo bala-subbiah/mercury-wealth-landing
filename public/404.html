@@ -3,14 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#F4F5F3" />
+    <meta name="theme-color" content="#fcfcfb" />
     <meta name="robots" content="noindex" />
     <title>Page not found | Mercury Wealth</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <!-- Standalone page: it is served outside the app bundle, so the token
-         values are written out literally here and the self-hosted fonts are
-         not available. Families fall back to Georgia / system sans by design.
-         No JavaScript. -->
+         values (design.md amendment 3) are written out literally here and the
+         self-hosted fonts are not available. The display face falls back to the
+         same neo-grotesque stack the tokens name after Hanken Grotesk, so the
+         register survives. Monochrome throughout. No JavaScript. -->
     <style>
       *,
       *::before,
@@ -30,9 +31,10 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        background: #f4f5f3; /* --color-paper */
-        color: #1b2536; /* --color-ink */
-        font-family: "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #fcfcfb; /* --color-paper */
+        color: #0d0d0d; /* --color-ink */
+        font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-weight: 400;
         font-size: 16px;
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
@@ -49,9 +51,10 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        font-size: 13px;
-        letter-spacing: 0.02em;
-        color: #5e6572; /* --color-muted-light */
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: #404040; /* --color-body-light — 10.1:1 on paper */
       }
 
       .label::before {
@@ -59,39 +62,37 @@
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background: #856223; /* --color-brass-deep */
+        background: #0d0d0d; /* --color-ink */
       }
 
       h1 {
         margin-top: 20px;
         max-width: 16em;
-        font-family: "Source Serif 4 Variable", Georgia, serif;
-        font-weight: 400;
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB",
+          "Microsoft YaHei", sans-serif; /* --font-display, sans the webfont */
+        font-weight: 300;
         font-style: normal;
-        font-size: clamp(32px, 6vw, 56px);
-        line-height: 1.12;
-        letter-spacing: -0.01em;
+        font-size: clamp(32px, 6vw, 60px);
+        line-height: 1.02;
+        letter-spacing: -0.025em;
       }
 
       .home {
         display: inline-block;
         margin-top: 32px;
         padding-bottom: 2px;
-        color: #2c3546; /* --color-body-light */
+        color: #0d0d0d; /* --color-ink */
         text-decoration: none;
-        border-bottom: 1px solid #d8dad4; /* --rule-light */
-        transition:
-          color 200ms cubic-bezier(0.16, 1, 0.3, 1),
-          border-color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+        border-bottom: 1px solid #e0e0e0; /* --rule-light */
+        transition: border-color 200ms cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       .home:hover {
-        color: #856223;
-        border-bottom-color: #856223;
+        border-bottom-color: #0d0d0d;
       }
 
       .home:focus-visible {
-        outline: 2px solid #856223;
+        outline: 2px solid #0d0d0d;
         outline-offset: 3px;
         border-radius: 2px;
       }

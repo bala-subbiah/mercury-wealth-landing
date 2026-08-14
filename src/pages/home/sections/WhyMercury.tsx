@@ -2,14 +2,14 @@ import type { ReactNode } from "react";
 import Reveal from "../../../chrome/Reveal.tsx";
 import "./WhyMercury.css";
 
-/* Why Mercury — the rogo split: a sticky serif head on the left, three items
+/* Why Mercury — the rogo split: a sticky display head on the left, three items
    separated by hairlines on the right. Three answers, no more; the product
    pages carry the depth. Copy tightened from fact source §1, §2, §4 and §5. */
 
 const STROKE = {
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: 1.25,
+  strokeWidth: 1.5,
   strokeLinecap: "round",
   strokeLinejoin: "round",
 } as const;

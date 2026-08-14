@@ -40,7 +40,7 @@
   display: inline-flex;
   width: 40px;
   height: 40px;
-  color: var(--color-brass-deep);
+  color: var(--color-ink);
 }
 
 .trust-answer__icon svg {
@@ -51,7 +51,7 @@
 .trust-answer__title {
   margin-top: var(--space-sm);
   font-size: 19px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.25;
   color: var(--color-ink);
 }
@@ -79,7 +79,7 @@
   list-style: none;
   font-size: 14px;
   font-weight: 500;
-  color: var(--color-brass-deep);
+  color: var(--color-ink);
   cursor: pointer;
 }
 

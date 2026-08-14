@@ -3,7 +3,8 @@ import { CONVERSATION_MAILTO, DEMO_LINK_PROPS } from "../../../links.ts";
 import "./home-cta.css";
 import "./FinalCta.css";
 
-/* Final CTA — dark close, three short serif lines graduating into the ground,
+/* Final CTA — midnight close, three short display lines graduating into the
+   ground,
    one demo CTA, and the offered second path that is never a condition of
    seeing the product. Copy tightened from the audited close (fact source §2,
    FinalCta) and the standing presence micro-line. */

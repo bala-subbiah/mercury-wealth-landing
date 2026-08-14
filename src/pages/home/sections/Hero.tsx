@@ -3,14 +3,15 @@ import { CONVERSATION_MAILTO, DEMO_LINK_PROPS } from "../../../links.ts";
 import "./home-cta.css";
 import "./Hero.css";
 
-/* Home hero — full-bleed Hong Kong night footage graded INTO the navy ground
-   (design DNA item 2, capsa treatment), left-aligned serif display in two short
-   lines, one grey sans line naming who it is for, one primary CTA.
+/* Home hero — full-bleed Hong Kong footage desaturated and laid INTO the paper
+   ground at low opacity, blended top and bottom by gradient (amendment 3),
+   left-aligned grotesque display in two short lines, one grey line naming who
+   it is for, one primary CTA and one hairline secondary.
 
    The video is decoration: it carries no information the copy does not, so it
    is aria-hidden and simply not rendered when the reader asks for reduced
-   motion. The graded gradient beneath it is the static fallback, which is also
-   what shows while the file is still loading. */
+   motion. The plain paper ground beneath it is the static fallback, which is
+   also what shows while the file is still loading. */
 
 function prefersReducedMotion(): boolean {
   return (
@@ -25,7 +26,7 @@ export default function Hero() {
   const [reduced] = useState(prefersReducedMotion);
 
   return (
-    <section className="hero band band--navy">
+    <section className="hero band band--paper">
       <div className="hero__media" aria-hidden="true">
         {!reduced && (
           <video

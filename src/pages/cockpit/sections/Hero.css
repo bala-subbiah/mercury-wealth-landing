@@ -39,26 +39,6 @@
   margin-top: var(--space-lg);
 }
 
-.cockpit-hero__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  min-height: 44px;
-  padding: 14px 28px;
-  border-radius: 999px;
-  background: var(--color-brass);
-  color: var(--color-navy);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.2;
-  transition: background-color var(--dur-fast) var(--ease-out);
-}
-
-.cockpit-hero__cta:hover {
-  background: var(--color-brass-bright);
-}
-
 .cockpit-hero__caption {
   font-family: var(--font-mono);
   font-size: 12px;

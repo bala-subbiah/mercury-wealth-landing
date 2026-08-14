@@ -1,9 +1,8 @@
-/* Logo marquee — slim navy band directly under the hero, so the dark bookend
-   reads as one surface and the strip sits at the hero's lower edge. */
+/* Logo marquee — the first midnight bookend, directly under the paper hero.
+   The colour change is the separation; no rule is needed on top of it. */
 
 .marquee {
   padding-block: var(--space-lg) var(--space-xl);
-  border-top: 1px solid var(--rule-dark);
 }
 
 .marquee__inner {
@@ -12,14 +11,16 @@
 }
 
 .marquee__label {
+  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   line-height: 1.4;
   color: var(--color-muted-dark);
 }
 
-/* Clips the loop and fades both edges so logos arrive and leave, never cut. */
+/* Clips the loop and fades both edges into the midnight ground, so logos
+   arrive and leave rather than being cut. */
 .marquee__viewport {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(
@@ -70,9 +71,10 @@
   height: 24px;
   width: auto;
   max-width: 150px;
-  /* Monochromed to the band; the mark's own colours never appear. */
+  /* Monochromed to the band; the mark's own colours never appear. No glow:
+     the mockup's hover drop-shadow is not ported (amendment 3, motion). */
   filter: brightness(0) invert(1);
-  opacity: 0.6;
+  opacity: 0.55;
   transition: opacity var(--dur-fast) var(--ease-out);
 }
 

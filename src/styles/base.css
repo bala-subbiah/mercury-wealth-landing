@@ -71,17 +71,30 @@ a {
   text-decoration: none;
 }
 
-/* Headings are roman serif, never italic (design.md hard rule 3). */
+/* Headings are the neo-grotesque display face at light weight, never italic
+   (design.md amendment 3). Display sizes run 300; small heads step to 400 so a
+   17px title never reads as hairline. */
 h1,
 h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 400;
   font-style: normal;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
   text-wrap: balance;
+}
+
+h1,
+h2 {
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+h3,
+h4 {
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 p {
@@ -109,8 +122,15 @@ hr {
   border-top: 1px solid var(--rule-light);
 }
 
+/* Monochrome selection (amendment 3): ink on light, inverted on dark bands. */
 ::selection {
-  background: var(--color-brass);
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.band--navy ::selection,
+.on-dark ::selection {
+  background: #ffffff;
   color: var(--color-navy);
 }
 
@@ -119,7 +139,7 @@ hr {
 /* One ring everywhere. Visible, 2px, never animated (hard rule 5).
    --focus-ring is re-declared on dark bands by .on-dark below. */
 :root {
-  --focus-ring: var(--color-brass-deep);
+  --focus-ring: var(--color-ink);
 }
 
 :focus-visible {
@@ -177,19 +197,53 @@ hr {
   width: 100%;
 }
 
-/* Navy: the product working. */
+/* Midnight: the bookends — hero shells, trust, the close, the footer. */
 .band--navy,
 .on-dark {
   background: var(--color-navy);
   color: var(--color-ink-dark);
-  --focus-ring: var(--color-brass);
+  --focus-ring: #ffffff;
 }
 
-/* Warm paper: the company speaking, in daylight. */
+/* Paper: the site's dominant daylight register. */
 .band--paper {
   background: var(--color-paper);
   color: var(--color-ink);
-  --focus-ring: var(--color-brass-deep);
+  --focus-ring: var(--color-ink);
+}
+
+/* One luminance step down from paper — alternating bands, no new hue. */
+.band--paper-2 {
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+  --focus-ring: var(--color-ink);
+}
+
+/* ------------------------------------------------------- CTA band vars --- */
+
+/* The button idiom (amendment 3) is one shape in two colourways. Each band
+   publishes the four values; every CTA in the site — home, nav, footer,
+   product pages — reads them, so a button is always right for its ground.
+   Buttons themselves live in their own component sheets. */
+:root,
+.band--paper,
+.band--paper-2 {
+  --cta-ground: var(--color-ink);
+  --cta-label: #ffffff;
+  --cta-sweep: #404040; /* white on #404040 = 10.4:1 */
+  --cta-hairline: var(--rule-light);
+  --cta-ink: var(--color-ink);
+  --cta-ghost-sweep: rgba(13, 13, 13, 0.06);
+}
+
+.band--navy,
+.on-dark {
+  --cta-ground: #ffffff;
+  --cta-label: var(--color-navy);
+  --cta-sweep: #dfe3e8; /* #040B15 on #dfe3e8 = 15.3:1 */
+  --cta-hairline: var(--rule-dark);
+  --cta-ink: #ffffff;
+  --cta-ghost-sweep: rgba(255, 255, 255, 0.1);
 }
 
 /* Body copy never runs wider than the measure. */

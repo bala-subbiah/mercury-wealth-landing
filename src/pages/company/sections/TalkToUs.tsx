@@ -6,6 +6,7 @@ import {
   DEMO_LINK_PROPS,
   LINKEDIN_URL,
 } from "../../../links.ts";
+import "../../home/sections/home-cta.css";
 import "./TalkToUs.css";
 
 /* Talk to us — the page's final band, navy (Amendment 1/2: navy carries the
@@ -24,7 +25,7 @@ export default function TalkToUs() {
         </p>
 
         <div className="co-talk__actions">
-          <a className="co-talk__cta" {...DEMO_LINK_PROPS}>
+          <a className="home-cta" {...DEMO_LINK_PROPS}>
             Open the live demo
           </a>
           <a className="co-talk__secondary" href={CONVERSATION_MAILTO}>

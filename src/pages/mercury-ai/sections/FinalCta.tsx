@@ -1,5 +1,6 @@
 import Reveal from "../../../chrome/Reveal.tsx";
 import { CONVERSATION_MAILTO, DEMO_LINK_PROPS } from "../../../links.ts";
+import "../../home/sections/home-cta.css";
 import "./FinalCta.css";
 
 /* Final CTA — dark bookend, tightened from the DiFinalCta copy (fact source
@@ -19,7 +20,7 @@ export default function FinalCta() {
         </Reveal>
 
         <Reveal as="div" delay={160} className="mai-cta__actions">
-          <a className="mai-cta__cta" {...DEMO_LINK_PROPS}>
+          <a className="home-cta" {...DEMO_LINK_PROPS}>
             Open the live demo
           </a>
           <a className="mai-cta__quiet" href={CONVERSATION_MAILTO}>

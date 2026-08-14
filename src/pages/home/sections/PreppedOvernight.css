@@ -1,4 +1,6 @@
-/* Prepped overnight — paper band, text beside a simplified product fragment. */
+/* Prepped overnight — paper-2 band, text beside a product fragment drawn in
+   the illustration idiom (amendment 3): a sharp steel-tinted plane carrying
+   small white status cards, chips in the fragment-only duos. */
 
 .prepped {
   padding-block: var(--space-xl) var(--space-2xl);
@@ -11,38 +13,48 @@
 }
 
 .prepped__title {
-  font-size: clamp(30px, 5.2vw, 46px);
-  line-height: 1.12;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 5.2vw, 52px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
   color: var(--color-ink);
 }
 
 .prepped__sub {
   margin-top: var(--space-md);
   font-size: clamp(15px, 1.4vw, 17px);
+  font-weight: 400;
   line-height: 1.6;
-  color: var(--color-muted-light);
+  color: var(--color-body-light);
 }
 
 /* ------------------------------------------------------------- fragment --- */
 
-/* The briefing panel. A tinted plane on paper, hairline only: no shadow does
-   the separating. */
+/* The briefing plane. Sharp-cornered and borderless — the steel tint is what
+   separates it from the band, not a rule and not a shadow. */
 .brief {
   padding: var(--space-md);
-  border: 1px solid var(--rule-light);
-  border-radius: 8px;
-  background: rgba(27, 37, 54, 0.035);
+  border-radius: 0;
+  background: linear-gradient(
+    180deg,
+    var(--tint-steel-a) 0%,
+    #c4d4e2 52%,
+    var(--tint-steel-b) 100%
+  );
 }
 
+/* Timestamp register: mono, tracked, tabular. Ink, not muted — 9.2:1 even on
+   the darkest end of the steel gradient. */
 .brief__stamp {
   padding-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--rule-light);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   font-size: 10px;
   letter-spacing: 0.16em;
   line-height: 1.5;
-  color: var(--color-muted-light);
+  color: var(--color-ink);
 }
 
 /* All three cards share one grid cell, so the panel is as tall as the tallest
@@ -58,9 +70,9 @@
 
 .bcard {
   padding: 18px 20px;
-  border: 1px solid var(--rule-light);
-  border-radius: 5px;
-  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
@@ -77,35 +89,36 @@
 
 .bcard__chip {
   display: inline-block;
-  padding: 3px 8px;
-  border-radius: 3px;
+  padding: 4px 8px;
+  border-radius: 4px;
   font-family: var(--font-mono);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.16em;
   line-height: 1.4;
 }
 
-/* Luminous, but only inside this fragment, and mixed toward ink so a 10px
-   label still clears AA on the card's white ground. */
+/* Chromatic colour lives here and nowhere else on the page. Every duo clears
+   4.5:1 on its own ground. */
 .bcard--rose .bcard__chip {
-  background: color-mix(in srgb, var(--ui-rose) 14%, transparent);
-  color: color-mix(in srgb, var(--ui-rose) 55%, var(--color-ink));
+  background: var(--chip-rose-bg);
+  color: var(--chip-rose-ink);
 }
 
 .bcard--amber .bcard__chip {
-  background: color-mix(in srgb, var(--ui-amber) 16%, transparent);
-  color: color-mix(in srgb, var(--ui-amber) 55%, var(--color-ink));
+  background: var(--chip-amber-bg);
+  color: var(--chip-amber-ink);
 }
 
-.bcard--indigo .bcard__chip {
-  background: color-mix(in srgb, var(--ui-indigo) 12%, transparent);
-  color: color-mix(in srgb, var(--ui-indigo) 55%, var(--color-ink));
+.bcard--slate .bcard__chip {
+  background: var(--chip-slate-bg);
+  color: var(--chip-slate-ink);
 }
 
 .bcard__text {
   margin-top: 12px;
   font-size: 15px;
+  font-weight: 400;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: var(--color-body-light);
@@ -117,9 +130,9 @@
   gap: 8px;
   margin-top: 14px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.3;
-  color: var(--color-brass-deep);
+  color: var(--color-ink);
 }
 
 .bcard__arrow {
@@ -150,8 +163,8 @@
   width: 7px;
   height: 7px;
   border-radius: 999px;
-  background: var(--color-muted-light);
-  opacity: 0.35;
+  background: var(--color-ink);
+  opacity: 0.3;
   transition: opacity var(--dur-fast) var(--ease-out);
 }
 

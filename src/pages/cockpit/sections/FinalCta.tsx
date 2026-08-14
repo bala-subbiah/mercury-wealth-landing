@@ -1,5 +1,6 @@
 import { CONVERSATION_MAILTO, DEMO_LINK_PROPS } from "../../../links.ts";
 import Reveal from "../../../chrome/Reveal.tsx";
+import "../../home/sections/home-cta.css";
 import "./FinalCta.css";
 
 /* Final CTA — fact source §2 FinalCta, title verbatim, subhead tightened to
@@ -18,7 +19,7 @@ export default function FinalCta() {
         </Reveal>
 
         <Reveal as="div" delay={120} className="cockpit-cta__actions">
-          <a className="cockpit-cta__cta" {...DEMO_LINK_PROPS}>
+          <a className="home-cta" {...DEMO_LINK_PROPS}>
             Open the live demo
           </a>
           <a className="cockpit-cta__quiet" href={CONVERSATION_MAILTO}>

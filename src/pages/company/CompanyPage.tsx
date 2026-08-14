@@ -17,7 +17,7 @@ export default function CompanyPage() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Nav current="company" />
+      <Nav tone="light" current="company" />
 
       <main id="main">
         <Head />

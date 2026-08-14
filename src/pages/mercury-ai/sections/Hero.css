@@ -40,26 +40,6 @@
   margin-top: var(--space-lg);
 }
 
-.mai-hero__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  min-height: 44px;
-  padding: 14px 28px;
-  border-radius: 999px;
-  background: var(--color-brass);
-  color: var(--color-navy);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.2;
-  transition: background-color var(--dur-fast) var(--ease-out);
-}
-
-.mai-hero__cta:hover {
-  background: var(--color-brass-bright);
-}
-
 .mai-hero__quiet {
   display: inline-flex;
   align-items: center;

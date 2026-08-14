@@ -1,5 +1,6 @@
 import { CONTACT_EMAIL, CONTACT_MAILTO, DEMO_LINK_PROPS } from "../../../links.ts";
 import Reveal from "../../../chrome/Reveal.tsx";
+import "../../home/sections/home-cta.css";
 import "./TrustContact.css";
 
 /* Final band — navy, the page's one relentless CTA (hard rule 10). Body
@@ -29,7 +30,7 @@ export default function TrustContact() {
         </Reveal>
 
         <Reveal delay={160}>
-          <a className="trust-contact__cta" {...DEMO_LINK_PROPS}>
+          <a className="home-cta" {...DEMO_LINK_PROPS}>
             Open the live demo
           </a>
         </Reveal>

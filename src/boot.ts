@@ -6,8 +6,8 @@
    Page entries: `import "../../boot.ts";` on line 1 of main.tsx. Nothing else
    should import fonts or the global sheets. */
 
-import "@fontsource-variable/source-serif-4";
-import "@fontsource-variable/inter";
+import "@fontsource-variable/hanken-grotesk";
+import "@fontsource-variable/plus-jakarta-sans";
 import "@fontsource-variable/jetbrains-mono";
 
 import "./styles/tokens.css";

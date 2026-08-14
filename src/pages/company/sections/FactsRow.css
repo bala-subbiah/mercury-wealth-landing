@@ -22,7 +22,7 @@
   display: inline-flex;
   width: 26px;
   height: 26px;
-  color: var(--color-brass-deep);
+  color: var(--color-ink);
 }
 
 .facts__title {
@@ -50,8 +50,8 @@
 }
 
 .facts__link:hover {
-  color: var(--color-brass-deep);
-  border-color: var(--color-brass-deep);
+  color: var(--color-ink);
+  border-color: var(--color-ink);
 }
 
 .facts__hedge {

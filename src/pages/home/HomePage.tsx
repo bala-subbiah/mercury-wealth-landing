@@ -12,9 +12,10 @@ import FinalCta from "./sections/FinalCta.tsx";
    this page has to survive a thirty-second read by someone who has never heard
    the word "custodian".
 
-   Banding runs dark → light → dark: the hero and the logo strip open on navy,
-   the explaining middle happens in daylight, and the trust band and close
-   return to the product's own ground. */
+   Banding runs light → dark → light → dark (amendment 3): the hero opens on
+   paper with the skyline graded into it, the logo strip is the first midnight
+   bookend, the explaining middle happens in daylight, and the trust band and
+   close return to midnight. */
 
 export default function HomePage() {
   return (
@@ -22,7 +23,7 @@ export default function HomePage() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Nav overHero current="home" />
+      <Nav overHero tone="light" current="home" />
 
       <main id="main">
         <Hero />

@@ -15,7 +15,7 @@ const ROTATE_MS = 10_000;
 
 type Card = {
   chip: string;
-  tone: "rose" | "amber" | "indigo";
+  tone: "rose" | "amber" | "slate";
   text: string;
   action: string;
 };
@@ -35,7 +35,7 @@ const CARDS: ReadonlyArray<Card> = [
   },
   {
     chip: "CONCENTRATION",
-    tone: "indigo",
+    tone: "slate",
     text: "Okonkwo Family Thematic: NVDA 12.1% against a 10% cap.",
     action: "See the holding",
   },
@@ -63,7 +63,7 @@ export default function PreppedOvernight() {
   }, [reduced, paused]);
 
   return (
-    <section className="band band--paper prepped">
+    <section className="band band--paper-2 prepped">
       <div className="container prepped__grid">
         <div className="prepped__copy">
           <Reveal as="h2" className="prepped__title">

@@ -42,7 +42,7 @@
   display: inline-flex;
   width: 30px;
   height: 30px;
-  color: var(--color-brass-deep);
+  color: var(--color-ink);
 }
 
 .mai-cap__card-title {
@@ -74,7 +74,13 @@
   padding-top: 2px;
   font-size: 14.5px;
   font-weight: 500;
-  color: var(--color-brass-deep);
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--rule-light);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.mai-cap__card-link:hover {
+  border-color: var(--color-ink);
 }
 
 .mai-cap__arrow {

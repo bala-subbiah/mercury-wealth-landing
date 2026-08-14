@@ -1,6 +1,5 @@
-/* The founder statement — the page's centrepiece. Large serif blockquote, a
-   single brass rule standing in for a quote mark (hard rule 2: brass <=5%,
-   never a flood). No photo, no second name. */
+/* The founder statement — the page's centrepiece. Large display blockquote, a
+   single ink rule standing in for a quote mark. No photo, no second name. */
 
 .co-founder {
   padding-block: var(--space-lg) var(--space-2xl);
@@ -10,7 +9,7 @@
   position: relative;
   max-width: 42em;
   padding-left: var(--space-lg);
-  border-left: 2px solid var(--color-brass-deep);
+  border-left: 2px solid var(--color-ink);
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(21px, 3vw, 30px);
@@ -34,8 +33,7 @@
 }
 
 .co-founder__name:hover {
-  color: var(--color-brass-deep);
-  border-color: var(--color-brass-deep);
+  border-color: var(--color-ink);
 }
 
 .co-founder__role {

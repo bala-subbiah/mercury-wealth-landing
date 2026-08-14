@@ -19,7 +19,7 @@ export default function TrustPage() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Nav current="trust" />
+      <Nav tone="light" current="trust" />
 
       <main id="main">
         <TrustHero />

@@ -1,13 +1,14 @@
-/* Nav — design DNA N1b. Fixed bar, dark register, one pill CTA.
-   Brass appears only on the CTA and on link hover/current: well under the 5%
-   accent budget. Motion is transform/opacity/colour only, never `all`. */
+/* Nav — fixed bar, one sharp-rectangle CTA, two colourways (design.md
+   amendment 3). Every colour in this sheet comes from the tone block, so the
+   bar is one component and never two. Motion is transform/opacity/colour only,
+   never `all`. */
 
 .nav {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
-  color: var(--color-ink-dark);
-  --focus-ring: var(--color-brass);
+  color: var(--nav-ink);
+  --focus-ring: var(--nav-ink);
   background: transparent;
   border-bottom: 1px solid transparent;
   transition:
@@ -15,21 +16,49 @@
     border-color var(--dur-fast) var(--ease-out);
 }
 
-/* Pages without a dark hero: the bar has its ground from the first pixel. */
-.nav--solid {
-  background: var(--color-navy);
-  border-bottom-color: var(--rule-dark);
+/* --------------------------------------------------------- colourways --- */
+
+/* Ink type that lands on paper: pages whose top band is light. */
+.nav--tone-light {
+  --nav-ink: var(--color-ink);
+  --nav-quiet: var(--color-body-light);
+  --nav-ground: var(--color-paper);
+  --nav-rule: var(--rule-light);
+  --nav-menu-ground: #ffffff;
+  --nav-menu-hover: var(--color-paper-3);
+  --nav-cta-ground: var(--color-ink);
+  --nav-cta-label: #ffffff;
+  --nav-cta-sweep: #404040;
 }
 
-/* Over a dark hero: transparent until the reader leaves the hero. */
+/* White type that lands on midnight: pages whose top band is dark. */
+.nav--tone-dark {
+  --nav-ink: #ffffff;
+  --nav-quiet: var(--color-muted-dark);
+  --nav-ground: var(--color-navy);
+  --nav-rule: var(--rule-dark);
+  --nav-menu-ground: var(--color-panel);
+  --nav-menu-hover: var(--color-panel-2);
+  --nav-cta-ground: #ffffff;
+  --nav-cta-label: var(--color-navy);
+  --nav-cta-sweep: #dfe3e8;
+}
+
+/* Pages without a floating hero: the bar has its ground from the first pixel. */
+.nav--solid {
+  background: var(--nav-ground);
+  border-bottom-color: var(--nav-rule);
+}
+
+/* Over a hero: transparent until the reader leaves it. */
 .nav--over-hero.is-scrolled {
-  background: var(--color-navy);
-  border-bottom-color: var(--rule-dark);
+  background: var(--nav-ground);
+  border-bottom-color: var(--nav-rule);
 }
 
 /* The open mobile sheet always needs its own ground. */
 .nav.is-open {
-  background: var(--color-navy);
+  background: var(--nav-ground);
   border-bottom-color: transparent;
 }
 
@@ -52,18 +81,18 @@
 
 .nav__wordmark {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 24px;
-  letter-spacing: -0.015em;
+  font-weight: 500;
+  font-size: 23px;
+  letter-spacing: -0.02em;
   line-height: 1;
-  color: var(--color-ink-dark);
+  color: var(--nav-ink);
   white-space: nowrap;
   margin-right: auto;
-  transition: color var(--dur-fast) var(--ease-out);
+  transition: opacity var(--dur-fast) var(--ease-out);
 }
 
 .nav__wordmark:hover {
-  color: var(--color-brass-bright);
+  opacity: 0.7;
 }
 
 /* --------------------------------------------------------------- links -- */
@@ -80,31 +109,48 @@
   align-items: center;
 }
 
+/* Links carry a drawn underline rather than a colour change: the accent is
+   monochrome now, so the movement has to do the signalling. */
 .nav__link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   white-space: nowrap;
+  font-family: var(--font-body);
   font-size: 15px;
+  font-weight: 400;
   line-height: 1;
-  color: var(--color-ink-dark);
+  color: var(--nav-ink);
   padding: 10px 2px;
-  transition: color var(--dur-fast) var(--ease-out);
 }
 
-.nav__link:hover,
-.nav__link[aria-current="page"] {
-  color: var(--color-brass-bright);
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.nav__link:hover::after,
+.nav__link[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left center;
 }
 
 .nav__link--trigger {
-  font-family: inherit;
+  font-family: var(--font-body);
 }
 
 .nav__chevron {
   width: 10px;
   height: 6px;
-  transition: transform var(--dur-fast) var(--ease-out);
 }
 
 .nav__item--menu.is-open .nav__chevron {
@@ -121,9 +167,9 @@
   flex-direction: column;
   min-width: 180px;
   padding: var(--space-xs);
-  background: var(--color-panel);
-  border: 1px solid var(--rule-dark);
-  border-radius: 4px;
+  background: var(--nav-menu-ground);
+  border: 1px solid var(--nav-rule);
+  border-radius: 0;
 }
 
 .nav__menu[hidden] {
@@ -133,23 +179,19 @@
 .nav__menu-link {
   display: block;
   padding: 11px 14px;
-  border-radius: 3px;
   white-space: nowrap;
   font-size: 15px;
   line-height: 1.2;
-  color: var(--color-ink-dark);
-  transition:
-    background-color var(--dur-fast) var(--ease-out),
-    color var(--dur-fast) var(--ease-out);
+  color: var(--nav-ink);
+  transition: background-color var(--dur-fast) var(--ease-out);
 }
 
 .nav__menu-link:hover,
 .nav__menu-link[aria-current="page"] {
-  background: var(--color-panel-2);
-  color: var(--color-brass-bright);
+  background: var(--nav-menu-hover);
 }
 
-/* ----------------------------------------------------------- CTA pill --- */
+/* ------------------------------------------------------------- CTA ----- */
 
 .nav__actions {
   display: flex;
@@ -159,25 +201,40 @@
 }
 
 .nav__cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: none;
   align-items: center;
   white-space: nowrap;
-  padding: 10px 20px;
-  border-radius: 999px;
-  border: 1px solid var(--color-brass);
-  background: var(--color-brass);
-  color: var(--color-navy);
-  font-size: 14px;
+  padding: 12px 22px;
+  border-radius: 0;
+  border: 1px solid var(--nav-cta-ground);
+  background: var(--nav-cta-ground);
+  color: var(--nav-cta-label);
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 500;
-  line-height: 1.2;
-  transition:
-    background-color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
-.nav__cta:hover {
-  background: var(--color-brass-bright);
-  border-color: var(--color-brass-bright);
+.nav__cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--nav-cta-sweep);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 500ms var(--ease-out);
+}
+
+.nav__cta:hover::after,
+.nav__cta:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
 }
 
 /* ----------------------------------------------------------- hamburger -- */
@@ -189,7 +246,7 @@
   width: 44px;
   height: 44px;
   margin-right: -10px;
-  color: var(--color-ink-dark);
+  color: var(--nav-ink);
 }
 
 .nav__burger-box {
@@ -225,7 +282,8 @@
   height: calc(100dvh - var(--nav-h));
   overflow-y: auto;
   padding: var(--space-lg) var(--page-gutter) var(--space-xl);
-  background: var(--color-navy);
+  background: var(--nav-ground);
+  color: var(--nav-ink);
 }
 
 .nav__sheet[hidden] {
@@ -242,17 +300,19 @@
   padding: 14px 0 6px;
   font-size: 13px;
   letter-spacing: 0.02em;
-  color: var(--color-muted-dark);
+  color: var(--nav-quiet);
 }
 
 .nav__sheet-link {
   display: block;
   padding: 14px 0;
   font-family: var(--font-display);
-  font-size: 26px;
-  line-height: 1.2;
-  color: var(--color-ink-dark);
-  border-bottom: 1px solid var(--rule-dark);
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--nav-ink);
+  border-bottom: 1px solid var(--nav-rule);
 }
 
 .nav__sheet-link--sub {
@@ -260,22 +320,48 @@
 }
 
 .nav__sheet-link[aria-current="page"] {
-  color: var(--color-brass);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
 }
 
 .nav__sheet-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   align-self: flex-start;
   white-space: nowrap;
-  padding: 14px 26px;
-  border-radius: 999px;
-  background: var(--color-brass);
-  color: var(--color-navy);
-  font-size: 15px;
+  padding: 16px 32px;
+  border-radius: 0;
+  border: 1px solid var(--nav-cta-ground);
+  background: var(--nav-cta-ground);
+  color: var(--nav-cta-label);
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 500;
-  line-height: 1.2;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.nav__sheet-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--nav-cta-sweep);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 500ms var(--ease-out);
+}
+
+.nav__sheet-cta:hover::after,
+.nav__sheet-cta:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
 }
 
 /* ------------------------------------------------------------ desktop --- */
@@ -292,5 +378,13 @@
   .nav__burger,
   .nav__sheet {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__link::after,
+  .nav__cta::after,
+  .nav__sheet-cta::after {
+    transition: none;
   }
 }

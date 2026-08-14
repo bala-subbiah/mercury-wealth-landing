@@ -113,10 +113,11 @@
 
 .mai-doc__chip {
   padding: 8px 14px;
-  background: var(--color-navy);
-  color: var(--color-ink-dark);
-  border-radius: 999px;
+  background: var(--chip-slate-bg);
+  color: var(--chip-slate-ink);
+  border-radius: 4px;
   font-family: var(--font-mono);
+  font-weight: 600;
   font-size: 11.5px;
   letter-spacing: 0.14em;
 }

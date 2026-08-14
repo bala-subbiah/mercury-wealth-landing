@@ -1,45 +1,66 @@
 /* Mercury Wealth — design tokens.
-   Transcribed verbatim from design.md § Tokens (locked system, Direction C
-   "Institutional intelligence", amendments 1 + 2). Do not add, rename or
-   re-value a custom property here without an amendment in design.md.
+   Transcribed from design.md § Tokens as amended by **Amendment 3** (2026-08-15,
+   "Gemini-mockup type & color adoption"): light-dominant monochrome system,
+   Hanken Grotesk display / Plus Jakarta Sans body / JetBrains Mono micro-type,
+   midnight #040B15 as bookend ground only, brass retired.
+   Do not add, rename or re-value a custom property here without an amendment
+   in design.md.
 
    Section agents: use these variables, never raw hex. */
 
 :root {
-  /* Surfaces — amendment 1 (2026-08-13): ground lifted, panels re-pitched above it */
-  --color-navy: #0b1220; /* the ground: dominant dark paper */
-  --color-panel: #141c2c; /* product-UI panel surface, one step above ground */
-  --color-panel-2: #1c2434; /* nested UI cards, one step above panel */
-  --color-paper: #f4f5f3; /* daylight interlude paper (warm) */
-  --color-hero-grad-top: #111d31; /* top of the hero still gradient */
+  /* Surfaces — dark bookends (hero shells, trust, close, footer, nav) */
+  --color-navy: #040b15; /* brand midnight: the bookend ground (name kept for compat) */
+  --color-panel: #0d1a2d; /* product-UI panel surface, one step above midnight */
+  --color-panel-2: #16263c; /* nested UI cards, one clear step above panel */
+  --color-hero-grad-top: #0d1a2d; /* top of a DARK hero gradient (product pages) */
+
+  /* Surfaces — light grounds (the site's dominant register) */
+  --color-paper: #fcfcfb; /* primary light ground */
+  --color-paper-2: #f6f7fa; /* alternating band step */
+  --color-paper-3: #ebedf2; /* illustration / inset panel tint */
 
   /* Ink */
-  --color-ink: #1b2536; /* on light */
-  --color-body-light: #2c3546; /* body on light */
-  --color-muted-light: #5e6572; /* 5.36:1 on --color-paper */
-  --color-ink-dark: #e6e8e4; /* primary on dark */
-  --color-muted-dark: #98a0ac;
-
-  /* Accent — marketing chrome only, <=5% footprint */
-  --color-brass: #c69b4e; /* on dark surfaces */
-  --color-brass-deep: #856223; /* on light surfaces; 5.10:1 on --color-paper */
-  --color-brass-bright: #d8b26a; /* hover lift for brass chrome on dark surfaces */
+  --color-ink: #0d0d0d; /* primary on light — 18.9:1 on --color-paper */
+  --color-body-light: #404040; /* body on light — 10.1:1 on --color-paper */
+  --color-muted-light: #404040; /* merged with body (amendment 3) */
+  --color-caption-light: #6b6b6b; /* sanctioned captions only — 5.2:1 on --color-paper */
+  --color-ink-dark: #ffffff; /* primary on dark — 19.7:1 on --color-navy */
+  --color-muted-dark: #a6adb8; /* body on dark — 8.7:1 on --color-navy */
 
   /* Hairlines */
-  --rule-dark: rgba(255, 255, 255, 0.08);
-  --rule-light: #d8dad4;
+  --rule-light: #e0e0e0;
+  --rule-dark: rgba(255, 255, 255, 0.1);
 
-  /* Luminous — ONLY inside product surfaces (panels, data strips, recreations) */
+  /* Chip duos — ONLY inside product fragments. Ink values are the mockup's hues
+     pulled down to clear 4.5:1 on their own ground (see report / design.md). */
+  --chip-amber-ink: #b45309; /* 4.5:1 on --chip-amber-bg */
+  --chip-amber-bg: #fef3c7;
+  --chip-rose-ink: #be123c; /* 5.2:1 on --chip-rose-bg (mockup #e11d48 was 3.9:1) */
+  --chip-rose-bg: #ffe4e6;
+  --chip-emerald-ink: #047857; /* 4.8:1 on --chip-emerald-bg (mockup #059669 was 3.3:1) */
+  --chip-emerald-bg: #d1fae5;
+  --chip-slate-ink: #334155; /* 8.4:1 on --chip-slate-bg — the neutral fourth state */
+  --chip-slate-bg: #e2e8f0;
+
+  /* Luminous — ONLY inside DARK product surfaces (panels, data strips) */
   --ui-indigo: #6366f1;
   --ui-emerald: #34d399;
   --ui-amber: #f59e0b;
   --ui-rose: #fb7185;
 
+  /* Illustration tints — the steel gradient behind fragment cards */
+  --tint-steel-a: #a2b5c7;
+  --tint-steel-b: #dce7f1;
+
   /* Type — family names carry the "Variable" suffix to match the installed
-     @fontsource-variable/* packages */
-  --font-display: "Source Serif 4 Variable", Georgia, serif; /* 400/600, ROMAN ONLY */
-  --font-body: "Inter Variable", -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono Variable", monospace; /* UPPERCASE labels, ls 0.18em, tabular-nums */
+     @fontsource-variable/* packages. Display is a neo-grotesque, not a serif. */
+  --font-display:
+    "Hanken Grotesk Variable", "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif; /* 300 display; 350–400 small */
+  --font-body:
+    "Plus Jakarta Sans Variable", -apple-system, "Segoe UI", Roboto, sans-serif; /* 400 body */
+  --font-mono: "JetBrains Mono Variable", monospace; /* UPPERCASE, ls 0.2em, tabular-nums */
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -56,8 +77,7 @@
   --space-2xl: 104px;
   --space-3xl: 160px;
 
-  /* Layout — shared page geometry so every page gutters and measures alike.
-     (Scaffold addition; not a design-system change.) */
+  /* Layout — shared page geometry so every page gutters and measures alike. */
   --page-max: 1200px; /* content column cap */
   --page-gutter: 24px; /* mobile-first side gutter */
   --measure: 34em; /* body copy measure cap (design.md amendment 2 §5) */

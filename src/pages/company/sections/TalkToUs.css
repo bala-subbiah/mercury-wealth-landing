@@ -1,6 +1,6 @@
-/* Talk to us — navy final band. Brass reserved for the primary CTA only
-   (hard rule 2: <=5% footprint); the secondary path and the plain links stay
-   ink-dark with an underline, never a second flood of brass. */
+/* Talk to us — navy final band. Primary CTA is the shared home-cta sharp
+   rectangle; the secondary path and the plain links stay ink-dark with an
+   underline, monochrome throughout. */
 
 .co-talk {
   padding-block: var(--space-2xl) var(--space-2xl);
@@ -28,26 +28,6 @@
   margin-top: var(--space-lg);
 }
 
-.co-talk__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  min-height: 44px;
-  padding: 14px 28px;
-  border-radius: 999px;
-  background: var(--color-brass);
-  color: var(--color-navy);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.2;
-  transition: background-color var(--dur-fast) var(--ease-out);
-}
-
-.co-talk__cta:hover {
-  background: var(--color-brass-bright);
-}
-
 .co-talk__secondary {
   display: inline-flex;
   align-items: center;
@@ -62,8 +42,7 @@
 }
 
 .co-talk__secondary:hover {
-  color: var(--color-brass);
-  border-color: var(--color-brass);
+  border-color: #ffffff;
 }
 
 .co-talk__links {

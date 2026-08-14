@@ -1,49 +1,94 @@
 /* The home page's two call-to-action shapes, shared by the hero and the final
-   band so the primary pill is drawn once. Brass is the only chrome accent and
-   it appears on two small pills per page: well inside the 5% budget.
-   Motion is colour/opacity only (hard rule 5): no scale, no `transition: all`. */
+   band so the language is drawn once (design.md amendment 3).
 
-.home-cta {
+   Primary   — sharp-cornered rectangle, --cta-ground fill, mono uppercase label
+               in --cta-label. On light bands that is ink-on-paper with a white
+               label; on midnight bands it inverts to a white ground with a
+               midnight label. The band publishes the colourway (base.css).
+   Secondary — the same rectangle, transparent, 1px --cta-hairline border, label
+               in the band's own ink.
+
+   Hover is the mockup's sweep: a ::after plane scaled from 0 to 1 across the
+   button, transform-only, var(--ease-out). No `transition: all`, no scale on
+   the button itself, and the label never moves. */
+
+.home-cta,
+.home-quiet {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  padding: 12px 26px;
-  border-radius: 999px;
-  border: 1px solid var(--color-brass);
-  background: var(--color-brass);
-  color: var(--color-navy);
-  font-size: 15px;
+  padding: 15px 32px;
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 500;
-  line-height: 1.2;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+  /* One line, always: the label is short and the sweep needs a stable box. */
   white-space: nowrap;
-  transition:
-    background-color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
 }
 
-.home-cta:hover {
-  background: var(--color-brass-bright);
-  border-color: var(--color-brass-bright);
+/* The sweep plane. Negative z-index inside the button's own stacking context
+   puts it over the ground and under the label. */
+.home-cta::after,
+.home-quiet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 500ms var(--ease-out);
 }
 
-/* The offered second path. Never a button, never as loud as the demo. */
+.home-cta:hover::after,
+.home-cta:focus-visible::after,
+.home-quiet:hover::after,
+.home-quiet:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ------------------------------------------------------------- primary --- */
+
+.home-cta {
+  border: 1px solid var(--cta-ground);
+  background: var(--cta-ground);
+  color: var(--cta-label);
+}
+
+.home-cta::after {
+  background: var(--cta-sweep);
+}
+
+/* ----------------------------------------------------------- secondary --- */
+
 .home-quiet {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding-block: 10px;
-  font-size: 15px;
-  line-height: 1.3;
-  color: var(--color-muted-dark);
-  white-space: nowrap;
-  border-bottom: 1px solid transparent;
-  transition:
-    color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
+  border: 1px solid var(--cta-hairline);
+  background: transparent;
+  color: var(--cta-ink);
 }
 
-.home-quiet:hover {
-  color: var(--color-ink-dark);
-  border-bottom-color: var(--color-brass);
+.home-quiet::after {
+  background: var(--cta-ghost-sweep);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-cta::after,
+  .home-quiet::after {
+    transition: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-cta,
+  .home-quiet {
+    padding: 16px 32px;
+    font-size: 12px;
+  }
 }

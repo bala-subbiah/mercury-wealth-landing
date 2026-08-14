@@ -107,54 +107,99 @@ rules, integrity rules, roman headings, banned vocabulary — is unchanged and b
 `docs/offerings-map.md` and the 14-section macrostructure it defined are SUPERSEDED for
 IA purposes by the v3 brief's nav; consult them only as fact references.
 
+## Amendment 3 — Gemini-mockup type & color adoption (owner-directed, 2026-08-15)
+
+The owner directed v3 to take its font pairing and color theming from the Gemini mockup
+(`docs/gemini-build-mockup/mercury-digital-remix-test/`), vetted first. Verdict: the
+system is good and is adopted, with three corrections.
+
+**What the mockup actually is.** Its `--font-serif` role is not a serif: display type is
+"Helvetica Neue" (Swiss neo-grotesque) at light weight and large scale, body is Plus
+Jakarta Sans (300), micro-type is JetBrains Mono (uppercase, 0.2em tracked, incl. CTA
+buttons). Color is a 5-tone monochrome brand palette (black #0d0d0d/#000, greys #404040 /
+#e0e0e0 / #f0f0f0, white #fff) plus brand midnight #040B15 (+ lifted #0d1a2d); content
+sections sit on off-whites (#fcfcfb / #f6f7fa / #ebedf2), the shell/bookends on midnight.
+Chromatic color exists ONLY inside product fragments: chip duos amber #b45309/#fef3c7,
+rose #e11d48/#ffe4e6, emerald #059669/#d1fae5, and steel-blue illustration tints
+(#a2b5c7→#dce7f1). CTAs are sharp-cornered rectangles: ink ground, white mono uppercase
+label; secondary is hairline-bordered transparent. Hero: light ground with the HK video
+at ~20% opacity blended into it by gradient, ink display type.
+
+**Vet findings and corrections:**
+1. *Portability flaw:* Helvetica Neue ships on Apple platforms only; Windows falls back
+   to Arial. Corrected by self-hosting **Hanken Grotesk Variable** (closest free match to
+   HN at light display sizes) ahead of the system stack: display =
+   `"Hanken Grotesk Variable", "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+   "Hiragino Sans GB", "Microsoft YaHei", sans-serif`.
+2. *Legibility flaw:* 300-weight body at 14px is too thin. Floor: body text < 20px is
+   weight 400; weight 300 is reserved for display and ≥20px ledes.
+3. *Motion flaws:* the mockup's `transition: all`, hover-brightness and logo drop-shadow
+   glows are NOT ported. Our motion rules (transform/opacity only, var(--ease-out),
+   reduced-motion collapse) stand unchanged.
+
+**Supersedes:** Source Serif 4 display and Inter body are retired from this site (the
+serif remains the product app's concern, not the marketing site's). Brass is retired as
+the chrome accent; the accent is now monochrome ink (mono-tracked rectangles, hairlines,
+ink underlines). Luminous-only-inside-fragments survives with the mockup's chip duos.
+Amendment 1's #0B1220 ground ruling applied to a navy-dominant site; v3 is light-dominant,
+and the midnight #040B15 returns ONLY as bookend bands (hero shell, trust, final CTA,
+footer) with #0d1a2d as the panel step above it. Amendment 2's register rules (banding
+ratio, mono-retreats-into-product, copy rationing, spacing) all stand; mono uppercase in
+BUTTONS/chips/timestamps is sanctioned (it is the mockup's own CTA idiom), mono section
+labels remain dead.
+
 ## Tokens
+
+The authoritative, current block (as amended by Amendment 3, 2026-08-15) is transcribed
+in `src/styles/tokens.css` and mirrored here. Values verified for contrast in the R1
+restyle report (all text/ground pairs ≥4.5:1; two mockup chip inks were pulled down to
+clear that bar: rose #e11d48→#be123c, emerald #059669→#047857).
 
 ```css
 :root {
-  /* Surfaces — amendment 1 (2026-08-13): ground lifted, panels re-pitched above it */
-  --color-navy: #0B1220;        /* the ground: dominant dark paper */
-  --color-panel: #141C2C;       /* product-UI panel surface, one step above ground */
-  --color-panel-2: #1C2434;     /* nested UI cards, one step above panel */
-  --color-paper: #F4F5F3;       /* daylight interlude paper (warm) */
-  --color-hero-grad-top: #111d31; /* top of the hero still gradient (Hero, HomeHero) */
+  /* Surfaces — dark bookends (hero shells, trust, close, footer) */
+  --color-navy: #040b15;        /* brand midnight (name kept for compat) */
+  --color-panel: #0d1a2d;       /* product-UI panel surface on dark */
+  --color-panel-2: #16263c;     /* nested UI cards, one step above panel */
+  --color-hero-grad-top: #0d1a2d; /* top of a DARK hero gradient (product pages) */
+
+  /* Surfaces — light grounds (the dominant register) */
+  --color-paper: #fcfcfb;  --color-paper-2: #f6f7fa;  --color-paper-3: #ebedf2;
 
   /* Ink */
-  --color-ink: #1B2536;         /* on light */
-  --color-body-light: #2C3546;  /* body on light */
-  --color-muted-light: #5E6572; /* AA fix: 5.36:1 on --color-paper (was #6A7180 @ 4.48:1, failed AA) */
-  --color-ink-dark: #E6E8E4;    /* primary on dark */
-  --color-muted-dark: #98A0AC;
-
-  /* Accent — marketing chrome only, ≤5% footprint */
-  --color-brass: #C69B4E;       /* on dark surfaces */
-  --color-brass-deep: #856223;  /* on light surfaces; AA fix: 5.10:1 on --color-paper (was #96702F @ 4.12:1, failed AA) */
-  --color-brass-bright: #d8b26a; /* hover lift for brass chrome on dark surfaces */
+  --color-ink: #0d0d0d;  --color-body-light: #404040;  --color-muted-light: #404040;
+  --color-caption-light: #6b6b6b;  --color-ink-dark: #ffffff;  --color-muted-dark: #a6adb8;
 
   /* Hairlines */
-  --rule-dark: rgba(255, 255, 255, 0.08);
-  --rule-light: #D8DAD4;
+  --rule-light: #e0e0e0;  --rule-dark: rgba(255, 255, 255, 0.1);
 
-  /* Luminous — ONLY inside product surfaces (panels, data strips, recreations) */
-  --ui-indigo: #6366F1;
-  --ui-emerald: #34D399;
-  --ui-amber: #F59E0B;
-  --ui-rose: #FB7185;
+  /* Chip duos — ONLY inside product fragments */
+  --chip-amber-ink: #b45309;  --chip-amber-bg: #fef3c7;
+  --chip-rose-ink: #be123c;   --chip-rose-bg: #ffe4e6;
+  --chip-emerald-ink: #047857; --chip-emerald-bg: #d1fae5;
+  --chip-slate-ink: #334155;  --chip-slate-bg: #e2e8f0;
 
-  /* Type — family names carry the "Variable" suffix to match the installed
-     @fontsource-variable/* packages (was the static-family names below) */
-  --font-display: "Source Serif 4 Variable", Georgia, serif;   /* 400/600, ROMAN ONLY (was "Source Serif 4") */
-  --font-body: "Inter Variable", -apple-system, sans-serif;    /* was "Inter" */
-  --font-mono: "JetBrains Mono Variable", monospace;           /* labels UPPERCASE, ls 0.18em; tabular-nums (was "JetBrains Mono") */
+  /* Luminous — ONLY inside DARK product surfaces */
+  --ui-indigo: #6366f1; --ui-emerald: #34d399; --ui-amber: #f59e0b; --ui-rose: #fb7185;
 
-  /* Motion */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-fast: 200ms;
-  --dur-med: 450ms;
-  --dur-slow: 900ms;
+  /* Illustration tints — steel gradient behind fragment cards */
+  --tint-steel-a: #a2b5c7;  --tint-steel-b: #dce7f1;
 
-  /* Space: 4pt scale — --space-xs 8px · sm 16 · md 24 · lg 40 · xl 64 · 2xl 104 · 3xl 160 */
+  /* Type — display is a neo-grotesque, not a serif (Amendment 3) */
+  --font-display: "Hanken Grotesk Variable", "Helvetica Neue", Helvetica, Arial,
+                  "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-body: "Plus Jakarta Sans Variable", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono Variable", monospace; /* buttons/chips/timestamps only */
+
+  /* Motion (unchanged) + Space: 4pt scale (unchanged; see tokens.css) */
 }
 ```
+
+CTA language (Amendment 3): sharp-cornered rectangles, mono uppercase 0.2em-tracked
+labels; ink ground/white label on light bands, white ground/midnight label on dark;
+hover is a transform-only scaleX sweep; secondary is a hairline-bordered transparent
+rectangle. Band classes publish `--cta-*` variables so any section gets the correct
+colourway automatically.
 
 ## Hard rules (every build task inherits these)
 

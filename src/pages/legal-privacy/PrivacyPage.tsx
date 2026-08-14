@@ -13,7 +13,7 @@ export default function PrivacyPage() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Nav current="privacy" />
+      <Nav tone="light" current="privacy" />
 
       <main id="main">
         <PrivacyHead />

@@ -1,4 +1,5 @@
 import { DEMO_LINK_PROPS } from "../../../links.ts";
+import "../../home/sections/home-cta.css";
 import "./Hero.css";
 
 /* Cockpit hero — dark, full-bleed, no video on this page (design.md Amendment 2:
@@ -17,7 +18,7 @@ export default function Hero() {
         </p>
 
         <div className="cockpit-hero__actions">
-          <a className="cockpit-hero__cta" {...DEMO_LINK_PROPS}>
+          <a className="home-cta" {...DEMO_LINK_PROPS}>
             Open the live demo
           </a>
           <p className="cockpit-hero__caption">NO FORM &middot; NO SIGN-UP &middot; THE REAL PRODUCT</p>

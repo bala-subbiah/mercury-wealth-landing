@@ -1,6 +1,7 @@
-/* Ask Mercury — paper band carrying one dark product fragment.
-   The software looks the same wherever it is shown, so the chat keeps the
-   product's own navy surface even in daylight. */
+/* Ask Mercury — paper band carrying one product fragment, drawn in the same
+   illustration idiom as the briefing panel (amendment 3): a sharp steel-tinted
+   plane with white cards on it, so the two fragments on this page read as one
+   product rather than two. */
 
 .ask {
   padding-block: var(--space-xl);
@@ -8,17 +9,21 @@
 }
 
 .ask__title {
-  font-size: clamp(28px, 4.8vw, 44px);
-  line-height: 1.14;
-  max-width: 16em;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.8vw, 50px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  max-width: 17em;
   color: var(--color-ink);
 }
 
 .ask__sub {
   margin-top: var(--space-md);
   font-size: clamp(15px, 1.4vw, 17px);
+  font-weight: 400;
   line-height: 1.6;
-  color: var(--color-muted-light);
+  color: var(--color-body-light);
 }
 
 /* ----------------------------------------------------------------- chat --- */
@@ -30,11 +35,14 @@
   max-width: 760px;
   margin-top: var(--space-lg);
   padding: var(--space-md);
-  border: 1px solid var(--rule-dark);
-  border-radius: 10px;
-  background: var(--color-navy);
-  color: var(--color-ink-dark);
-  --focus-ring: var(--color-brass);
+  border-radius: 0;
+  background: linear-gradient(
+    180deg,
+    var(--tint-steel-a) 0%,
+    #c4d4e2 52%,
+    var(--tint-steel-b) 100%
+  );
+  color: var(--color-ink);
 }
 
 .chat__row {
@@ -53,29 +61,29 @@
   max-width: 100%;
   padding: 14px 18px;
   font-size: 15px;
+  font-weight: 400;
   line-height: 1.5;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .chat__bubble--ask {
   max-width: 30em;
-  border-radius: 14px 14px 4px 14px;
-  background: var(--color-panel-2);
-  color: var(--color-ink-dark);
+  border-radius: 12px 12px 4px 12px;
+  color: var(--color-ink);
 }
 
 .chat__bubble--answer {
   width: 100%;
-  border: 1px solid var(--rule-dark);
-  border-radius: 14px 14px 14px 4px;
-  background: var(--color-panel);
+  border-radius: 12px 12px 12px 4px;
 }
 
 .chat__who {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   line-height: 1.4;
-  color: var(--color-muted-dark);
+  color: var(--color-body-light);
 }
 
 .chat__results {
@@ -94,32 +102,35 @@
 }
 
 .chat__result + .chat__result {
-  border-top: 1px solid var(--rule-dark);
+  border-top: 1px solid var(--rule-light);
 }
 
 .chat__name {
-  font-weight: 500;
-  color: var(--color-ink-dark);
+  font-weight: 600;
+  color: var(--color-ink);
   white-space: nowrap;
 }
 
 .chat__detail {
-  color: var(--color-muted-dark);
+  color: var(--color-body-light);
 }
 
+/* The mandate check is the fragment's one chromatic note, in the emerald duo
+   (4.8:1 ink on ground). */
 .chat__check {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--rule-dark);
+  margin-top: 14px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: var(--chip-emerald-bg);
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   font-size: 10px;
   letter-spacing: 0.14em;
   line-height: 1.5;
-  color: var(--ui-emerald);
+  color: var(--chip-emerald-ink);
 }
 
 .chat__tick {

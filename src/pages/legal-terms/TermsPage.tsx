@@ -13,7 +13,7 @@ export default function TermsPage() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Nav current="terms" />
+      <Nav tone="light" current="terms" />
 
       <main id="main">
         <TermsHead />
