@@ -1,0 +1,296 @@
+/* Nav — design DNA N1b. Fixed bar, dark register, one pill CTA.
+   Brass appears only on the CTA and on link hover/current: well under the 5%
+   accent budget. Motion is transform/opacity/colour only, never `all`. */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  color: var(--color-ink-dark);
+  --focus-ring: var(--color-brass);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+/* Pages without a dark hero: the bar has its ground from the first pixel. */
+.nav--solid {
+  background: var(--color-navy);
+  border-bottom-color: var(--rule-dark);
+}
+
+/* Over a dark hero: transparent until the reader leaves the hero. */
+.nav--over-hero.is-scrolled {
+  background: var(--color-navy);
+  border-bottom-color: var(--rule-dark);
+}
+
+/* The open mobile sheet always needs its own ground. */
+.nav.is-open {
+  background: var(--color-navy);
+  border-bottom-color: transparent;
+}
+
+.nav__spacer {
+  height: var(--nav-h);
+}
+
+.nav__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  height: var(--nav-h);
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+/* ------------------------------------------------------------ wordmark -- */
+
+.nav__wordmark {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  color: var(--color-ink-dark);
+  white-space: nowrap;
+  margin-right: auto;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__wordmark:hover {
+  color: var(--color-brass-bright);
+}
+
+/* --------------------------------------------------------------- links -- */
+
+.nav__links {
+  display: none;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.nav__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--color-ink-dark);
+  padding: 10px 2px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__link:hover,
+.nav__link[aria-current="page"] {
+  color: var(--color-brass-bright);
+}
+
+.nav__link--trigger {
+  font-family: inherit;
+}
+
+.nav__chevron {
+  width: 10px;
+  height: 6px;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.nav__item--menu.is-open .nav__chevron {
+  transform: translateY(1px);
+}
+
+/* --------------------------------------------------- desktop dropdown --- */
+
+.nav__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: -16px;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: var(--space-xs);
+  background: var(--color-panel);
+  border: 1px solid var(--rule-dark);
+  border-radius: 4px;
+}
+
+.nav__menu[hidden] {
+  display: none;
+}
+
+.nav__menu-link {
+  display: block;
+  padding: 11px 14px;
+  border-radius: 3px;
+  white-space: nowrap;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--color-ink-dark);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.nav__menu-link:hover,
+.nav__menu-link[aria-current="page"] {
+  background: var(--color-panel-2);
+  color: var(--color-brass-bright);
+}
+
+/* ----------------------------------------------------------- CTA pill --- */
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-left: var(--space-sm);
+}
+
+.nav__cta {
+  display: none;
+  align-items: center;
+  white-space: nowrap;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--color-brass);
+  background: var(--color-brass);
+  color: var(--color-navy);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.nav__cta:hover {
+  background: var(--color-brass-bright);
+  border-color: var(--color-brass-bright);
+}
+
+/* ----------------------------------------------------------- hamburger -- */
+
+.nav__burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  color: var(--color-ink-dark);
+}
+
+.nav__burger-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 22px;
+}
+
+.nav__burger-line {
+  display: block;
+  height: 1.5px;
+  width: 100%;
+  background: currentColor;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.nav.is-open .nav__burger-line:first-child {
+  transform: translateY(3.75px) rotate(45deg);
+}
+
+.nav.is-open .nav__burger-line:last-child {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+/* -------------------------------------------------------- mobile sheet -- */
+
+.nav__sheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  height: calc(100dvh - var(--nav-h));
+  overflow-y: auto;
+  padding: var(--space-lg) var(--page-gutter) var(--space-xl);
+  background: var(--color-navy);
+}
+
+.nav__sheet[hidden] {
+  display: none;
+}
+
+.nav__sheet-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav__sheet-group {
+  display: block;
+  padding: 14px 0 6px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--color-muted-dark);
+}
+
+.nav__sheet-link {
+  display: block;
+  padding: 14px 0;
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1.2;
+  color: var(--color-ink-dark);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.nav__sheet-link--sub {
+  padding-left: var(--space-sm);
+}
+
+.nav__sheet-link[aria-current="page"] {
+  color: var(--color-brass);
+}
+
+.nav__sheet-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  white-space: nowrap;
+  padding: 14px 26px;
+  border-radius: 999px;
+  background: var(--color-brass);
+  color: var(--color-navy);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* ------------------------------------------------------------ desktop --- */
+
+@media (min-width: 900px) {
+  .nav__links {
+    display: flex;
+  }
+
+  .nav__cta {
+    display: inline-flex;
+  }
+
+  .nav__burger,
+  .nav__sheet {
+    display: none;
+  }
+}

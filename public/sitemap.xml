@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Base URL must match VITE_SITE_URL in .env (static file, no env replacement). -->
+<!-- Keep in sync with the entries in vite.config.ts. Static file: no build-time
+     replacement happens here, so the host is written out in full. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mercury-wealth-landing.vercel.app/</loc>
@@ -8,7 +9,7 @@
     <loc>https://mercury-wealth-landing.vercel.app/cockpit/</loc>
   </url>
   <url>
-    <loc>https://mercury-wealth-landing.vercel.app/document-intelligence/</loc>
+    <loc>https://mercury-wealth-landing.vercel.app/mercury-ai/</loc>
   </url>
   <url>
     <loc>https://mercury-wealth-landing.vercel.app/trust/</loc>

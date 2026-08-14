@@ -1,0 +1,25 @@
+/* Scroll-in reveal. Transform + opacity only; no `transition: all`. */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.reveal.is-shown {
+  opacity: 1;
+  transform: none;
+}
+
+/* Belt and braces: the hook already skips observing under reduced motion, so
+   `is-shown` lands on the first paint — this makes the static state explicit
+   even if a component forgets. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

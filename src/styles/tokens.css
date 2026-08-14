@@ -1,105 +1,53 @@
-/* Hallmark · macrostructure: Marquee Hero (video) + banded scrollytelling · theme: studied-DNA (Direction C) · studied: yes */
+/* Mercury Wealth — design tokens.
+   Transcribed verbatim from design.md § Tokens (locked system, Direction C
+   "Institutional intelligence", amendments 1 + 2). Do not add, rename or
+   re-value a custom property here without an amendment in design.md.
 
-/* Mercury Wealth — Locked Design System (Direction C · "Institutional intelligence")
-   Source of truth: /design.md — do not diverge from these values without an owner
-   sign-off recorded there first. */
+   Section agents: use these variables, never raw hex. */
 
 :root {
-  /* ---------------------------------------------------------------------
-     Surfaces
-     --------------------------------------------------------------------- */
-  /* Amendment 1 (design.md, owner-approved 2026-08-13): the ground lifts off
-     near-black and the panels are re-pitched one clear luminance step above it,
-     because panels must separate from the ground WITHOUT relying on shadow.
-     Contrast on the new ground: --color-muted-dark 7.1:1, --color-ink-dark 15.1:1;
-     --color-muted-dark on --color-panel 6.5:1. */
-  --color-navy: #0b1220; /* the ground: page background, unpanelled bands */
+  /* Surfaces — amendment 1 (2026-08-13): ground lifted, panels re-pitched above it */
+  --color-navy: #0b1220; /* the ground: dominant dark paper */
   --color-panel: #141c2c; /* product-UI panel surface, one step above ground */
   --color-panel-2: #1c2434; /* nested UI cards, one step above panel */
   --color-paper: #f4f5f3; /* daylight interlude paper (warm) */
-  --color-hero-grad-top: #111d31; /* top of the hero still gradient, one step above the ground */
+  --color-hero-grad-top: #111d31; /* top of the hero still gradient */
 
-  /* ---------------------------------------------------------------------
-     Ink
-     --------------------------------------------------------------------- */
+  /* Ink */
   --color-ink: #1b2536; /* on light */
   --color-body-light: #2c3546; /* body on light */
-  --color-muted-light: #5e6572; /* 5.36:1 on --color-paper (was #6a7180 @ 4.48:1) */
+  --color-muted-light: #5e6572; /* 5.36:1 on --color-paper */
   --color-ink-dark: #e6e8e4; /* primary on dark */
   --color-muted-dark: #98a0ac;
 
-  /* ---------------------------------------------------------------------
-     Accent — marketing chrome only, <=5% footprint
-     --------------------------------------------------------------------- */
+  /* Accent — marketing chrome only, <=5% footprint */
   --color-brass: #c69b4e; /* on dark surfaces */
-  --color-brass-deep: #856223; /* on light surfaces; 5.10:1 on --color-paper (was #96702f @ 4.12:1) */
+  --color-brass-deep: #856223; /* on light surfaces; 5.10:1 on --color-paper */
   --color-brass-bright: #d8b26a; /* hover lift for brass chrome on dark surfaces */
 
-  /* ---------------------------------------------------------------------
-     Hairlines
-     --------------------------------------------------------------------- */
+  /* Hairlines */
   --rule-dark: rgba(255, 255, 255, 0.08);
   --rule-light: #d8dad4;
 
-  /* ---------------------------------------------------------------------
-     Luminous — ONLY inside product surfaces (panels, data strips, recreations)
-     --------------------------------------------------------------------- */
+  /* Luminous — ONLY inside product surfaces (panels, data strips, recreations) */
   --ui-indigo: #6366f1;
   --ui-emerald: #34d399;
   --ui-amber: #f59e0b;
   --ui-rose: #fb7185;
 
-  /* ---------------------------------------------------------------------
-     Product-surface chrome — panel radii, hairline variants, depth.
-     Used only by the product-UI recreations in src/components/product/.
-     --------------------------------------------------------------------- */
-  --radius-panel: 12px;
-  --radius-card: 8px;
-  --radius-chip: 4px;
-
-  --rule-dark-soft: rgba(255, 255, 255, 0.05);
-  --rule-dark-strong: rgba(255, 255, 255, 0.14);
-
-  --surface-hover: rgba(255, 255, 255, 0.03);
-  --surface-sunken: rgba(0, 0, 0, 0.22);
-
-  --shadow-panel: 0 24px 60px -32px rgba(0, 0, 0, 0.85);
-  --shadow-card: 0 12px 28px -20px rgba(0, 0, 0, 0.8);
-
-  /* ---------------------------------------------------------------------
-     Type families — must match @fontsource-variable package family names
-     --------------------------------------------------------------------- */
+  /* Type — family names carry the "Variable" suffix to match the installed
+     @fontsource-variable/* packages */
   --font-display: "Source Serif 4 Variable", Georgia, serif; /* 400/600, ROMAN ONLY */
   --font-body: "Inter Variable", -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono Variable", monospace; /* labels UPPERCASE, ls 0.18em; tabular-nums */
+  --font-mono: "JetBrains Mono Variable", monospace; /* UPPERCASE labels, ls 0.18em, tabular-nums */
 
-  /* ---------------------------------------------------------------------
-     Type scale — body/UI sizes fixed, display sizes fluid via clamp()
-     --------------------------------------------------------------------- */
-  --text-xs: 0.75rem; /* 12px */
-  --text-sm: 0.875rem; /* 14px */
-  --text-base: 1rem; /* 16px */
-  --text-md: 1.125rem; /* 18px */
-  --text-lg: 1.25rem; /* 20px */
-  --text-xl: 1.5rem; /* 24px */
-  --text-2xl: 1.875rem; /* 30px */
-
-  --text-display-sm: clamp(1.75rem, 1.45rem + 1.3vw, 2.5rem);
-  --text-display-md: clamp(2.25rem, 1.65rem + 2.5vw, 3.5rem);
-  --text-display-lg: clamp(2.75rem, 1.85rem + 3.8vw, 4.75rem);
-  --text-display-xl: clamp(3.25rem, 1.95rem + 5.5vw, 6rem);
-
-  /* ---------------------------------------------------------------------
-     Motion
-     --------------------------------------------------------------------- */
+  /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-fast: 200ms;
   --dur-med: 450ms;
   --dur-slow: 900ms;
 
-  /* ---------------------------------------------------------------------
-     Space — 4pt scale
-     --------------------------------------------------------------------- */
+  /* Space: 4pt scale */
   --space-xs: 8px;
   --space-sm: 16px;
   --space-md: 24px;
@@ -107,4 +55,18 @@
   --space-xl: 64px;
   --space-2xl: 104px;
   --space-3xl: 160px;
+
+  /* Layout — shared page geometry so every page gutters and measures alike.
+     (Scaffold addition; not a design-system change.) */
+  --page-max: 1200px; /* content column cap */
+  --page-gutter: 24px; /* mobile-first side gutter */
+  --measure: 34em; /* body copy measure cap (design.md amendment 2 §5) */
+  --nav-h: 64px; /* nav band height, mobile */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-gutter: 40px;
+    --nav-h: 76px;
+  }
 }

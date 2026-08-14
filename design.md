@@ -59,6 +59,54 @@ navy again), but never arbitrarily — a paper band must be a passage where Merc
 as a company rather than a passage where the software is on screen. **No light/dark
 toggle**: these are two fixed registers, not a user preference.
 
+## Amendment 2 — the marketing register (v3, 2026-08-15, from the 2026-08-13 team review)
+
+The team accepted the system's surfaces, palette, and type but rejected the *register*:
+v2 read as a product-explanation document. v3 is a conversion-first marketing site for a
+modern tech startup, rebuilt against the pattern DNA of v7labs.com, capsa.ai and rogo.ai
+(see `docs/v3-design-dna.md` — the pattern source for every section decision, with
+`docs/team-feedback.md` as ground truth). What moves:
+
+**1. The banding ratio inverts.** Navy no longer dominates ~70% of every page. The dark
+ground carries the *bookends* — hero (HK video, graded into the navy), the trust band,
+the final CTA band, the footer — and warm paper carries the explanatory middle of every
+page. The meaning rule survives ("navy = the product working / paper = the company
+speaking") but the default page is now light with dark bookends, like all three
+reference sites.
+
+**2. Mono discipline retreats into the product.** Uppercase mono micro-labels are dead
+as section furniture (all six tag strips were struck in review). Mono survives ONLY
+inside product-UI fragments (status-card chips, timestamps, tabular numbers) and legal
+fine print. Section heads are serif + optional one-line grey sans subhead; no eyebrows,
+no kickers, no numbered chapter labels.
+
+**3. Imagery rule inverts.** Hard rule 7's "faithful product-UI recreations, never
+illustration" is replaced: marketing sections PREFER simplified, animated product
+fragments — an ask bar, a status card with a colored chip, a chat bubble pair, a
+3-card auto-carousel — floated on graded photo or tinted panels. Faithful dense
+recreations are reserved for product pages, and even there cropped to one idea per
+frame. Still banned: stock-photo metaphors, abstract blob illustration, fake browser
+chrome, invented data in any fragment.
+
+**4. Copy is rationed.** Half of v2's words or less, sourced from `docs/v3-fact-source.md`
+(the audited v2 copy). Per scroll position: one serif headline (3–9 words), at most
+~3 lines of body. The layman test governs: if a section needs study, it fails. Deep
+trust/compliance detail compresses to icon checklists with the full answers one click
+away.
+
+**5. Spacing opens up.** Marketing scale: sections breathe at --space-2xl/3xl
+(104–160px) minimum on desktop; one idea per viewport; grids cap at 3 columns; body
+measure stays ≤ 34em. Mobile is designed simultaneously, single column, hero video
+retained, sections short.
+
+**6. Naming.** The engines line is publicly "Mercury AI"; "Cockpit" stays. Nav:
+Product (Cockpit · Mercury AI) · Trust · Company · [demo CTA].
+
+Everything else — tokens, fonts, brass ≤5%, luminous-inside-product-only, motion
+rules, integrity rules, roman headings, banned vocabulary — is unchanged and binding.
+`docs/offerings-map.md` and the 14-section macrostructure it defined are SUPERSEDED for
+IA purposes by the v3 brief's nav; consult them only as fact references.
+
 ## Tokens
 
 ```css
