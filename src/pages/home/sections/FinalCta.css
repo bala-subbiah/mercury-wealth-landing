@@ -1,0 +1,66 @@
+/* Final CTA — the page's last dark band. One idea, three beats, one action. */
+
+.close {
+  padding-block: var(--space-2xl);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.close__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.close__title {
+  display: flex;
+  flex-direction: column;
+  max-width: 15em;
+  /* Small screens take the floor down so the short beats stay one line each
+     and the staccato still reads as three steps, not six. */
+  font-size: clamp(26px, 7.5vw, 52px);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  color: var(--color-ink-dark);
+}
+
+.close__line {
+  display: block;
+}
+
+/* The staccato graduates into the ground: each line one step quieter. */
+.close__line--2 {
+  color: rgba(230, 232, 228, 0.72);
+}
+
+.close__line--3 {
+  color: rgba(230, 232, 228, 0.5);
+}
+
+.close__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm) var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.close__where {
+  margin-top: var(--space-lg);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  color: var(--color-muted-dark);
+}
+
+@media (min-width: 900px) {
+  .close {
+    padding-block: var(--space-3xl);
+  }
+
+  .close__actions {
+    margin-top: var(--space-xl);
+  }
+}

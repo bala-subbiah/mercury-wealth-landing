@@ -5,9 +5,9 @@ import "./Footer.css";
 /* Site footer — dark navy, serif tagline, plain link columns, contact row.
    Design DNA item 10. No mono tag strips (struck in the 2026-08-13 review). */
 
-// TODO (T2–T6): replace the placeholder tagline with the final one line,
-// tightened from docs/v3-fact-source.md. Serif, one line, no em-dash.
-const TAGLINE = "The advisor's cockpit.";
+// The sitewide tagline, carried verbatim from the audited v2 footer
+// (docs/v3-fact-source.md §1, "one-liners used as taglines").
+const TAGLINE = "See the whole book. Act with governance.";
 
 const YEAR = 2026;
 

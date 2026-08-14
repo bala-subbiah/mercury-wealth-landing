@@ -1,0 +1,97 @@
+/* Facts row — one compact, icon-led band. Cards separate by hairline only
+   (design.md: never shadow), grid caps at 2 columns on this page (Amendment 2
+   §5: grids cap at 3). Compact padding relative to the other bands, per the
+   task's "ONE compact band" instruction. */
+
+.facts {
+  padding-block: var(--space-lg) var(--space-xl);
+}
+
+.facts__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--rule-light);
+}
+
+.facts__item {
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.facts__icon {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  color: var(--color-brass-deep);
+}
+
+.facts__title {
+  margin-top: var(--space-sm);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-ink);
+}
+
+.facts__body {
+  margin-top: var(--space-xs);
+  max-width: 34em;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-muted-light);
+}
+
+.facts__link {
+  color: var(--color-body-light);
+  border-bottom: 1px solid var(--rule-light);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.facts__link:hover {
+  color: var(--color-brass-deep);
+  border-color: var(--color-brass-deep);
+}
+
+.facts__hedge {
+  display: block;
+  margin-top: var(--space-xs);
+  color: var(--color-muted-light);
+  opacity: 0.85;
+}
+
+.facts__mono {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--color-body-light);
+}
+
+@media (min-width: 768px) {
+  .facts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .facts__item {
+    padding: var(--space-lg) 0;
+    border-right: 1px solid transparent;
+  }
+
+  .facts__item:nth-child(odd) {
+    padding-right: var(--space-xl);
+    border-right-color: var(--rule-light);
+  }
+
+  .facts__item:nth-child(even) {
+    padding-left: var(--space-xl);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .facts__link {
+    transition: none;
+  }
+}

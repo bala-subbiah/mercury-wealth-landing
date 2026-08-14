@@ -1,0 +1,30 @@
+/* Shared head treatment for both legal pages (co-located per page rather than
+   shared across folders, per the scaffold's "do not touch other pages'
+   folders" instruction — this file and TermsHead.css are intentionally
+   near-duplicates). */
+
+.legal-head {
+  padding-block: var(--space-2xl) var(--space-lg);
+}
+
+.legal-head__title {
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.legal-head__effective {
+  margin-top: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--color-muted-light);
+}
+
+.legal-head__intro {
+  margin-top: var(--space-md);
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 21px);
+  line-height: 1.5;
+  color: var(--color-ink);
+}

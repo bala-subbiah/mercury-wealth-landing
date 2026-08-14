@@ -1,0 +1,28 @@
+import { DEMO_LINK_PROPS } from "../../../links.ts";
+import "./Hero.css";
+
+/* Cockpit hero — dark, full-bleed, no video on this page (design.md Amendment 2:
+   "Optional simple background treatment... no video on this page"). Headline is
+   the reserved line "Every custodian. One cockpit." (fact source §2, do not
+   reuse elsewhere). No eyebrow, no tag strip — Amendment 2 rule 2. */
+
+export default function Hero() {
+  return (
+    <section className="cockpit-hero band band--navy">
+      <div className="container cockpit-hero__inner">
+        <h1 className="cockpit-hero__title">Every custodian. One cockpit.</h1>
+        <p className="cockpit-hero__sub">
+          Monitor the book, advise the client, execute with governance. Every
+          booking centre on one screen, in your base currency.
+        </p>
+
+        <div className="cockpit-hero__actions">
+          <a className="cockpit-hero__cta" {...DEMO_LINK_PROPS}>
+            Open the live demo
+          </a>
+          <p className="cockpit-hero__caption">NO FORM &middot; NO SIGN-UP &middot; THE REAL PRODUCT</p>
+        </div>
+      </div>
+    </section>
+  );
+}

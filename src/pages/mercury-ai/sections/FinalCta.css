@@ -1,0 +1,77 @@
+/* Final CTA — dark bookend band, centred serif staccato close. */
+
+.mai-cta {
+  padding-block: var(--space-2xl) var(--space-3xl);
+}
+
+.mai-cta__inner {
+  max-width: 620px;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.mai-cta__title {
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.1;
+  color: var(--color-ink-dark);
+}
+
+.mai-cta__sub {
+  margin-top: var(--space-md);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--color-muted-dark);
+}
+
+.mai-cta__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.mai-cta__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  min-height: 44px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  background: var(--color-brass);
+  color: var(--color-navy);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.mai-cta__cta:hover {
+  background: var(--color-brass-bright);
+}
+
+.mai-cta__quiet {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 15px;
+  color: var(--color-muted-dark);
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.mai-cta__quiet:hover {
+  color: var(--color-ink-dark);
+  border-bottom-color: var(--rule-dark);
+}
+
+@media (min-width: 560px) {
+  .mai-cta__actions {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-md);
+  }
+}

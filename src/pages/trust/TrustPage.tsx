@@ -1,12 +1,17 @@
 import Nav from "../../chrome/Nav.tsx";
 import Footer from "../../chrome/Footer.tsx";
+import TrustHero from "./sections/TrustHero.tsx";
+import TrustAnswers from "./sections/TrustAnswers.tsx";
+import TrustStatus from "./sections/TrustStatus.tsx";
+import TrustEvidence from "./sections/TrustEvidence.tsx";
+import TrustContact from "./sections/TrustContact.tsx";
 
-/* Trust — SCAFFOLD ONLY. Sections land in ./sections/ and are composed
-   here, in scroll order, inside <main>. Delete the placeholder band below.
-
-   When this page opens on a dark, full-bleed hero, switch to
-   <Nav overHero current="trust" /> and give the hero
-   padding-top: var(--nav-h) so nothing sits under the bar. */
+/* Trust — the full compliance-officer answer, compressed for the layman
+   (review A5): icon-first claims up front, detail one click away. Paper
+   carries the company's own voice (hero, the six answers, evidence); navy
+   carries the two bookend bands (certifications, final CTA), per
+   design.md Amendment 1's meaning rule and the DNA's "trust band gets its
+   own dark stripe" pattern. Nav is solid (no dark hero on this page). */
 
 export default function TrustPage() {
   return (
@@ -17,11 +22,11 @@ export default function TrustPage() {
       <Nav current="trust" />
 
       <main id="main">
-        <section className="band band--paper" style={{ padding: "var(--space-3xl) 0" }}>
-          <div className="container">
-            <h1>Trust sections land here</h1>
-          </div>
-        </section>
+        <TrustHero />
+        <TrustAnswers />
+        <TrustStatus />
+        <TrustEvidence />
+        <TrustContact />
       </main>
 
       <Footer />

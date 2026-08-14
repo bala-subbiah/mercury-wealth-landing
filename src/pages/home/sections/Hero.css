@@ -1,0 +1,177 @@
+/* Hero — the dark bookend that opens the page.
+   The nav floats over this section, so the hero reserves var(--nav-h) itself. */
+
+.hero {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  min-height: 640px;
+  min-height: 92svh;
+  padding-top: calc(var(--nav-h) + var(--space-lg));
+  padding-bottom: var(--space-xl);
+  isolation: isolate;
+}
+
+/* ---------------------------------------------------------------- media --- */
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* Also the reduced-motion / still-loading state: the footage never carries
+     meaning, so a graded navy field stands in for it with nothing lost. */
+  background:
+    radial-gradient(120% 90% at 78% 12%, rgba(17, 29, 49, 0.9) 0%, rgba(11, 18, 32, 0) 60%),
+    linear-gradient(180deg, var(--color-hero-grad-top) 0%, var(--color-navy) 72%);
+}
+
+.hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Pulled toward the brand ground rather than left as raw footage. */
+  filter: saturate(0.45) contrast(1.08) brightness(0.92);
+}
+
+/* Two directional washes plus a navy tint: the copy side sits at ~95% navy,
+   the skyline reads through on the far side. Text keeps AA either way. */
+.hero__grade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 18, 32, 0.82) 0%,
+      rgba(11, 18, 32, 0.34) 44%,
+      rgba(11, 18, 32, 0.9) 100%
+    ),
+    linear-gradient(
+      100deg,
+      rgba(11, 18, 32, 0.94) 0%,
+      rgba(11, 18, 32, 0.84) 34%,
+      rgba(11, 18, 32, 0.36) 74%,
+      rgba(11, 18, 32, 0.24) 100%
+    ),
+    linear-gradient(0deg, rgba(17, 29, 49, 0.42), rgba(17, 29, 49, 0.42));
+}
+
+/* Small screens put the copy over the middle of the frame: darken evenly. */
+@media (max-width: 767px) {
+  .hero__grade {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(11, 18, 32, 0.88) 0%,
+        rgba(11, 18, 32, 0.64) 38%,
+        rgba(11, 18, 32, 0.94) 100%
+      ),
+      linear-gradient(0deg, rgba(17, 29, 49, 0.48), rgba(17, 29, 49, 0.48));
+  }
+}
+
+/* ---------------------------------------------------------------- copy ---- */
+
+.hero__inner {
+  position: relative;
+}
+
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  max-width: 14em;
+  /* The floor is set by the longest line ("already briefed.") clearing a 320px
+     viewport inside the gutters, so the display never breaks to three lines. */
+  font-size: clamp(37px, 8.6vw, 82px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--color-ink-dark);
+}
+
+.hero__line {
+  display: block;
+}
+
+.hero__sub {
+  max-width: 30em;
+  margin-top: var(--space-md);
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.55;
+  color: var(--color-muted-dark);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.hero__caption {
+  margin-top: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  color: rgba(198, 155, 78, 0.85);
+}
+
+/* ---------------------------------------------------------------- entry --- */
+
+/* One quiet arrival, transform + opacity only. Not a scroll reveal: the hero
+   is above the fold and must never be blank on first paint for long. */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero__title,
+.hero__sub,
+.hero__actions,
+.hero__caption {
+  animation: hero-in var(--dur-slow) var(--ease-out) both;
+}
+
+.hero__sub {
+  animation-delay: 90ms;
+}
+
+.hero__actions {
+  animation-delay: 170ms;
+}
+
+.hero__caption {
+  animation-delay: 240ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title,
+  .hero__sub,
+  .hero__actions,
+  .hero__caption {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* -------------------------------------------------------------- desktop --- */
+
+@media (min-width: 900px) {
+  .hero {
+    min-height: min(88svh, 820px);
+    padding-top: calc(var(--nav-h) + var(--space-xl));
+    padding-bottom: var(--space-2xl);
+  }
+
+  .hero__sub {
+    margin-top: var(--space-lg);
+  }
+}

@@ -1,0 +1,117 @@
+/* Logo marquee — slim navy band directly under the hero, so the dark bookend
+   reads as one surface and the strip sits at the hero's lower edge. */
+
+.marquee {
+  padding-block: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.marquee__inner {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.marquee__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  color: var(--color-muted-dark);
+}
+
+/* Clips the loop and fades both edges so logos arrive and leave, never cut. */
+.marquee__viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-slide 45s linear infinite;
+}
+
+/* Slides exactly one of the three copies, so the frame it lands on is
+   pixel-identical to the frame it left. */
+@keyframes marquee-slide {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-33.3333%, 0, 0);
+  }
+}
+
+.marquee__viewport:hover .marquee__track,
+.marquee__viewport:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__set {
+  display: flex;
+  align-items: center;
+  gap: clamp(40px, 7vw, 88px);
+  padding-right: clamp(40px, 7vw, 88px);
+}
+
+.marquee__item {
+  display: flex;
+  align-items: center;
+}
+
+.marquee__logo {
+  height: 24px;
+  width: auto;
+  max-width: 150px;
+  /* Monochromed to the band; the mark's own colours never appear. */
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.marquee__item:hover .marquee__logo {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .marquee {
+    padding-block: var(--space-lg) var(--space-2xl);
+  }
+
+  .marquee__logo {
+    height: 28px;
+    max-width: 180px;
+  }
+}
+
+/* Reduced motion: one static, wrapped row. The duplicate copies exist only to
+   hide the loop's join, so they go. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .marquee__track {
+    animation: none;
+    width: 100%;
+    transform: none;
+  }
+
+  .marquee__set {
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-xl);
+    padding-right: 0;
+  }
+
+  .marquee__set[aria-hidden="true"] {
+    display: none;
+  }
+}

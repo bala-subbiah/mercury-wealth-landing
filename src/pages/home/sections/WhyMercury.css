@@ -1,0 +1,97 @@
+/* Why Mercury — sticky head left, hairline-separated items right. */
+
+.why {
+  padding-block: var(--space-xl);
+  border-top: 1px solid var(--rule-light);
+}
+
+.why__grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.why__title {
+  font-size: clamp(30px, 5.2vw, 48px);
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.why__sub {
+  margin-top: var(--space-sm);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-muted-light);
+}
+
+.why__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.why__item {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: var(--space-sm);
+  padding-block: var(--space-md);
+}
+
+.why__item + .why__item {
+  border-top: 1px solid var(--rule-light);
+}
+
+.why__icon {
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  color: var(--color-brass-deep);
+}
+
+/* Sans, bold, small: the serif belongs to the sticky head alone here. */
+.why__item-title {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--color-ink);
+}
+
+.why__body {
+  max-width: 34em;
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-muted-light);
+}
+
+@media (min-width: 900px) {
+  .why {
+    padding-block: var(--space-2xl);
+  }
+
+  .why__grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .why__head {
+    position: sticky;
+    top: calc(var(--nav-h) + var(--space-lg));
+  }
+
+  .why__item {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: var(--space-md);
+    padding-block: var(--space-lg);
+  }
+
+  .why__item:first-child {
+    padding-top: 0;
+  }
+
+  .why__icon {
+    width: 28px;
+    height: 28px;
+  }
+}

@@ -1,0 +1,100 @@
+/* Six capabilities — paper ground, 3-col card grid (desktop) -> 2-col
+   (tablet) -> 1-col (mobile). Cards separate by hairline, never shadow. */
+
+.mai-cap {
+  padding-block: var(--space-2xl);
+}
+
+.mai-cap__head {
+  max-width: 640px;
+}
+
+.mai-cap__title {
+  font-size: clamp(30px, 4.2vw, 42px);
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+
+.mai-cap__sub {
+  margin-top: var(--space-sm);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--color-muted-light);
+}
+
+.mai-cap__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.mai-cap__card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg) var(--space-md);
+  background: #fff;
+  border: 1px solid var(--rule-light);
+  border-radius: 6px;
+}
+
+.mai-cap__icon {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  color: var(--color-brass-deep);
+}
+
+.mai-cap__card-title {
+  margin-top: var(--space-md);
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.mai-cap__card-line {
+  margin-top: var(--space-xs);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-body-light);
+}
+
+.mai-cap__card-support {
+  margin-top: var(--space-xs);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-muted-light);
+}
+
+.mai-cap__card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-md);
+  padding-top: 2px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--color-brass-deep);
+}
+
+.mai-cap__arrow {
+  width: 11px;
+  height: 11px;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.mai-cap__card-link:hover .mai-cap__arrow {
+  transform: translate(1px, -1px);
+}
+
+@media (min-width: 640px) {
+  .mai-cap__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .mai-cap__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

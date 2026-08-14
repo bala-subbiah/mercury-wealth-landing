@@ -1,0 +1,84 @@
+/* How it works — 3-step diagram. Horizontal with a connecting hairline on
+   desktop, stacked vertical on mobile. Step numbers are mono (product
+   idiom), everything else is body sans. */
+
+.mai-how {
+  padding-block: var(--space-2xl);
+}
+
+.mai-how__head {
+  max-width: 640px;
+}
+
+.mai-how__title {
+  font-size: clamp(30px, 4.2vw, 42px);
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+
+.mai-how__sub {
+  margin-top: var(--space-sm);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--color-muted-light);
+}
+
+.mai-how__steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+}
+
+.mai-how__step {
+  position: relative;
+}
+
+.mai-how__n {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-brass-deep);
+}
+
+.mai-how__step-label {
+  margin-top: var(--space-xs);
+  font-size: 21px;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.mai-how__step-body {
+  margin-top: var(--space-xs);
+  max-width: 34em;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-muted-light);
+}
+
+.mai-how__connector {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .mai-how__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .mai-how__step {
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .mai-how__n {
+    position: absolute;
+    top: calc(var(--space-lg) * -1 + 1px);
+    left: 0;
+    padding: 0 4px 0 0;
+    background: var(--color-paper);
+    transform: translateY(-50%);
+  }
+}

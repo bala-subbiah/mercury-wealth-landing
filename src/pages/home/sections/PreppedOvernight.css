@@ -1,0 +1,189 @@
+/* Prepped overnight — paper band, text beside a simplified product fragment. */
+
+.prepped {
+  padding-block: var(--space-xl) var(--space-2xl);
+}
+
+.prepped__grid {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.prepped__title {
+  font-size: clamp(30px, 5.2vw, 46px);
+  line-height: 1.12;
+  color: var(--color-ink);
+}
+
+.prepped__sub {
+  margin-top: var(--space-md);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.6;
+  color: var(--color-muted-light);
+}
+
+/* ------------------------------------------------------------- fragment --- */
+
+/* The briefing panel. A tinted plane on paper, hairline only: no shadow does
+   the separating. */
+.brief {
+  padding: var(--space-md);
+  border: 1px solid var(--rule-light);
+  border-radius: 8px;
+  background: rgba(27, 37, 54, 0.035);
+}
+
+.brief__stamp {
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--rule-light);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  color: var(--color-muted-light);
+}
+
+/* All three cards share one grid cell, so the panel is as tall as the tallest
+   card and nothing reflows as they advance. */
+.brief__stack {
+  display: grid;
+  margin-top: var(--space-sm);
+}
+
+.brief__stack > .bcard {
+  grid-area: 1 / 1;
+}
+
+.bcard {
+  padding: 18px 20px;
+  border: 1px solid var(--rule-light);
+  border-radius: 5px;
+  background: #ffffff;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.bcard.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.bcard__chip {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+}
+
+/* Luminous, but only inside this fragment, and mixed toward ink so a 10px
+   label still clears AA on the card's white ground. */
+.bcard--rose .bcard__chip {
+  background: color-mix(in srgb, var(--ui-rose) 14%, transparent);
+  color: color-mix(in srgb, var(--ui-rose) 55%, var(--color-ink));
+}
+
+.bcard--amber .bcard__chip {
+  background: color-mix(in srgb, var(--ui-amber) 16%, transparent);
+  color: color-mix(in srgb, var(--ui-amber) 55%, var(--color-ink));
+}
+
+.bcard--indigo .bcard__chip {
+  background: color-mix(in srgb, var(--ui-indigo) 12%, transparent);
+  color: color-mix(in srgb, var(--ui-indigo) 55%, var(--color-ink));
+}
+
+.bcard__text {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-body-light);
+}
+
+.bcard__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-brass-deep);
+}
+
+.bcard__arrow {
+  width: 14px;
+  height: 10px;
+}
+
+/* ----------------------------------------------------------------- dots --- */
+
+.brief__dots {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: var(--space-xs);
+  margin-left: -10px;
+}
+
+.brief__dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.brief__dot-mark {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--color-muted-light);
+  opacity: 0.35;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.brief__dot.is-current .brief__dot-mark,
+.brief__dot:hover .brief__dot-mark {
+  opacity: 1;
+}
+
+/* -------------------------------------------------- reduced motion / md --- */
+
+.brief__stack--static {
+  gap: var(--space-sm);
+}
+
+.brief__stack--static > .bcard {
+  grid-area: auto;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+@media (min-width: 900px) {
+  .prepped {
+    padding-block: var(--space-2xl);
+  }
+
+  .prepped__grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: var(--space-2xl);
+  }
+
+  .brief {
+    padding: var(--space-lg);
+  }
+}

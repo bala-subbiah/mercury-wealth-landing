@@ -1,12 +1,20 @@
 import Nav from "../../chrome/Nav.tsx";
 import Footer from "../../chrome/Footer.tsx";
+import Hero from "./sections/Hero.tsx";
+import LogoMarquee from "./sections/LogoMarquee.tsx";
+import PreppedOvernight from "./sections/PreppedOvernight.tsx";
+import AskMercury from "./sections/AskMercury.tsx";
+import WhyMercury from "./sections/WhyMercury.tsx";
+import TrustBand from "./sections/TrustBand.tsx";
+import FinalCta from "./sections/FinalCta.tsx";
 
-/* Home — SCAFFOLD ONLY. Sections land in ./sections/ and are composed
-   here, in scroll order, inside <main>. Delete the placeholder band below.
+/* Home — sells the offer and nothing more. The product pages carry the depth;
+   this page has to survive a thirty-second read by someone who has never heard
+   the word "custodian".
 
-   When this page opens on a dark, full-bleed hero, switch to
-   <Nav overHero current="home" /> and give the hero
-   padding-top: var(--nav-h) so nothing sits under the bar. */
+   Banding runs dark → light → dark: the hero and the logo strip open on navy,
+   the explaining middle happens in daylight, and the trust band and close
+   return to the product's own ground. */
 
 export default function HomePage() {
   return (
@@ -14,14 +22,16 @@ export default function HomePage() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Nav current="home" />
+      <Nav overHero current="home" />
 
       <main id="main">
-        <section className="band band--paper" style={{ padding: "var(--space-3xl) 0" }}>
-          <div className="container">
-            <h1>Home sections land here</h1>
-          </div>
-        </section>
+        <Hero />
+        <LogoMarquee />
+        <PreppedOvernight />
+        <AskMercury />
+        <WhyMercury />
+        <TrustBand />
+        <FinalCta />
       </main>
 
       <Footer />

@@ -1,0 +1,92 @@
+/* Evidence — text left, small filing fragment right. Calm, no product chrome
+   beyond a folder card and four labelled chips. */
+
+.trust-evidence {
+  padding: var(--space-xl) 0 var(--space-2xl);
+}
+
+.trust-evidence__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.trust-evidence__title {
+  font-size: clamp(24px, 3.6vw, 32px);
+  line-height: 1.2;
+  color: var(--color-ink);
+  max-width: 14em;
+}
+
+.trust-evidence__body {
+  margin-top: var(--space-sm);
+  max-width: var(--measure);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-muted-light);
+}
+
+.trust-evidence__fragment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.trust-evidence__chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.trust-evidence__chip {
+  padding: 8px 12px;
+  border: 1px solid var(--rule-light);
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-body-light);
+}
+
+.trust-evidence__arrow {
+  width: 20px;
+  height: 32px;
+  color: var(--color-muted-light);
+}
+
+.trust-evidence__arrow svg {
+  width: 100%;
+  height: 100%;
+}
+
+.trust-evidence__folder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  padding: 20px;
+  border: 1px solid var(--rule-light);
+  border-radius: 6px;
+  background: var(--color-navy);
+}
+
+.trust-evidence__folder-caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: var(--color-brass);
+}
+
+@media (min-width: 900px) {
+  .trust-evidence__grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+}

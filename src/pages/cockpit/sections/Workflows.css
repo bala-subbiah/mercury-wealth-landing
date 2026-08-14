@@ -1,0 +1,81 @@
+/* The six workflows — paper ground, 2-col card grid, hairline separation
+   (no shadows, per design.md: panels/cards separate by step or rule, never
+   shadow, and that discipline holds for marketing cards too). */
+
+.workflows {
+  padding-block: var(--space-2xl) var(--space-2xl);
+}
+
+.workflows__head {
+  max-width: 640px;
+}
+
+.workflows__title {
+  font-size: clamp(30px, 4.2vw, 42px);
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+
+.workflows__sub {
+  margin-top: var(--space-sm);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--color-muted-light);
+}
+
+.workflows__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--rule-light);
+}
+
+.workflows__card {
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.workflows__icon {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  color: var(--color-brass-deep);
+}
+
+.workflows__card-title {
+  margin-top: var(--space-md);
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.workflows__card-body {
+  margin-top: var(--space-xs);
+  max-width: 40em;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--color-muted-light);
+}
+
+@media (min-width: 768px) {
+  .workflows__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-xl);
+  }
+
+  /* Column rule between the two cards in each row; the shared top/bottom
+     rules keep doing the row separation. */
+  .workflows__card {
+    border-right: 1px solid transparent;
+    padding: var(--space-xl) 0;
+  }
+
+  .workflows__card:nth-child(odd) {
+    padding-right: var(--space-xl);
+    border-right-color: var(--rule-light);
+  }
+
+  .workflows__card:nth-child(even) {
+    padding-left: var(--space-xl);
+  }
+}

@@ -1,0 +1,60 @@
+/* Who uses it — 2x2 card grid, hairline separated, no shadows. */
+
+.personas {
+  padding-block: var(--space-2xl);
+}
+
+.personas__title {
+  max-width: 20em;
+  font-size: clamp(28px, 3.8vw, 38px);
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.personas__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--rule-light);
+}
+
+.personas__card {
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.personas__role {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+
+.personas__benefit {
+  margin-top: 10px;
+  max-width: 30em;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-muted-light);
+}
+
+@media (min-width: 640px) {
+  .personas__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-xl);
+  }
+
+  .personas__card {
+    border-right: 1px solid transparent;
+  }
+
+  .personas__card:nth-child(odd) {
+    padding-right: var(--space-xl);
+    border-right-color: var(--rule-light);
+  }
+
+  .personas__card:nth-child(even) {
+    padding-left: var(--space-xl);
+  }
+}

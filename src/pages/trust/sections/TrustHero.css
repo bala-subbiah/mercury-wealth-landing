@@ -1,0 +1,26 @@
+/* Trust hero — compact, one screen, no scroll cue needed. */
+
+.trust-hero {
+  padding: var(--space-2xl) 0 var(--space-xl);
+}
+
+.trust-hero__title {
+  font-size: clamp(32px, 5.4vw, 52px);
+  line-height: 1.12;
+  color: var(--color-ink);
+  max-width: 14em;
+}
+
+.trust-hero__lead {
+  margin-top: var(--space-md);
+  max-width: var(--measure);
+  font-size: clamp(16px, 1.9vw, 19px);
+  line-height: 1.55;
+  color: var(--color-muted-light);
+}
+
+@media (min-width: 768px) {
+  .trust-hero {
+    padding: var(--space-3xl) 0 var(--space-xl);
+  }
+}

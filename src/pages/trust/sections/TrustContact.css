@@ -1,0 +1,63 @@
+/* Final CTA band — dark, centred, one relentless CTA. */
+
+.trust-contact {
+  padding: var(--space-2xl) 0 var(--space-3xl);
+}
+
+.trust-contact__inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trust-contact__title {
+  font-size: clamp(28px, 4.6vw, 40px);
+  line-height: 1.18;
+  color: var(--color-ink-dark);
+  max-width: 16em;
+}
+
+.trust-contact__body {
+  margin-top: var(--space-md);
+  max-width: var(--measure);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-muted-dark);
+}
+
+.trust-contact__mail {
+  color: var(--color-brass);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.trust-contact__mail:hover {
+  color: var(--color-brass-bright);
+}
+
+.trust-contact__note {
+  margin-top: var(--space-sm);
+  font-size: 14px;
+  color: var(--color-muted-dark);
+}
+
+.trust-contact__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-lg);
+  padding: 15px 30px;
+  border-radius: 999px;
+  background: var(--color-brass);
+  color: var(--color-navy);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.trust-contact__cta:hover {
+  background: var(--color-brass-bright);
+}

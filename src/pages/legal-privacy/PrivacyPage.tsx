@@ -1,12 +1,11 @@
 import Nav from "../../chrome/Nav.tsx";
 import Footer from "../../chrome/Footer.tsx";
+import PrivacyHead from "./sections/PrivacyHead.tsx";
+import PrivacyBody from "./sections/PrivacyBody.tsx";
 
-/* Privacy — SCAFFOLD ONLY. Sections land in ./sections/ and are composed
-   here, in scroll order, inside <main>. Delete the placeholder band below.
-
-   When this page opens on a dark, full-bleed hero, switch to
-   <Nav overHero current="privacy" /> and give the hero
-   padding-top: var(--nav-h) so nothing sits under the bar. */
+/* Privacy — a prose page, carried from v2 (git show refs/heads/v2:src/legal/
+   PrivacyPage.tsx) and restyled into the v3 system. Static throughout: no
+   Reveal on legal pages. Nav is solid; the page never opens on a dark hero. */
 
 export default function PrivacyPage() {
   return (
@@ -17,11 +16,8 @@ export default function PrivacyPage() {
       <Nav current="privacy" />
 
       <main id="main">
-        <section className="band band--paper" style={{ padding: "var(--space-3xl) 0" }}>
-          <div className="container">
-            <h1>Privacy sections land here</h1>
-          </div>
-        </section>
+        <PrivacyHead />
+        <PrivacyBody />
       </main>
 
       <Footer />

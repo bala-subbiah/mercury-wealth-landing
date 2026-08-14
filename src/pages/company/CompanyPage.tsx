@@ -1,12 +1,15 @@
 import Nav from "../../chrome/Nav.tsx";
 import Footer from "../../chrome/Footer.tsx";
+import Head from "./sections/Head.tsx";
+import FounderStatement from "./sections/FounderStatement.tsx";
+import FactsRow from "./sections/FactsRow.tsx";
+import WorkingWith from "./sections/WorkingWith.tsx";
+import TalkToUs from "./sections/TalkToUs.tsx";
 
-/* Company — SCAFFOLD ONLY. Sections land in ./sections/ and are composed
-   here, in scroll order, inside <main>. Delete the placeholder band below.
-
-   When this page opens on a dark, full-bleed hero, switch to
-   <Nav overHero current="company" /> and give the hero
-   padding-top: var(--nav-h) so nothing sits under the bar. */
+/* Company — quote + facts, not essays (team feedback A6). The page opens on
+   paper (Head), stays on paper through the founder statement, the compact
+   facts row and the logo row, then closes on the one navy bookend
+   (TalkToUs). Nav is solid: this page never opens on a dark hero. */
 
 export default function CompanyPage() {
   return (
@@ -17,11 +20,11 @@ export default function CompanyPage() {
       <Nav current="company" />
 
       <main id="main">
-        <section className="band band--paper" style={{ padding: "var(--space-3xl) 0" }}>
-          <div className="container">
-            <h1>Company sections land here</h1>
-          </div>
-        </section>
+        <Head />
+        <FounderStatement />
+        <FactsRow />
+        <WorkingWith />
+        <TalkToUs />
       </main>
 
       <Footer />

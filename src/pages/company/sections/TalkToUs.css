@@ -1,0 +1,98 @@
+/* Talk to us — navy final band. Brass reserved for the primary CTA only
+   (hard rule 2: <=5% footprint); the secondary path and the plain links stay
+   ink-dark with an underline, never a second flood of brass. */
+
+.co-talk {
+  padding-block: var(--space-2xl) var(--space-2xl);
+}
+
+.co-talk__title {
+  font-size: clamp(30px, 4.4vw, 44px);
+  line-height: 1.15;
+  color: var(--color-ink-dark);
+}
+
+.co-talk__body {
+  margin-top: var(--space-md);
+  max-width: var(--measure);
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.55;
+  color: var(--color-muted-dark);
+}
+
+.co-talk__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.co-talk__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  min-height: 44px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: var(--color-brass);
+  color: var(--color-navy);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.co-talk__cta:hover {
+  background: var(--color-brass-bright);
+}
+
+.co-talk__secondary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-bottom: 2px;
+  color: var(--color-ink-dark);
+  border-bottom: 1px solid var(--rule-dark);
+  font-size: 16px;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.co-talk__secondary:hover {
+  color: var(--color-brass);
+  border-color: var(--color-brass);
+}
+
+.co-talk__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.co-talk__link {
+  font-size: 14.5px;
+  color: var(--color-muted-dark);
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.co-talk__link:hover {
+  color: var(--color-ink-dark);
+  border-color: var(--rule-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .co-talk__cta,
+  .co-talk__secondary,
+  .co-talk__link {
+    transition: none;
+  }
+}

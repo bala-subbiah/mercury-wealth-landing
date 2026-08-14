@@ -1,0 +1,73 @@
+/* Working with — quiet static logo row on paper. Source SVGs carry their own
+   fill colors, so a brightness(0) filter flattens them to a single dark
+   silhouette at reduced opacity (the "monochrome" treatment on a light
+   ground); full opacity on hover/focus. No motion beyond the opacity step. */
+
+.co-working {
+  padding-block: var(--space-lg) var(--space-2xl);
+}
+
+.co-working__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.co-working__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--color-muted-light);
+}
+
+.co-working__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg) var(--space-xl);
+  width: 100%;
+}
+
+.co-working__logo {
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0);
+  opacity: 0.6;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.co-working__logo:hover,
+.co-working__logo:focus-visible {
+  opacity: 1;
+}
+
+.co-logo--uob {
+  height: 20px;
+}
+
+.co-logo--lizen {
+  height: 28px;
+}
+
+.co-logo--cyberport {
+  height: 18px;
+}
+
+.co-logo--solomon {
+  height: 17px;
+}
+
+@media (max-width: 480px) {
+  .co-working__row {
+    gap: var(--space-md) var(--space-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .co-working__logo {
+    transition: none;
+  }
+}

@@ -1,0 +1,28 @@
+/* Co-located near-duplicate of legal-privacy/sections/PrivacyHead.css — kept
+   separate per the scaffold's per-page folder isolation. */
+
+.legal-head {
+  padding-block: var(--space-2xl) var(--space-lg);
+}
+
+.legal-head__title {
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.legal-head__effective {
+  margin-top: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--color-muted-light);
+}
+
+.legal-head__intro {
+  margin-top: var(--space-md);
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 21px);
+  line-height: 1.5;
+  color: var(--color-ink);
+}
