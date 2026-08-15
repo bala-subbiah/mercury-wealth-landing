@@ -3,14 +3,19 @@
    sits over it so the display type is plain white on night, not ink on paper.
    The nav floats over this section, so the hero reserves var(--nav-h) itself. */
 
+/* The band fills the viewport exactly once: `min-height`, never `height`, so a
+   short window (or a long headline, or a large font size) makes the hero grow
+   rather than making the copy collide with the strip at its foot. 100vh is the
+   floor for engines without svh; svh wins where it exists, so a phone's
+   retracting browser chrome can't push the strip off the screen. */
 .hero {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   overflow: hidden;
-  min-height: 640px;
-  min-height: 92svh;
+  min-height: 100vh;
+  min-height: 100svh;
   padding-top: calc(var(--nav-h) + var(--space-lg));
-  padding-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
   isolation: isolate;
 }
 
@@ -64,12 +69,24 @@
 
 /* ---------------------------------------------------------------- copy ---- */
 
+/* Takes the whole space the strip leaves and centres the copy inside it. It may
+   grow past that space but never shrink under it (flex-basis auto, shrink 0),
+   which is what keeps the gap below the CTA honest on short viewports. */
 .hero__inner {
   position: relative;
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
+}
+
+/* The strip's own floor: the copy above can never come closer than this. */
+.hero-logos {
+  position: relative;
+  flex: none;
+  margin-top: var(--space-xl);
 }
 
 .hero__title {
@@ -132,7 +149,8 @@
 
 .hero__title,
 .hero__sub,
-.hero__actions {
+.hero__actions,
+.hero-logos {
   animation: hero-in var(--dur-slow) var(--ease-out) both;
 }
 
@@ -144,10 +162,15 @@
   animation-delay: 170ms;
 }
 
+.hero-logos {
+  animation-delay: 260ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero__title,
   .hero__sub,
-  .hero__actions {
+  .hero__actions,
+  .hero-logos {
     animation: none;
     opacity: 1;
     transform: none;
@@ -158,9 +181,8 @@
 
 @media (min-width: 900px) {
   .hero {
-    min-height: min(88svh, 820px);
     padding-top: calc(var(--nav-h) + var(--space-xl));
-    padding-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
   }
 
   /* On wide viewports the copy sits centered, so the second wash is a

@@ -22,15 +22,23 @@
   padding-bottom: var(--space-xl);
 }
 
+/* Same live-type wordmark as the nav (see Nav.css), one step larger because it
+   is the footer's brand line rather than a bar item. */
 .footer__wordmark {
   display: inline-block;
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 23px;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 24px;
   line-height: 1;
-  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
   color: var(--color-ink-dark);
   transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.footer__wordmark .wordmark {
+  display: inline-block;
+  padding-right: 0.05em;
 }
 
 .footer__wordmark:hover {

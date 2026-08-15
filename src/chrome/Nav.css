@@ -79,16 +79,30 @@
 
 /* ------------------------------------------------------------ wordmark -- */
 
+/* The MERCURY wordmark is set in live type, not shipped as art: Plus Jakarta
+   Sans at the top of its variable range (800 — the logo's 900 is outside the
+   axis), uppercase, tracked -0.05em. It therefore inherits the tone's ink,
+   scales with the reader's zoom and never loads a second asset. The trailing
+   0.05em pad gives the negative tracking back to the final Y so it can't be
+   clipped by the inline box. */
 .nav__wordmark {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 23px;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
   line-height: 1;
   color: var(--nav-ink);
   white-space: nowrap;
   margin-right: auto;
   transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.nav__wordmark .wordmark {
+  display: inline-block;
+  padding-right: 0.05em;
 }
 
 .nav__wordmark:hover {

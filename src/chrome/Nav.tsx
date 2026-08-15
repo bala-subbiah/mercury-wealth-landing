@@ -141,8 +141,13 @@ export default function Nav({ overHero = false, tone = "dark", current }: NavPro
     <>
       <header className={classes}>
         <nav className="nav__bar" aria-label="Main">
-          <a className="nav__wordmark" href={ROUTES.home} aria-current={ariaCurrent("home")}>
-            Mercury
+          <a
+            className="nav__wordmark"
+            href={ROUTES.home}
+            aria-label="Mercury home"
+            aria-current={ariaCurrent("home")}
+          >
+            <span className="wordmark">Mercury</span>
           </a>
 
           <div className="nav__links">

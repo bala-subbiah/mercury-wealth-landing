@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DEMO_BOOKING_MAILTO } from "../../../links.ts";
+import HeroLogos from "./HeroLogos.tsx";
 import "./home-cta.css";
 import "./Hero.css";
 
@@ -12,7 +13,11 @@ import "./Hero.css";
    is aria-hidden and simply not rendered when the reader asks for reduced
    motion. The midnight ground beneath it is the static fallback, which is also
    what shows while the file is still loading — text contrast therefore never
-   depends on the video having arrived. */
+   depends on the video having arrived.
+
+   The band fills the viewport (owner-directed): copy centred in the space the
+   nav leaves, the partner strip riding the bottom edge, so the fold lands
+   exactly where this section ends. */
 
 function prefersReducedMotion(): boolean {
   return (
@@ -60,6 +65,8 @@ export default function Hero() {
           </a>
         </div>
       </div>
+
+      <HeroLogos />
     </section>
   );
 }

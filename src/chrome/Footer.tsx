@@ -16,8 +16,8 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
-          <a className="footer__wordmark" href={ROUTES.home}>
-            Mercury
+          <a className="footer__wordmark" href={ROUTES.home} aria-label="Mercury home">
+            <span className="wordmark">Mercury</span>
           </a>
           <p className="footer__tagline">{TAGLINE}</p>
 

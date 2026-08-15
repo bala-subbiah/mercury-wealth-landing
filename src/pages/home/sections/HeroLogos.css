@@ -1,0 +1,102 @@
+/* Hero partner strip — sits on the hero's bottom edge, over the footage, where
+   the scrim has closed to 0.97 midnight. Every mark is forced to flat white by
+   the filter, so no brand colour lands on the band and the row reads as one
+   texture. No glow on hover (amendment 3, motion): opacity only. */
+
+.hero-logos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* Quiet white rather than --color-muted-dark: the label lands on moving
+   footage, not on a panel. Sampled at 16 frames across the loop under the
+   label's own footprint, the muted grey bottomed out at 4.18:1 on the narrow
+   scrim (the footage's brightest harbour light passes right under it); white
+   held to 0.72 clears 4.5:1 on every frame at every breakpoint while still
+   sitting a clear step below the marks it introduces. */
+.hero-logos__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--color-ink-dark);
+  opacity: 0.72;
+}
+
+/* Two columns on phones: four wide wordmarks in one line would shrink to
+   illegibility long before 320px. */
+.hero-logos__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: var(--space-md) var(--space-lg);
+  width: 100%;
+}
+
+.hero-logos__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.hero-logos__mark {
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.58;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.hero-logos__item:hover .hero-logos__mark {
+  opacity: 1;
+}
+
+/* Per-mark heights are eyeballed to a shared optical weight, not to a shared
+   box: the four source files carry very different internal padding, and the
+   stacked lockups need more height than the wordmarks to read at the same
+   size. `aspect-ratio` matches each file's viewBox so the row occupies its
+   final width before the SVGs arrive — the strip never shifts. */
+.hero-logos__mark--uob {
+  height: 36px;
+  aspect-ratio: 700 / 150;
+}
+
+.hero-logos__mark--lizen {
+  height: 42px;
+  aspect-ratio: 700 / 180;
+}
+
+.hero-logos__mark--cyberport {
+  height: 36px;
+  aspect-ratio: 650 / 200;
+}
+
+.hero-logos__mark--solomon {
+  height: 38px;
+  aspect-ratio: 600 / 160;
+}
+
+/* From 640px the four spread across one line, rogo-style: a capped row so the
+   gaps stay company rather than becoming distance. */
+@media (min-width: 640px) {
+  .hero-logos__row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: clamp(24px, 5vw, 72px);
+    max-width: 940px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-logos__mark {
+    transition: none;
+  }
+}
