@@ -35,11 +35,62 @@
   border-bottom: 1px solid var(--rule-light);
 }
 
+/* ----------------------------------------------------------------- icons -- */
+
+/* Wave 2: the icons draw themselves in as their card reveals, ~70ms apart
+   down the grid. Deliberately quiet — the headline is the point, the icon is
+   seasoning. Strokes carrying .wf-draw also carry pathLength="1", which
+   normalises every path to a length of 1 so a single dash rule draws all of
+   them; the solid dots and the one intentionally dashed stroke are excluded
+   and fade instead. Both end states are the icon exactly as it was drawn
+   before this change. */
+
 .workflows__icon {
   display: inline-flex;
   width: 32px;
   height: 32px;
   color: var(--color-ink);
+}
+
+.workflows__card:nth-child(1) { --icon-delay: 120ms; }
+.workflows__card:nth-child(2) { --icon-delay: 190ms; }
+.workflows__card:nth-child(3) { --icon-delay: 260ms; }
+.workflows__card:nth-child(4) { --icon-delay: 330ms; }
+.workflows__card:nth-child(5) { --icon-delay: 400ms; }
+.workflows__card:nth-child(6) { --icon-delay: 470ms; }
+
+.workflows__icon .wf-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 700ms var(--ease-out) var(--icon-delay, 0ms);
+}
+
+.workflows__card.is-shown .workflows__icon .wf-draw {
+  stroke-dashoffset: 0;
+}
+
+.workflows__icon svg > :not(.wf-draw) {
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out)
+    calc(var(--icon-delay, 0ms) + 280ms);
+}
+
+.workflows__card.is-shown .workflows__icon svg > :not(.wf-draw) {
+  opacity: 1;
+}
+
+/* The finished icon, immediately. */
+@media (prefers-reduced-motion: reduce) {
+  .workflows__icon .wf-draw {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .workflows__icon svg > :not(.wf-draw) {
+    opacity: 1;
+    transition: none;
+  }
 }
 
 .workflows__card-title {

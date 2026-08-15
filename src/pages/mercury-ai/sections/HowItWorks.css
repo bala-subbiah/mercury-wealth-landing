@@ -1,6 +1,16 @@
 /* How it works — 3-step diagram. Horizontal with a connecting hairline on
    desktop, stacked vertical on mobile. Step numbers are mono (product
-   idiom), everything else is body sans. */
+   idiom), everything else is body sans.
+
+   Wave 2: the three steps arrive as a relay, 400ms apart, ~1.55s in total.
+   Per step: the number settles in, its hairline draws left to right, then
+   the label and body arrive behind it. Transform and opacity only.
+
+   The hairline used to be the step's `border-top`. It is now a positioned
+   element sitting exactly where that border was (the border survives as
+   `transparent`, so every box and the number's offset are unchanged) —
+   an element can be drawn with scaleX; a border cannot. The resolved
+   appearance is identical to before. */
 
 .mai-how {
   padding-block: var(--space-2xl);
@@ -34,20 +44,70 @@
   position: relative;
 }
 
+/* The relay clock. Each step reads 400ms after the one before it. */
+.mai-how__step:nth-child(1) { --step-delay: 0ms; }
+.mai-how__step:nth-child(2) { --step-delay: 400ms; }
+.mai-how__step:nth-child(3) { --step-delay: 800ms; }
+
+/* --------------------------------------------------------------- number -- */
+
+/* The lift and the settle are held in custom properties so the desktop rule
+   below can compose them with its own translateY(-50%) without either
+   overwriting the other. */
 .mai-how__n {
+  --n-lift: 8px;
+  --n-settle: 0.94;
   display: inline-block;
   font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: 0.18em;
   font-variant-numeric: tabular-nums;
   color: var(--color-ink);
+  opacity: 0;
+  transform: translateY(var(--n-lift)) scale(var(--n-settle));
+  transition:
+    opacity var(--dur-med) var(--ease-out) var(--step-delay, 0ms),
+    transform var(--dur-med) var(--ease-out) var(--step-delay, 0ms);
 }
+
+.mai-how__steps.is-relay .mai-how__n {
+  --n-lift: 0px;
+  --n-settle: 1;
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------- hairline -- */
+
+.mai-how__rule {
+  display: none;
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule-light);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-med) var(--ease-out)
+    calc(var(--step-delay, 0ms) + 160ms);
+}
+
+.mai-how__steps.is-relay .mai-how__rule {
+  transform: scaleX(1);
+}
+
+/* ------------------------------------------------------- label and body -- */
 
 .mai-how__step-label {
   margin-top: var(--space-xs);
   font-size: 21px;
   line-height: 1.25;
   color: var(--color-ink);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--dur-med) var(--ease-out) calc(var(--step-delay, 0ms) + 240ms),
+    transform var(--dur-med) var(--ease-out) calc(var(--step-delay, 0ms) + 240ms);
 }
 
 .mai-how__step-body {
@@ -56,10 +116,42 @@
   font-size: 15px;
   line-height: 1.55;
   color: var(--color-muted-light);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--dur-med) var(--ease-out) calc(var(--step-delay, 0ms) + 300ms),
+    transform var(--dur-med) var(--ease-out) calc(var(--step-delay, 0ms) + 300ms);
 }
 
-.mai-how__connector {
-  display: none;
+.mai-how__steps.is-relay .mai-how__step-label,
+.mai-how__steps.is-relay .mai-how__step-body {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------- reduced motion -- */
+
+/* The finished diagram, immediately: three numbered steps, three drawn
+   rules, all copy present. No staged states. */
+@media (prefers-reduced-motion: reduce) {
+  .mai-how__n {
+    --n-lift: 0px;
+    --n-settle: 1;
+    opacity: 1;
+    transition: none;
+  }
+
+  .mai-how__rule {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  .mai-how__step-label,
+  .mai-how__step-body {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 @media (min-width: 900px) {
@@ -70,7 +162,13 @@
 
   .mai-how__step {
     padding-top: var(--space-lg);
-    border-top: 1px solid var(--rule-light);
+    /* Transparent, not removed: it keeps the box metrics and the number's
+       offset exactly as they were when it carried the rule. */
+    border-top: 1px solid transparent;
+  }
+
+  .mai-how__rule {
+    display: block;
   }
 
   .mai-how__n {
@@ -79,6 +177,6 @@
     left: 0;
     padding: 0 4px 0 0;
     background: var(--color-paper);
-    transform: translateY(-50%);
+    transform: translateY(calc(-50% + var(--n-lift))) scale(var(--n-settle));
   }
 }

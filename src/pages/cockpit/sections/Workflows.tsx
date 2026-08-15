@@ -5,7 +5,16 @@ import "./Workflows.css";
 /* The six workflows — fact source §2, `WorkflowCards.tsx`. Headlines and body
    copy are verbatim (they survived the review); only the mono tag-strip
    captions under each card were struck, and the section eyebrow is dropped
-   per Amendment 2 (no eyebrows/tag strips as section furniture). */
+   per Amendment 2 (no eyebrows/tag strips as section furniture).
+
+   Wave 2: each card's icon draws itself in as the card reveals, staggered
+   ~70ms down the grid. Seasoning, not a show — the copy is what the section
+   is for. Strokes carry `pathLength={1}` and the class below so one CSS rule
+   can draw any of them regardless of their real length; the two elements
+   that would fight it (the solid dots, and the deliberately dashed line in
+   the fifth icon) are excluded and simply fade with their card. */
+
+const DRAW = "wf-draw";
 
 type Workflow = {
   icon: ReactNode;
@@ -23,13 +32,16 @@ const ICON_PROPS = {
   "aria-hidden": true,
 };
 
+/* Applied to every stroke that should be drawn rather than faded. */
+const DRAW_PROPS = { className: DRAW, pathLength: 1 };
+
 const WORKFLOWS: Workflow[] = [
   {
     icon: (
       <svg {...ICON_PROPS}>
-        <path d="M6 8a2 2 0 0 1 2-2h9v20H8a2 2 0 0 1-2-2Z" />
-        <path d="M17 6h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7" />
-        <path d="M11 10h4M11 14h4" />
+        <path {...DRAW_PROPS} d="M6 8a2 2 0 0 1 2-2h9v20H8a2 2 0 0 1-2-2Z" />
+        <path {...DRAW_PROPS} d="M17 6h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7" />
+        <path {...DRAW_PROPS} d="M11 10h4M11 14h4" />
         <circle cx="24" cy="10" r="1.4" fill="currentColor" stroke="none" />
       </svg>
     ),
@@ -39,9 +51,9 @@ const WORKFLOWS: Workflow[] = [
   {
     icon: (
       <svg {...ICON_PROPS}>
-        <path d="M5 22c5-2 6-13 11-15s7 8 11 6" />
+        <path {...DRAW_PROPS} d="M5 22c5-2 6-13 11-15s7 8 11 6" />
         <circle cx="21.5" cy="12" r="2" fill="currentColor" stroke="none" />
-        <path d="M4 26h24" />
+        <path {...DRAW_PROPS} d="M4 26h24" />
       </svg>
     ),
     headline: "Drift finds you. Not the reverse.",
@@ -50,9 +62,9 @@ const WORKFLOWS: Workflow[] = [
   {
     icon: (
       <svg {...ICON_PROPS}>
-        <path d="M9 5h10l6 6v16H9Z" />
-        <path d="M19 5v6h6" />
-        <path d="M13 16l2 2 5-5" />
+        <path {...DRAW_PROPS} d="M9 5h10l6 6v16H9Z" />
+        <path {...DRAW_PROPS} d="M19 5v6h6" />
+        <path {...DRAW_PROPS} d="M13 16l2 2 5-5" />
       </svg>
     ),
     headline: "From flagged to drafted, without slides.",
@@ -61,8 +73,8 @@ const WORKFLOWS: Workflow[] = [
   {
     icon: (
       <svg {...ICON_PROPS}>
-        <path d="M16 4 27 9v8c0 7-5 10.5-11 13-6-2.5-11-6-11-13V9Z" />
-        <path d="M11.5 16.2l3 3 6-6.4" />
+        <path {...DRAW_PROPS} d="M16 4 27 9v8c0 7-5 10.5-11 13-6-2.5-11-6-11-13V9Z" />
+        <path {...DRAW_PROPS} d="M11.5 16.2l3 3 6-6.4" />
       </svg>
     ),
     headline: "Approvals stop living in inboxes.",
@@ -71,8 +83,8 @@ const WORKFLOWS: Workflow[] = [
   {
     icon: (
       <svg {...ICON_PROPS}>
-        <path d="M5 16h18" />
-        <path d="M17 9l6 7-6 7" />
+        <path {...DRAW_PROPS} d="M5 16h18" />
+        <path {...DRAW_PROPS} d="M17 9l6 7-6 7" />
         <path d="M5 9v14" strokeDasharray="0.5 4.5" />
       </svg>
     ),
@@ -82,9 +94,9 @@ const WORKFLOWS: Workflow[] = [
   {
     icon: (
       <svg {...ICON_PROPS}>
-        <circle cx="15" cy="16" r="11" />
-        <path d="M15 9v7l5 3" />
-        <path d="M27 12l1.5-3" />
+        <circle {...DRAW_PROPS} cx="15" cy="16" r="11" />
+        <path {...DRAW_PROPS} d="M15 9v7l5 3" />
+        <path {...DRAW_PROPS} d="M27 12l1.5-3" />
       </svg>
     ),
     headline: "Compliance stops being archaeology.",

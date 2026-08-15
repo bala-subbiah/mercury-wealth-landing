@@ -1,18 +1,43 @@
-import Reveal from "../../../chrome/Reveal.tsx";
+import Reveal, { useReveal } from "../../../chrome/Reveal.tsx";
 import "./DocumentSpotlight.css";
 
 /* Document Intelligence spotlight — one alternating text-beside-visual row
    (fact source §6, DiExtraction/DiGovernance). Replaces v2's crowded
    TermSheetDissolve recreation with a simplified document -> fields
-   fragment (team-feedback A7): a document card with three mono field
-   chips that lift into a structured list on reveal. Field LABELS only
-   (ISSUER, BARRIER, MATURITY) — no invented values. The document's own
-   identity uses the audited specimen (fact source §9): Phoenix Autocallable
-   Note on Tencent, ISIN CH1382044167. */
+   fragment (team-feedback A7).
 
-const FIELDS = ["ISSUER", "BARRIER", "MATURITY"];
+   v3 wave 2: the fragment is no longer a static fade. On reveal it plays one
+   continuous micro-story, ~1.9s end to end:
+
+     0.0s  the specimen document card lands
+     0.1s  it goes to work: the body lines dim and a mono working line
+           ("Reading term sheet…") sits over them
+     0.9s  the working line clears, the lines come back, the arrow fades in
+     0.9s  the three field chips lift out one at a time (240ms apart)
+     1.2s  each landed chip picks up its page reference
+
+   End state: a structured list of field labels, each carrying the page and
+   section it was lifted from — the "down to the page and the section" claim
+   in the body copy, shown rather than asserted.
+
+   Integrity: field LABELS only (ISSUER, BARRIER, MATURITY) — no invented
+   values. The document's identity is the audited specimen (fact source §9):
+   Phoenix Autocallable Note on Tencent, ISIN CH1382044167, 6 pages. The
+   page references are deliberately generic locators inside that 6-page
+   specimen; §9 records no exact ones. */
+
+const FIELDS = [
+  { label: "ISSUER", source: "P.1 §1" },
+  { label: "BARRIER", source: "P.4 §2" },
+  { label: "MATURITY", source: "P.5 §3" },
+];
 
 export default function DocumentSpotlight() {
+  // One flag drives the whole sequence; the beat spacing lives in CSS
+  // transition delays, so under prefers-reduced-motion the same markup is
+  // simply already resolved.
+  const { ref, shown } = useReveal<HTMLDivElement>();
+
   return (
     <section className="mai-doc band band--paper">
       <div className="container mai-doc__grid">
@@ -27,18 +52,27 @@ export default function DocumentSpotlight() {
           </p>
         </Reveal>
 
-        <div className="mai-doc__visual" aria-hidden="true">
-          <Reveal as="div" delay={80} className="mai-doc__source">
+        <div
+          ref={ref}
+          className={`mai-doc__visual${shown ? " is-story" : ""}`}
+          aria-hidden="true"
+        >
+          <div className="mai-doc__source">
             <div className="mai-doc__source-head">
               <span className="mai-doc__source-name">PHOENIX AUTOCALLABLE NOTE &middot; TENCENT</span>
               <span className="mai-doc__source-isin">ISIN CH1382044167</span>
             </div>
-            <div className="mai-doc__lines">
-              <span />
-              <span />
-              <span className="mai-doc__lines--short" />
+            {/* The working line is pinned over the body lines, so the reading
+                state and the resolved state occupy exactly the same box. */}
+            <div className="mai-doc__lines-wrap">
+              <div className="mai-doc__lines">
+                <span />
+                <span />
+                <span className="mai-doc__lines--short" />
+              </div>
+              <p className="mai-doc__working">Reading term sheet…</p>
             </div>
-          </Reveal>
+          </div>
 
           <svg className="mai-doc__arrow" viewBox="0 0 24 40">
             <path
@@ -52,10 +86,11 @@ export default function DocumentSpotlight() {
           </svg>
 
           <ul className="mai-doc__result">
-            {FIELDS.map((field, index) => (
-              <Reveal as="li" key={field} delay={160 + index * 90} className="mai-doc__chip">
-                {field}
-              </Reveal>
+            {FIELDS.map((field) => (
+              <li key={field.label} className="mai-doc__chip">
+                <span className="mai-doc__chip-label">{field.label}</span>
+                <span className="mai-doc__chip-source">{field.source}</span>
+              </li>
             ))}
           </ul>
         </div>

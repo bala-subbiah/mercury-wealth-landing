@@ -1,6 +1,13 @@
 /* Document Intelligence spotlight — alternating text/visual row. The visual
    is a simplified document -> fields fragment: a document card, an arrow,
-   and a short structured list, no dense recreation, no invented values. */
+   and a short structured list, no dense recreation, no invented values.
+
+   Wave 2: the fragment plays a single reveal-triggered micro-story (see the
+   .tsx header for the beat sheet). Everything here is opacity + transform
+   only, on var(--ease-out); every animated element also declares the state
+   it must hold under prefers-reduced-motion, where the story is skipped and
+   the resolved frame is what renders. Nothing changes box size at any beat,
+   so no beat moves the page. */
 
 .mai-doc {
   padding-block: var(--space-2xl);
@@ -47,6 +54,8 @@
   gap: var(--space-sm);
 }
 
+/* ---- beat 1: the document lands ---- */
+
 .mai-doc__source {
   width: 100%;
   max-width: 320px;
@@ -54,6 +63,16 @@
   background: #fff;
   border: 1px solid var(--rule-light);
   border-radius: 6px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.mai-doc__visual.is-story .mai-doc__source {
+  opacity: 1;
+  transform: none;
 }
 
 .mai-doc__source-head {
@@ -78,11 +97,19 @@
   color: var(--color-muted-light);
 }
 
+/* ---- beat 2: it goes to work ---- */
+
+/* The wrapper reserves the body-lines box once; the working line is absolute
+   inside it, so the reading state costs no height. */
+.mai-doc__lines-wrap {
+  position: relative;
+  margin-top: var(--space-sm);
+}
+
 .mai-doc__lines {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: var(--space-sm);
 }
 
 .mai-doc__lines span {
@@ -96,30 +123,153 @@
   width: 60%;
 }
 
+.mai-doc__visual.is-story .mai-doc__lines {
+  animation: mai-doc-lines 1050ms var(--ease-out) both;
+}
+
+@keyframes mai-doc-lines {
+  0% { opacity: 1; }
+  16% { opacity: 0.28; }
+  70% { opacity: 0.28; }
+  100% { opacity: 1; }
+}
+
+/* Mono uppercase is allowed here: this is inside a product fragment. #404040
+   on white is 10.4:1. */
+.mai-doc__working {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--color-muted-light);
+  opacity: 0;
+}
+
+.mai-doc__visual.is-story .mai-doc__working {
+  animation: mai-doc-working 1050ms var(--ease-out) both;
+}
+
+@keyframes mai-doc-working {
+  0% { opacity: 0; }
+  16% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ---- beat 3: the hand-off ---- */
+
 .mai-doc__arrow {
   width: 18px;
   height: 28px;
   color: var(--color-muted-light);
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out) 760ms;
 }
+
+.mai-doc__visual.is-story .mai-doc__arrow {
+  opacity: 1;
+}
+
+/* ---- beat 4: the fields lift out, each with its locator ---- */
 
 .mai-doc__result {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   gap: var(--space-xs);
   width: 100%;
   max-width: 320px;
 }
 
 .mai-doc__chip {
-  padding: 8px 14px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
   background: var(--chip-slate-bg);
   color: var(--chip-slate-ink);
   border-radius: 4px;
   font-family: var(--font-mono);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.mai-doc__chip-label {
   font-weight: 600;
   font-size: 11.5px;
   letter-spacing: 0.14em;
+}
+
+/* The citation. Same ink as the label (8.2:1 on the slate chip), separated by
+   weight rather than by a lighter tone, and always occupying its slot so the
+   chip is the same size before and after it arrives. */
+.mai-doc__chip-source {
+  flex: none;
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.mai-doc__visual.is-story .mai-doc__chip {
+  opacity: 1;
+  transform: none;
+}
+
+.mai-doc__visual.is-story .mai-doc__chip-source {
+  opacity: 1;
+}
+
+.mai-doc__visual.is-story .mai-doc__chip:nth-child(1) { transition-delay: 900ms; }
+.mai-doc__visual.is-story .mai-doc__chip:nth-child(2) { transition-delay: 1140ms; }
+.mai-doc__visual.is-story .mai-doc__chip:nth-child(3) { transition-delay: 1380ms; }
+
+.mai-doc__visual.is-story .mai-doc__chip:nth-child(1) .mai-doc__chip-source { transition-delay: 1180ms; }
+.mai-doc__visual.is-story .mai-doc__chip:nth-child(2) .mai-doc__chip-source { transition-delay: 1420ms; }
+.mai-doc__visual.is-story .mai-doc__chip:nth-child(3) .mai-doc__chip-source { transition-delay: 1660ms; }
+
+/* ------------------------------------------------------- reduced motion -- */
+
+/* The resolved frame, immediately: document landed, fields extracted, each
+   one citing its page. No working state is ever shown. */
+@media (prefers-reduced-motion: reduce) {
+  .mai-doc__source,
+  .mai-doc__chip {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* The arrow keeps its own layout transform (it rotates on desktop); only
+     its entrance is cancelled. */
+  .mai-doc__arrow,
+  .mai-doc__chip-source {
+    opacity: 1;
+    transition: none;
+  }
+
+  .mai-doc__visual.is-story .mai-doc__lines,
+  .mai-doc__visual.is-story .mai-doc__working {
+    animation: none;
+  }
+
+  .mai-doc__lines {
+    opacity: 1;
+  }
+
+  .mai-doc__working {
+    display: none;
+  }
 }
 
 @media (min-width: 860px) {
@@ -130,6 +280,7 @@
 
   .mai-doc__visual {
     flex-direction: row;
+    align-items: center;
     justify-content: center;
   }
 
@@ -140,7 +291,7 @@
   }
 
   .mai-doc__result {
-    flex-direction: column;
-    max-width: 160px;
+    flex: none;
+    width: 168px;
   }
 }

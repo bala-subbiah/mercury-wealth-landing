@@ -1,7 +1,18 @@
 /* The audit trail writes itself — condensed GovernanceAct. Navy ground; the
    lifecycle thread is a sanctioned product fragment (mono chips + hairline
    links), not section furniture, so it keeps the mono discipline the rest of
-   the page's chrome gave up. */
+   the page's chrome gave up.
+
+   Wave 2: the thread is written rather than revealed. One 260ms beat per
+   stage; inside each beat the chip lights first and its outgoing hairline
+   draws left to right behind it, so the six stages read as a sequence
+   instead of a row. The two gate stages take a status tick 260ms after they
+   light. Transform and opacity only, all on var(--ease-out); the tick
+   reserves its slot from the first frame, so nothing in the strip shifts.
+
+   The strip keeps its contained horizontal scroll: scaleX shrinks the links
+   toward their left origin, so no beat is ever wider than the resolved
+   thread and the page itself never gains a scrollbar. */
 
 .gov-thread {
   padding-block: var(--space-2xl);
@@ -43,32 +54,15 @@
 .gov-thread__chip-wrap {
   display: flex;
   align-items: center;
-  opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity var(--dur-med) var(--ease-out),
-    transform var(--dur-med) var(--ease-out);
 }
 
-.gov-thread__strip.is-shown .gov-thread__chip-wrap {
-  opacity: 1;
-  transform: none;
-}
-
-.gov-thread__strip.is-shown .gov-thread__chip-wrap:nth-child(1) { transition-delay: 40ms; }
-.gov-thread__strip.is-shown .gov-thread__chip-wrap:nth-child(2) { transition-delay: 160ms; }
-.gov-thread__strip.is-shown .gov-thread__chip-wrap:nth-child(3) { transition-delay: 280ms; }
-.gov-thread__strip.is-shown .gov-thread__chip-wrap:nth-child(4) { transition-delay: 400ms; }
-.gov-thread__strip.is-shown .gov-thread__chip-wrap:nth-child(5) { transition-delay: 520ms; }
-.gov-thread__strip.is-shown .gov-thread__chip-wrap:nth-child(6) { transition-delay: 640ms; }
-
-@media (prefers-reduced-motion: reduce) {
-  .gov-thread__chip-wrap {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
+/* The beat clock: one stage every 260ms. */
+.gov-thread__chip-wrap:nth-child(1) { --beat: 0ms; }
+.gov-thread__chip-wrap:nth-child(2) { --beat: 260ms; }
+.gov-thread__chip-wrap:nth-child(3) { --beat: 520ms; }
+.gov-thread__chip-wrap:nth-child(4) { --beat: 780ms; }
+.gov-thread__chip-wrap:nth-child(5) { --beat: 1040ms; }
+.gov-thread__chip-wrap:nth-child(6) { --beat: 1300ms; }
 
 .gov-thread__chip {
   display: inline-flex;
@@ -82,6 +76,40 @@
   font-size: 12px;
   letter-spacing: 0.18em;
   color: var(--color-ink-dark);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--dur-med) var(--ease-out) var(--beat, 0ms),
+    transform var(--dur-med) var(--ease-out) var(--beat, 0ms);
+}
+
+.gov-thread__strip.is-shown .gov-thread__chip {
+  opacity: 1;
+  transform: none;
+}
+
+/* The status tick. Luminous is permitted here — a dark product surface
+   inside a fragment. #34d399 on the #0d1a2d chip is 9.5:1, well past the 3:1
+   a non-text graphic needs. The slot is held from the first frame so the
+   chip is exactly as wide before the tick arrives as after. */
+.gov-thread__tick {
+  display: inline-flex;
+  flex: none;
+  width: 15px;
+  height: 11px;
+  margin-left: 9px;
+  color: var(--ui-emerald);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out) calc(var(--beat, 0ms) + 260ms);
+}
+
+.gov-thread__tick svg {
+  width: 100%;
+  height: 100%;
+}
+
+.gov-thread__strip.is-shown .gov-thread__tick {
+  opacity: 1;
 }
 
 .gov-thread__link {
@@ -89,6 +117,29 @@
   width: var(--space-lg);
   height: 1px;
   background: var(--rule-dark);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-med) var(--ease-out) calc(var(--beat, 0ms) + 150ms);
+}
+
+.gov-thread__strip.is-shown .gov-thread__link {
+  transform: scaleX(1);
+}
+
+/* The resolved thread, immediately: six lit stages, five drawn hairlines,
+   both gate ticks present. No stage is ever shown mid-beat. */
+@media (prefers-reduced-motion: reduce) {
+  .gov-thread__chip,
+  .gov-thread__tick {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .gov-thread__link {
+    transform: scaleX(1);
+    transition: none;
+  }
 }
 
 .gov-thread__quote {

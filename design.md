@@ -211,7 +211,8 @@ colourway automatically.
    data in JetBrains Mono with `font-variant-numeric: tabular-nums`.
 5. **Motion**: transform/opacity only · var(--ease-out) · no `transition: all` · no hover
    scale · every animation has a `prefers-reduced-motion: reduce` static fallback ·
-   focus rings visible, never animated.
+   focus rings visible, never animated. (One sanctioned exception, wave 2 2026-08-15:
+   `stroke-dashoffset` draw-in on hand-drawn SVG line icons, reduced-motion-safe.)
 6. **Signature behaviors** (the AI-felt layer): self-composing morning briefing (hero),
    ticking mono data strip, term-sheet dissolve, streaming chat with visible mandate-checks,
    fluid-gradient MERCURY footer wordmark (monochrome luminance only).
