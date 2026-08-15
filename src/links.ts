@@ -22,6 +22,13 @@ export const CONVERSATION_MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIC
 /** Plain mailto, no subject — used where the address itself is the link text. */
 export const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 
+/** Backs the sitewide CTA button ("Book a demo"), per owner directive
+ *  2026-08-15 replacing the "Request a conversation" label. The softer
+ *  narrative conversation links (CONVERSATION_MAILTO) are unaffected. */
+export const DEMO_BOOKING_MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+  "Book a Mercury demo",
+)}`;
+
 /** Spread onto every demo anchor: new tab, no window.opener handle. */
 export const DEMO_LINK_PROPS = {
   href: DEMO_URL,

@@ -1,4 +1,4 @@
-import { CONVERSATION_MAILTO } from "../../../links.ts";
+import { DEMO_BOOKING_MAILTO } from "../../../links.ts";
 import "../../home/sections/home-cta.css";
 import "./Hero.css";
 
@@ -18,8 +18,8 @@ export default function Hero() {
         </p>
 
         <div className="cockpit-hero__actions">
-          <a className="home-cta" href={CONVERSATION_MAILTO}>
-            Request a conversation
+          <a className="home-cta" href={DEMO_BOOKING_MAILTO}>
+            Book a demo
           </a>
         </div>
       </div>

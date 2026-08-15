@@ -1,5 +1,5 @@
 import Reveal from "../../../chrome/Reveal.tsx";
-import { CONVERSATION_MAILTO } from "../../../links.ts";
+import { DEMO_BOOKING_MAILTO } from "../../../links.ts";
 import "./home-cta.css";
 import "./FinalCta.css";
 
@@ -21,8 +21,8 @@ export default function FinalCta() {
         </Reveal>
 
         <Reveal className="close__actions" delay={100}>
-          <a className="home-cta" href={CONVERSATION_MAILTO}>
-            Request a conversation
+          <a className="home-cta" href={DEMO_BOOKING_MAILTO}>
+            Book a demo
           </a>
         </Reveal>
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState, type FocusEvent } from "react";
-import { CONVERSATION_MAILTO } from "../links.ts";
+import { DEMO_BOOKING_MAILTO } from "../links.ts";
 import { ROUTES, type PageKey } from "./routes.ts";
 import "./Nav.css";
 
@@ -166,8 +166,8 @@ export default function Nav({ overHero = false, tone = "dark", current }: NavPro
           </div>
 
           <div className="nav__actions">
-            <a className="nav__cta" href={CONVERSATION_MAILTO}>
-              Request a conversation
+            <a className="nav__cta" href={DEMO_BOOKING_MAILTO}>
+              Book a demo
             </a>
 
             <button
@@ -227,8 +227,8 @@ export default function Nav({ overHero = false, tone = "dark", current }: NavPro
             </li>
           </ul>
 
-          <a className="nav__sheet-cta" href={CONVERSATION_MAILTO} onClick={closeSheet}>
-            Request a conversation
+          <a className="nav__sheet-cta" href={DEMO_BOOKING_MAILTO} onClick={closeSheet}>
+            Book a demo
           </a>
         </div>
       </header>

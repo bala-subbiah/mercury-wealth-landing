@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, CONTACT_MAILTO, CONVERSATION_MAILTO } from "../../../links.ts";
+import { CONTACT_EMAIL, CONTACT_MAILTO, DEMO_BOOKING_MAILTO } from "../../../links.ts";
 import Reveal from "../../../chrome/Reveal.tsx";
 import "../../home/sections/home-cta.css";
 import "./TrustContact.css";
@@ -30,8 +30,8 @@ export default function TrustContact() {
         </Reveal>
 
         <Reveal delay={160}>
-          <a className="home-cta" href={CONVERSATION_MAILTO}>
-            Request a conversation
+          <a className="home-cta" href={DEMO_BOOKING_MAILTO}>
+            Book a demo
           </a>
         </Reveal>
       </div>
