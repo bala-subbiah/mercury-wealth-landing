@@ -69,6 +69,7 @@
 }
 
 .bcard {
+  position: relative;
   padding: 18px 20px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 10px;
@@ -85,6 +86,54 @@
   opacity: 1;
   transform: none;
   pointer-events: auto;
+}
+
+/* ------------------------------------------------------------- resolving --- */
+
+/* The card arrives working and settles into its finding. The working line is
+   pinned over the card's own padding box, so the two states occupy exactly the
+   same space and the panel never changes height. */
+.bcard__body {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.bcard.is-resolving .bcard__body {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.bcard__working {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  right: 20px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--color-body-light);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.bcard.is-resolving .bcard__working {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bcard__body,
+  .bcard__working {
+    transition: none;
+  }
+
+  .bcard__working {
+    display: none;
+  }
 }
 
 .bcard__chip {

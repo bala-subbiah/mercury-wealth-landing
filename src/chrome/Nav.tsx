@@ -1,4 +1,12 @@
-import { useCallback, useEffect, useId, useRef, useState, type FocusEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type FocusEvent,
+  type MouseEvent,
+} from "react";
 import { DEMO_BOOKING_MAILTO } from "../links.ts";
 import { ROUTES, type PageKey } from "./routes.ts";
 import "./Nav.css";
@@ -25,9 +33,11 @@ import "./Nav.css";
    The bar is position:fixed in both cases; it is the only fixed element on the
    site, at z-index 100.
 
-   Product dropdown: opens on pointer-enter, closes on pointer-leave; Enter or
-   Space on the trigger toggles it for keyboard users; Escape and focus leaving
-   the item close it. aria-expanded tracks the real state at all times. */
+   Product dropdown: opens on pointer-enter, closes on pointer-leave; a
+   pointer click on the trigger just ensures it's open (hover already got
+   there first, so a click can't slam it shut). Enter or Space on the trigger
+   toggles it for keyboard users; Escape and focus leaving the item close it.
+   aria-expanded tracks the real state at all times. */
 
 const SCROLL_THRESHOLD = 40;
 
@@ -100,6 +110,19 @@ export default function Nav({ overHero = false, tone = "dark", current }: NavPro
     }
   }, []);
 
+  // Pointer clicks land after hover has already opened the menu (you can't
+  // click an element without first entering it), so a mouse click should
+  // just ensure the menu is open, not toggle it closed. Keyboard activation
+  // (Enter/Space) fires a synthetic click with event.detail === 0 — no real
+  // pointer was involved — so that path still toggles for a11y.
+  const onTriggerClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
+    if (event.detail === 0) {
+      setProductOpen((open) => !open);
+      return;
+    }
+    setProductOpen(true);
+  }, []);
+
   const closeSheet = useCallback(() => setMenuOpen(false), []);
 
   const classes = [
@@ -135,7 +158,7 @@ export default function Nav({ overHero = false, tone = "dark", current }: NavPro
                 className="nav__link nav__link--trigger"
                 aria-expanded={productOpen}
                 aria-controls={productMenuId}
-                onClick={() => setProductOpen((open) => !open)}
+                onClick={onTriggerClick}
               >
                 Product
                 <svg className="nav__chevron" viewBox="0 0 10 6" aria-hidden="true">

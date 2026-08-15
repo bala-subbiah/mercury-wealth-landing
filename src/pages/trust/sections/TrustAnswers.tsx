@@ -8,7 +8,9 @@ import "./TrustAnswers.css";
    so a layman reads six lines and a compliance officer still gets the full
    answer without leaving the page. Copy verbatim from
    docs/v3-fact-source.md SS4 (TrustAnswers) — hedge on card 5 preserved
-   exactly, never upgraded to a present-tense deployed fact. */
+   exactly, never upgraded to a present-tense deployed fact. Card 5 reframed
+   deployment-generic per design.md Amendment 3 ("Asia-first, not Asia-only"):
+   still the audited hedge, generalized past a HK/SG-only boundary. */
 
 type Answer = {
   title: string;
@@ -128,12 +130,12 @@ const ANSWERS: Answer[] = [
     icon: <SignatureIcon />,
   },
   {
-    title: "Hong Kong and Singapore data residency.",
+    title: "Deployment and data residency, your call.",
     mechanism:
-      "Mercury is built for in-region deployment in Hong Kong and Singapore, so client data does not have to leave the region it is regulated in.",
+      "Mercury deploys the way your firm requires: on-prem, private cloud, or your cloud provider, so client data stays where you are regulated.",
     // HEDGED — verbatim, never upgrade to a present-tense "deployed" claim.
     expansion:
-      "That is a design commitment, and we would rather name it as one: residency is a property of the deployment a firm actually runs on, so we confirm it in writing for that deployment rather than assert it once here for everybody.",
+      "Residency is a property of the deployment a firm actually runs on, so we confirm it in writing for that deployment rather than assert it once here for everybody.",
     icon: <ResidencyIcon />,
   },
   {

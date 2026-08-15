@@ -1,5 +1,5 @@
-/* Certifications status — dark band, two calm text badges + honesty note,
-   plus the questionnaire answer alongside. */
+/* Certifications status — dark band, hairline security-grid cells (design.md
+   Amendment 3) + honesty note, plus the questionnaire answer alongside. */
 
 .trust-status {
   padding: var(--space-2xl) 0;
@@ -18,24 +18,40 @@
   max-width: 16em;
 }
 
-.trust-status__badges {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
+.trust-status__certs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
   margin-top: var(--space-lg);
+  border-top: 1px solid var(--rule-dark);
 }
 
-.trust-status__badge {
+.trust-status__cert-cell {
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.trust-status__cert-icon {
   display: inline-flex;
-  align-items: center;
-  padding: 14px 18px;
-  border: 1px solid var(--rule-dark);
-  border-radius: 4px;
-  background: var(--color-panel);
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  letter-spacing: 0.1em;
+  width: 24px;
+  height: 24px;
   color: var(--color-ink-dark);
+}
+
+.trust-status__cert-title {
+  margin-top: var(--space-sm);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-ink-dark);
+}
+
+.trust-status__cert-status {
+  display: block;
+  margin-top: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--color-muted-dark);
 }
 
 .trust-status__note {
@@ -60,9 +76,17 @@
 }
 
 @media (min-width: 640px) {
-  .trust-status__badges {
-    flex-direction: row;
-    flex-wrap: wrap;
+  .trust-status__certs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .trust-status__cert-cell:first-child {
+    padding-right: var(--space-lg);
+    border-right: 1px solid var(--rule-dark);
+  }
+
+  .trust-status__cert-cell:last-child {
+    padding-left: var(--space-lg);
   }
 }
 

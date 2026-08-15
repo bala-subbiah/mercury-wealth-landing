@@ -1,0 +1,147 @@
+/* Rotating-word opener — paper, monochrome (Amendment 3). A band, not a
+   hero: capped well under full-screen, Nav above stays solid. */
+
+.co-rotate {
+  display: flex;
+  align-items: center;
+  min-height: clamp(380px, 64vh, 640px);
+}
+
+.co-rotate__inner {
+  width: 100%;
+  text-align: center;
+}
+
+/* Reduced-motion fallback — hidden by default, shown only when the reader
+   has asked for less motion (see media query at bottom). */
+.co-rotate__static {
+  display: none;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(32px, 6vw, 64px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+.co-rotate__line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.28em;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(32px, 6vw, 72px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.co-rotate__fixed {
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+/* Reserves the width of the longest word (the hidden sizer below) so the
+   line never reflows when the rotating word changes. */
+.co-rotate__wordwrap {
+  position: relative;
+  display: inline-block;
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.co-rotate__sizer {
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+.co-rotate__word {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: max-content;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.co-rotate__word--enter {
+  animation: co-rotate-in var(--dur-med) var(--ease-out) both;
+}
+
+.co-rotate__word--leave {
+  animation: co-rotate-out var(--dur-med) var(--ease-out) both;
+}
+
+/* The one accent: a drawn underline beneath the rotating word only, sized
+   to that word's own width (not the reserved container width). */
+.co-rotate__underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.08em;
+  height: 2px;
+  background: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: co-rotate-underline var(--dur-slow) var(--ease-out) both;
+  animation-delay: 120ms;
+}
+
+@keyframes co-rotate-in {
+  from {
+    transform: translateY(55%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes co-rotate-out {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-55%);
+    opacity: 0;
+  }
+}
+
+@keyframes co-rotate-underline {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .co-rotate {
+    min-height: clamp(320px, 56vh, 520px);
+  }
+
+  .co-rotate__line {
+    gap: 0.2em;
+  }
+}
+
+/* Reduced motion: static single line, no cycling, no underline sweep. The
+   base stylesheet already forces animation-duration to ~0 globally, but we
+   also stop the JS timer (see RotatingStatement.tsx) and swap to a plain
+   line so nothing jump-cuts every cycle. */
+@media (prefers-reduced-motion: reduce) {
+  .co-rotate__static {
+    display: block;
+  }
+
+  .co-rotate__line {
+    display: none;
+  }
+}

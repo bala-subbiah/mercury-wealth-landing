@@ -1,14 +1,16 @@
 import Nav from "../../chrome/Nav.tsx";
 import Footer from "../../chrome/Footer.tsx";
+import RotatingStatement from "./sections/RotatingStatement.tsx";
 import Head from "./sections/Head.tsx";
 import FounderStatement from "./sections/FounderStatement.tsx";
 import FactsRow from "./sections/FactsRow.tsx";
 import TalkToUs from "./sections/TalkToUs.tsx";
 
 /* Company — quote + facts, not essays (team feedback A6). The page opens on
-   paper (Head), stays on paper through the founder statement and the compact
-   facts row, then closes on the one navy bookend (TalkToUs). Nav is solid:
-   this page never opens on a dark hero. */
+   paper with the rotating-word statement band, stays on paper through the
+   "why we built this" head, the founder statement and the compact facts
+   row, then closes on the one navy bookend (TalkToUs). Nav is solid: this
+   page never opens on a dark hero. */
 
 export default function CompanyPage() {
   return (
@@ -19,6 +21,7 @@ export default function CompanyPage() {
       <Nav tone="light" current="company" />
 
       <main id="main">
+        <RotatingStatement />
         <Head />
         <FounderStatement />
         <FactsRow />

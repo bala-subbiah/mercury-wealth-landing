@@ -146,6 +146,9 @@
 
 .nav__link--trigger {
   font-family: var(--font-body);
+  /* Slightly larger than a plain nav__link so the pointer has a steadier
+     target before it heads for the dropdown below. */
+  padding: 10px 6px;
 }
 
 .nav__chevron {
@@ -170,6 +173,20 @@
   background: var(--nav-menu-ground);
   border: 1px solid var(--nav-rule);
   border-radius: 0;
+}
+
+/* Invisible bridge across the 6px visual offset above: without it that strip
+   belongs to neither the trigger nor the menu, so the pointer "leaves" the
+   item (and the wrapper's mouseleave fires) while crossing it. This keeps
+   the pointer over a descendant of .nav__item--menu the whole way down,
+   without changing the 6px offset the menu appears to sit at. */
+.nav__menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -6px;
+  height: 6px;
 }
 
 .nav__menu[hidden] {

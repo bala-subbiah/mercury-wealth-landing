@@ -1,0 +1,384 @@
+/* Workflow cards — paper band, five cards in a 3 + 2 grid on desktop.
+
+   Each card is a sharp-cornered white plane with a steel-tinted illustration
+   pane on top, drawn in the same fragment idiom as the briefing panel and the
+   chat (amendment 3): small white cards and chip duos on a steel gradient,
+   monochrome everywhere else. Cards separate by hairline, never by shadow. */
+
+.work {
+  padding-block: var(--space-xl);
+}
+
+.work__title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 5.2vw, 52px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  max-width: 16em;
+  color: var(--color-ink);
+}
+
+.work__sub {
+  max-width: var(--measure);
+  margin-top: var(--space-md);
+  font-size: clamp(15px, 1.4vw, 17px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-body-light);
+}
+
+.work__grid {
+  display: grid;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.wcard {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 var(--space-md);
+  border: 1px solid var(--rule-light);
+  border-radius: 0;
+  background: #ffffff;
+}
+
+.wcard__title {
+  margin: var(--space-md) var(--space-md) 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--color-ink);
+}
+
+.wcard__body {
+  max-width: 34em;
+  margin: 8px var(--space-md) 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-body-light);
+}
+
+/* ---------------------------------------------------------- illustration --- */
+
+/* The steel plane. Fixed ratio so the five panes align across the grid and
+   nothing reflows once the fonts land. */
+.wcard__art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  padding: var(--space-md);
+  background: linear-gradient(
+    180deg,
+    var(--tint-steel-a) 0%,
+    #c4d4e2 52%,
+    var(--tint-steel-b) 100%
+  );
+}
+
+.frag {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* A small white product card: the one shape every fragment is built from. */
+.frag__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.frag__query {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-body-light);
+}
+
+.frag__caret {
+  flex: none;
+  width: 2px;
+  height: 15px;
+  background: var(--color-ink);
+}
+
+.frag__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.frag__chip {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+}
+
+/* Chromatic colour exists only here, in the duos, and each clears 4.5:1. */
+.frag__chip--slate {
+  background: var(--chip-slate-bg);
+  color: var(--chip-slate-ink);
+}
+
+.frag__chip--rose {
+  background: var(--chip-rose-bg);
+  color: var(--chip-rose-ink);
+}
+
+.frag__chip--amber {
+  background: var(--chip-amber-bg);
+  color: var(--chip-amber-ink);
+}
+
+/* --- the spoken note --- */
+
+.frag__bar--note {
+  justify-content: space-between;
+}
+
+.frag__wave {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+}
+
+.frag__wave i {
+  display: block;
+  width: 2px;
+  background: var(--color-ink);
+  opacity: 0.55;
+}
+
+.frag__wave i:nth-child(1) { height: 6px; }
+.frag__wave i:nth-child(2) { height: 12px; }
+.frag__wave i:nth-child(3) { height: 16px; }
+.frag__wave i:nth-child(4) { height: 9px; }
+.frag__wave i:nth-child(5) { height: 14px; }
+.frag__wave i:nth-child(6) { height: 7px; }
+.frag__wave i:nth-child(7) { height: 11px; }
+
+.frag__time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--color-ink);
+}
+
+/* --- the drift gauge --- */
+
+.frag--gauge {
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.frag__track {
+  position: relative;
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-paper-3);
+}
+
+.frag__fill {
+  position: absolute;
+  inset: 0 32% 0 0;
+  border-radius: 3px;
+  background: var(--chip-rose-ink);
+}
+
+.frag__target {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  left: 60%;
+  width: 2px;
+  background: var(--color-ink);
+}
+
+.frag__nums {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--color-body-light);
+}
+
+/* --- the workflow steps --- */
+
+.frag--steps {
+  gap: 8px;
+}
+
+.frag__step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--color-body-light);
+}
+
+.frag__step.is-done {
+  color: var(--color-ink);
+}
+
+/* The pending step reads as an outline, not a filled card. */
+.frag__step:not(.is-done) {
+  border: 1px dashed rgba(13, 13, 13, 0.35);
+  background: transparent;
+}
+
+.frag__tick {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  color: var(--chip-emerald-ink);
+}
+
+/* --- the document --- */
+
+.frag--doc {
+  gap: 0;
+  align-items: flex-start;
+}
+
+.frag__page {
+  display: block;
+  width: 100%;
+  padding: 14px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.frag__page i {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-paper-3);
+}
+
+.frag__page i + i {
+  margin-top: 7px;
+}
+
+.frag__page i:nth-child(1) { width: 62%; }
+.frag__page i:nth-child(2) { width: 100%; }
+.frag__page i:nth-child(3) { width: 78%; }
+
+/* The extracted fields sit half off the page, as if lifted out of it. */
+.frag__chips--lift {
+  margin-top: -9px;
+  margin-left: auto;
+}
+
+/* -------------------------------------------------------------- the link --- */
+
+.work__more {
+  margin-top: var(--space-lg);
+}
+
+.work__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+
+.work__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.work__link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work__link::after {
+    transition: none;
+  }
+}
+
+.work__link-arrow {
+  width: 14px;
+  height: 10px;
+}
+
+/* ------------------------------------------------------------ breakpoints --- */
+
+@media (min-width: 620px) {
+  .work__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Six tracks: three cards of two on the first row, two cards of three on the
+   second. The 3 + 2 arrangement, without a stretched fifth card. */
+@media (min-width: 1000px) {
+  .work {
+    padding-block: var(--space-2xl);
+  }
+
+  .work__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .wcard:nth-child(-n + 3) {
+    grid-column: span 2;
+  }
+
+  .wcard:nth-child(n + 4) {
+    grid-column: span 3;
+  }
+
+  .wcard:nth-child(n + 4) .wcard__art {
+    aspect-ratio: 21 / 9;
+  }
+
+  .work__more {
+    margin-top: var(--space-xl);
+  }
+}

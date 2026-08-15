@@ -1,0 +1,91 @@
+/* By the numbers — paper band, four rows divided by full-width hairlines.
+   No tag strip: the label is quiet sans, the numerals carry the section. */
+
+.nums {
+  padding-block: var(--space-xl);
+  border-top: 1px solid var(--rule-light);
+}
+
+.nums__label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-caption-light);
+}
+
+.nums__list {
+  margin-top: var(--space-md);
+}
+
+.nums__row {
+  display: grid;
+  gap: var(--space-xs);
+  padding-block: var(--space-md);
+  border-top: 1px solid var(--rule-light);
+}
+
+.nums__row:last-child {
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.nums__figure {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 12vw, 120px);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 0.94;
+  color: var(--color-ink);
+  /* The settle: the numeral arrives a beat after its row, rising into place.
+     Transform and opacity only, and the row reserves its height either way, so
+     nothing on the page moves while it lands. */
+  opacity: 0;
+  transform: translateY(0.1em);
+  transition:
+    opacity var(--dur-slow) var(--ease-out) 120ms,
+    transform var(--dur-slow) var(--ease-out) 120ms;
+}
+
+.nums__row.is-shown .nums__figure {
+  opacity: 1;
+  transform: none;
+}
+
+.nums__caption {
+  max-width: 26em;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-body-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nums__figure {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (min-width: 800px) {
+  .nums {
+    padding-block: var(--space-2xl);
+  }
+
+  .nums__list {
+    margin-top: var(--space-lg);
+  }
+
+  .nums__row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 30em);
+    align-items: end;
+    gap: var(--space-lg);
+    padding-block: var(--space-lg);
+  }
+
+  /* Wide enough that "four-eyes" never breaks across its own hyphen. */
+  .nums__caption {
+    max-width: 30em;
+    padding-bottom: 0.6em;
+    text-align: right;
+  }
+}

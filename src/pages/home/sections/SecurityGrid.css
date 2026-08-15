@@ -1,0 +1,164 @@
+/* Security grid — midnight band, a centred head over six hairline-separated
+   cells. Hairlines are drawn by the cells themselves (top on every row, left on
+   every column but the first), so the grid stays aligned at each breakpoint and
+   nothing separates by shadow. */
+
+.sec {
+  padding-block: var(--space-xl);
+}
+
+.sec__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.8vw, 50px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  max-width: 16em;
+  margin-inline: auto;
+  text-align: center;
+  color: var(--color-ink-dark);
+}
+
+.sec__grid {
+  display: grid;
+  margin-top: var(--space-lg);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.sec__cell {
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--rule-dark);
+}
+
+.sec__icon {
+  width: 26px;
+  height: 26px;
+  color: var(--color-ink-dark);
+}
+
+.sec__cell-title {
+  margin-top: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--color-ink-dark);
+}
+
+/* The status register: mono, tracked, muted — 8.7:1 on the midnight ground. */
+.sec__status {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.16em;
+  line-height: 1.6;
+  color: var(--color-muted-dark);
+}
+
+/* ----------------------------------------------------------------- foot --- */
+
+.sec__foot {
+  display: grid;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.sec__note {
+  max-width: 42em;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-muted-dark);
+}
+
+.sec__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: start;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: var(--color-ink-dark);
+}
+
+.sec__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.sec__link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sec__link::after {
+    transition: none;
+  }
+}
+
+.sec__link-arrow {
+  width: 14px;
+  height: 10px;
+}
+
+/* ------------------------------------------------------------ breakpoints --- */
+
+@media (min-width: 620px) {
+  .sec__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sec__cell {
+    padding: var(--space-md);
+    border-left: 1px solid var(--rule-dark);
+  }
+
+  .sec__cell:nth-child(2n + 1) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (min-width: 960px) {
+  .sec {
+    padding-block: var(--space-2xl);
+  }
+
+  .sec__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: var(--space-xl);
+  }
+
+  /* Reset the two-column rule, then draw the three-column one. */
+  .sec__cell:nth-child(2n + 1) {
+    padding-left: var(--space-md);
+    border-left: 1px solid var(--rule-dark);
+  }
+
+  .sec__cell:nth-child(3n + 1) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .sec__foot {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+}

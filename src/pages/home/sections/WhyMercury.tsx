@@ -4,7 +4,13 @@ import "./WhyMercury.css";
 
 /* Why Mercury — the rogo split: a sticky display head on the left, three items
    separated by hairlines on the right. Three answers, no more; the product
-   pages carry the depth. Copy tightened from fact source §1, §2, §4 and §5. */
+   pages carry the depth. Copy tightened from fact source §1, §2, §4 and §5.
+
+   Asia is stated as expertise (base currencies here, supervisors here) rather
+   than as a constraint on where the software can run, and the deployment
+   answer keeps the audited residency hedge intact: residency is a property of
+   the deployment a firm actually runs on, confirmed in writing for that
+   deployment, never asserted once here for everybody (fact source §4, #5). */
 
 const STROKE = {
   fill: "none",
@@ -36,18 +42,18 @@ const ITEMS: ReadonlyArray<Item> = [
       </>
     ),
     title: "Governance built into the work",
-    body: "Four-eyes sign-off, client acceptance in-app or by e-signature, and every material action written to an immutable log as it happens.",
+    body: "Four-eyes sign-off, client acceptance in-app or by e-signature, and every material action written to an immutable log as it happens, in the shape an SFC- or MAS-supervised firm is expected to keep it.",
   },
   {
     icon: (
       <>
-        <circle cx="12" cy="12" r="8.6" {...STROKE} />
-        <path d="M3.6 9.4h16.8M3.6 14.6h16.8" {...STROKE} />
-        <path d="M12 3.4c2.3 2.4 3.5 5.3 3.5 8.6S14.3 18.2 12 20.6c-2.3-2.4-3.5-5.3-3.5-8.6S9.7 5.8 12 3.4z" {...STROKE} />
+        <rect x="3.4" y="4.2" width="17.2" height="5.6" rx="1.4" {...STROKE} />
+        <rect x="3.4" y="14.2" width="17.2" height="5.6" rx="1.4" {...STROKE} />
+        <path d="M7 7h.01M7 17h.01" {...STROKE} />
       </>
     ),
-    title: "Built for Hong Kong and Singapore",
-    body: "Suitability here is judged on the record: what was recommended, on what basis, cleared by whom. The SFC and the MAS ask to see it.",
+    title: "Your deployment, your call",
+    body: "On-prem, private cloud or your cloud. Residency is a property of the deployment your firm runs on, so we confirm it in writing for that deployment.",
   },
 ];
 

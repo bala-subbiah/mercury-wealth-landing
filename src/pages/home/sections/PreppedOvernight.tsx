@@ -13,6 +13,10 @@ import "./PreppedOvernight.css";
 
 const ROTATE_MS = 10_000;
 
+/* How long a card spends working before it resolves. Long enough to read the
+   working line, short enough that the card is never what you are waiting for. */
+const RESOLVE_MS = 600;
+
 type Card = {
   chip: string;
   tone: "rose" | "amber" | "slate";
@@ -52,6 +56,17 @@ export default function PreppedOvernight() {
   const [reduced] = useState(prefersReducedMotion);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  // Each card arrives mid-work and resolves: the briefing is being read, not
+  // retrieved from a slide. Opacity and transform only, and the card's box is
+  // the same size in both states, so nothing on the page moves.
+  const [resolving, setResolving] = useState(!prefersReducedMotion());
+
+  useEffect(() => {
+    if (reduced) return;
+    setResolving(true);
+    const timer = window.setTimeout(() => setResolving(false), RESOLVE_MS);
+    return () => window.clearTimeout(timer);
+  }, [index, reduced]);
 
   useEffect(() => {
     if (reduced || paused) return;
@@ -92,27 +107,42 @@ export default function PreppedOvernight() {
             >
               {CARDS.map((card, position) => {
                 const active = reduced || position === index;
+                const working = active && !reduced && resolving;
                 return (
                   <article
-                    className={`bcard bcard--${card.tone}${active ? " is-active" : ""}`}
+                    className={`bcard bcard--${card.tone}${active ? " is-active" : ""}${
+                      working ? " is-resolving" : ""
+                    }`}
                     key={card.chip}
                     aria-hidden={active ? undefined : true}
                   >
-                    <p className="bcard__chip">{card.chip}</p>
-                    <p className="bcard__text">{card.text}</p>
-                    <p className="bcard__action">
-                      {card.action}
-                      <svg viewBox="0 0 14 10" aria-hidden="true" className="bcard__arrow">
-                        <path
-                          d="M1 5h11M8.4 1.4 12 5l-3.6 3.6"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </p>
+                    <div className="bcard__body">
+                      <p className="bcard__chip">{card.chip}</p>
+                      <p className="bcard__text">{card.text}</p>
+                      <p className="bcard__action">
+                        {card.action}
+                        <svg
+                          viewBox="0 0 14 10"
+                          aria-hidden="true"
+                          className="bcard__arrow"
+                        >
+                          <path
+                            d="M1 5h11M8.4 1.4 12 5l-3.6 3.6"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </p>
+                    </div>
+
+                    {active && !reduced && (
+                      <p className="bcard__working" aria-hidden="true">
+                        Reading overnight moves…
+                      </p>
+                    )}
                   </article>
                 );
               })}
