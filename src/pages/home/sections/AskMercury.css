@@ -8,6 +8,12 @@
   border-top: 1px solid var(--rule-light);
 }
 
+.ask__inner {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
 .ask__title {
   font-family: var(--font-display);
   font-size: clamp(28px, 4.8vw, 50px);
@@ -32,8 +38,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  max-width: 760px;
-  margin-top: var(--space-lg);
   padding: var(--space-md);
   border-radius: 0;
   background: linear-gradient(
@@ -146,10 +150,12 @@
     padding-block: var(--space-2xl);
   }
 
+  .ask__inner {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: var(--space-2xl);
+  }
+
   .chat {
-    max-width: 720px;
-    margin-top: var(--space-xl);
-    margin-left: auto;
     padding: var(--space-lg);
   }
 }
