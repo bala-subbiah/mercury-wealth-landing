@@ -66,24 +66,35 @@
 
 .hero__inner {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .hero__title {
-  display: flex;
-  flex-direction: column;
   max-width: 15em;
-  /* The floor is set by the longest line ("already briefed.") clearing a 320px
-     viewport inside the gutters, so the display never breaks to three lines. */
+  /* The floor clears a 320px viewport inside the gutters with the natural
+     wrap (no forced break below 640px), so the display never exceeds three
+     lines even on the narrowest supported viewport. */
   font-family: var(--font-display);
-  font-size: clamp(34px, 7.6vw, 72px);
+  font-size: clamp(32px, 7.6vw, 72px);
   font-weight: 300;
-  line-height: 1.0;
+  line-height: 1.05;
   letter-spacing: -0.025em;
   color: var(--color-ink-dark);
 }
 
-.hero__line {
-  display: block;
+/* Hidden below 640px so the headline wraps naturally as one flowing phrase;
+   from 640px up it forces the mockup's exact two-line break. */
+.hero__break {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .hero__break {
+    display: inline;
+  }
 }
 
 .hero__sub {
@@ -99,6 +110,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: var(--space-sm);
   margin-top: var(--space-lg);
 }
@@ -151,14 +163,15 @@
     padding-bottom: var(--space-2xl);
   }
 
-  /* On wide viewports the copy holds the left third while the skyline runs on
-     to the right, so a second wash weights the scrim toward the type side and
-     the vertical pass eases off by the same amount. The right of the frame is
-     the part of the footage the reader actually gets to see. */
+  /* On wide viewports the copy sits centered, so the second wash is a
+     center-weighted radial pass instead of a left-side gradient: same peak
+     darkness (0.42) as before, now sitting under the centered headline
+     rather than under left-aligned type, and it tapers off symmetrically
+     toward both edges. The vertical pass underneath is unchanged. */
   .hero__scrim {
     background:
-      linear-gradient(
-        90deg,
+      radial-gradient(
+        ellipse 62% 100% at 50% 50%,
         rgba(4, 11, 21, 0.42) 0%,
         rgba(4, 11, 21, 0.16) 52%,
         rgba(4, 11, 21, 0) 78%

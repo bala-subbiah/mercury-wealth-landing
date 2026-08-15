@@ -48,14 +48,11 @@ export default function Hero() {
 
       <div className="container hero__inner">
         <h1 className="hero__title">
-          <span className="hero__line">Start the day</span>
-          <span className="hero__line">already briefed.</span>
+          Built for Wealth firms <br className="hero__break" />
+          bold enough to evolve.
         </h1>
 
-        <p className="hero__sub">
-          Front-office software for external asset managers, private banks and brokerages in
-          Hong Kong and Singapore.
-        </p>
+        <p className="hero__sub">Mercury: The AI operations team for modern wealth.</p>
 
         <div className="hero__actions">
           <a className="home-cta" href={CONVERSATION_MAILTO}>
