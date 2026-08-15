@@ -7,39 +7,59 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-md);
 }
 
-/* Quiet white rather than --color-muted-dark: the label lands on moving
-   footage, not on a panel. Sampled at 16 frames across the loop under the
-   label's own footprint, the muted grey bottomed out at 4.18:1 on the narrow
-   scrim (the footage's brightest harbour light passes right under it); white
-   held to 0.72 clears 4.5:1 on every frame at every breakpoint while still
-   sitting a clear step below the marks it introduces. */
-.hero-logos__label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  line-height: 1.4;
-  text-transform: uppercase;
-  color: var(--color-ink-dark);
-  opacity: 0.72;
-}
+/* ------------------------------------------------------------- marquee --- */
 
-/* Two columns on phones: four wide wordmarks in one line would shrink to
-   illegibility long before 320px. */
-.hero-logos__row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: center;
-  justify-items: center;
-  gap: var(--space-md) var(--space-lg);
+/* Clips the loop and fades both edges into the hero footage, so marks arrive
+   and leave rather than being cut by a hard edge. */
+.hero-logos__viewport {
   width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+.hero-logos__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: clamp(40px, 7vw, 88px);
+  animation: hero-logos-marquee 40s linear infinite;
+}
+
+.hero-logos__viewport:hover .hero-logos__track,
+.hero-logos__viewport:focus-within .hero-logos__track {
+  animation-play-state: paused;
+}
+
+/* The track is the four-mark set duplicated once (see HeroLogos.tsx): sliding
+   exactly half its own width lands the second copy pixel-for-pixel where the
+   first began, so the loop has no seam. */
+@keyframes hero-logos-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 .hero-logos__item {
   display: flex;
+  flex: none;
   align-items: center;
   justify-content: center;
   min-width: 0;
@@ -61,8 +81,8 @@
 /* Per-mark heights are eyeballed to a shared optical weight, not to a shared
    box: the four source files carry very different internal padding, and the
    stacked lockups need more height than the wordmarks to read at the same
-   size. `aspect-ratio` matches each file's viewBox so the row occupies its
-   final width before the SVGs arrive — the strip never shifts. */
+   size. `aspect-ratio` matches each file's viewBox so a mark occupies its
+   final width before the SVG arrives — the track never shifts. */
 .hero-logos__mark--uob {
   height: 36px;
   aspect-ratio: 700 / 150;
@@ -83,20 +103,43 @@
   aspect-ratio: 600 / 160;
 }
 
+/* ------------------------------------------------------ reduced motion --- */
+
+/* The pre-marquee static row: hidden by default, and the only version that
+   ever reaches a reduced-motion visitor. */
+.hero-logos__row {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-logos__viewport {
+    display: none;
+  }
+
+  .hero-logos__mark {
+    transition: none;
+  }
+
+  /* Two columns on phones: four wide wordmarks in one line would shrink to
+     illegibility long before 320px. */
+  .hero-logos__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: var(--space-md) var(--space-lg);
+    width: 100%;
+  }
+}
+
 /* From 640px the four spread across one line, rogo-style: a capped row so the
    gaps stay company rather than becoming distance. */
-@media (min-width: 640px) {
+@media (prefers-reduced-motion: reduce) and (min-width: 640px) {
   .hero-logos__row {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     gap: clamp(24px, 5vw, 72px);
     max-width: 940px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-logos__mark {
-    transition: none;
   }
 }

@@ -1,3 +1,4 @@
+// Parked 2026-08-15 (owner): re-add to HomePage when attested metrics arrive.
 import Reveal from "../../../chrome/Reveal.tsx";
 import "./ByTheNumbers.css";
 

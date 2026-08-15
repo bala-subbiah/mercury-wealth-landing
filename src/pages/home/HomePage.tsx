@@ -5,7 +5,6 @@ import WorkflowCards from "./sections/WorkflowCards.tsx";
 import PreppedOvernight from "./sections/PreppedOvernight.tsx";
 import AskMercury from "./sections/AskMercury.tsx";
 import IntegrationsConveyor from "./sections/IntegrationsConveyor.tsx";
-import ByTheNumbers from "./sections/ByTheNumbers.tsx";
 import WhyMercury from "./sections/WhyMercury.tsx";
 import SecurityGrid from "./sections/SecurityGrid.tsx";
 import FinalCta from "./sections/FinalCta.tsx";
@@ -34,7 +33,6 @@ export default function HomePage() {
         <PreppedOvernight />
         <AskMercury />
         <IntegrationsConveyor />
-        <ByTheNumbers />
         <WhyMercury />
         <SecurityGrid />
         <FinalCta />
