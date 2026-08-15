@@ -535,6 +535,10 @@ export const DEMO_LINK_PROPS = { href: DEMO_URL, target: "_blank", rel: "noopene
 Plus the founder's personal LinkedIn (owner-supplied, real, only personal link on the
 site): `https://www.linkedin.com/in/oscar-chan-499a1a48/` (`src/company-page/FounderStatement.tsx`).
 
+> **[SUPERSEDED 2026-08-15, owner directive R3]** The demo CTA and its captions below
+> are retired: the sitewide CTA is now a single **"Request a conversation"** button per
+> cluster (CONVERSATION_MAILTO). The paragraphs below are kept as the v2 harvest record.
+
 CTA copy used sitewide, verbatim, on every placement: **"Open the live demo"** (primary),
 mobile-collapsed variant **"Live demo"**, secondary variants **"Explore the Cockpit"** /
 **"See how it works"** / **"See the engines"**, and the offered (never required) secondary

@@ -1,4 +1,4 @@
-import { CONVERSATION_MAILTO, DEMO_LINK_PROPS } from "../../../links.ts";
+import { CONVERSATION_MAILTO } from "../../../links.ts";
 import "../../home/sections/home-cta.css";
 import "./Hero.css";
 
@@ -16,10 +16,7 @@ export default function Hero() {
         <p className="mai-hero__sub">It prepares. You decide.</p>
 
         <div className="mai-hero__actions">
-          <a className="home-cta" {...DEMO_LINK_PROPS}>
-            Open the live demo
-          </a>
-          <a className="mai-hero__quiet" href={CONVERSATION_MAILTO}>
+          <a className="home-cta" href={CONVERSATION_MAILTO}>
             Request a conversation
           </a>
         </div>

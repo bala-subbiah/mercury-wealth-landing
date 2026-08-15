@@ -3,8 +3,11 @@
    §5: grids cap at 3). Compact padding relative to the other bands, per the
    task's "ONE compact band" instruction. */
 
+/* The band now closes the paper run before the navy contact bookend (the logo
+   row that used to sit between them is gone, R3), so the tail padding grows a
+   step to keep the join from reading as a hard stop. */
 .facts {
-  padding-block: var(--space-lg) var(--space-xl);
+  padding-block: var(--space-lg) var(--space-2xl);
 }
 
 .facts__grid {
@@ -41,19 +44,6 @@
   color: var(--color-muted-light);
 }
 
-.facts__link {
-  color: var(--color-body-light);
-  border-bottom: 1px solid var(--rule-light);
-  transition:
-    color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
-}
-
-.facts__link:hover {
-  color: var(--color-ink);
-  border-color: var(--color-ink);
-}
-
 .facts__hedge {
   display: block;
   margin-top: var(--space-xs);
@@ -87,11 +77,5 @@
 
   .facts__item:nth-child(even) {
     padding-left: var(--space-xl);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .facts__link {
-    transition: none;
   }
 }

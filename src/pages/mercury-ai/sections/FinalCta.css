@@ -31,23 +31,6 @@
   margin-top: var(--space-lg);
 }
 
-.mai-cta__quiet {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  font-size: 15px;
-  color: var(--color-muted-dark);
-  border-bottom: 1px solid transparent;
-  transition:
-    color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
-}
-
-.mai-cta__quiet:hover {
-  color: var(--color-ink-dark);
-  border-bottom-color: var(--rule-dark);
-}
-
 @media (min-width: 560px) {
   .mai-cta__actions {
     flex-direction: row;

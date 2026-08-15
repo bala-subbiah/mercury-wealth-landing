@@ -1,4 +1,4 @@
-import { DEMO_LINK_PROPS } from "../../../links.ts";
+import { CONVERSATION_MAILTO } from "../../../links.ts";
 import "../../home/sections/home-cta.css";
 import "./Hero.css";
 
@@ -18,10 +18,9 @@ export default function Hero() {
         </p>
 
         <div className="cockpit-hero__actions">
-          <a className="home-cta" {...DEMO_LINK_PROPS}>
-            Open the live demo
+          <a className="home-cta" href={CONVERSATION_MAILTO}>
+            Request a conversation
           </a>
-          <p className="cockpit-hero__caption">NO FORM &middot; NO SIGN-UP &middot; THE REAL PRODUCT</p>
         </div>
       </div>
     </section>

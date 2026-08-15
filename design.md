@@ -227,7 +227,11 @@ colourway automatically.
    product; warm paper carries the company's own voice, at least once per page. Panels
    separate from the ground by luminance step, never by shadow. Section paddings varied,
    not uniform. No light/dark toggle.
-10. **One relentless CTA**: "Open the live demo" (placeholder URL until owner supplies).
+10. **One relentless CTA**: "Request a conversation" (CONVERSATION_MAILTO). Owner
+    directive 2026-08-15 (R3): the live-demo CTA and its "NO FORM · NO SIGN-UP"
+    captions are retired sitewide; every CTA cluster carries exactly one button, the
+    contact button. The "WORKING WITH" logo strip/marquee is likewise retired (home
+    and company); the logo assets stay in public/logos/ unused.
 
 ## IA / macrostructure
 

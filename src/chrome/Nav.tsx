@@ -1,16 +1,17 @@
 import { useCallback, useEffect, useId, useRef, useState, type FocusEvent } from "react";
-import { DEMO_LINK_PROPS } from "../links.ts";
+import { CONVERSATION_MAILTO } from "../links.ts";
 import { ROUTES, type PageKey } from "./routes.ts";
 import "./Nav.css";
 
 /* The site's single nav: wordmark left, plain links, one sharp rectangle CTA
    right; transparent over the hero, and gaining its own ground once scrolled
-   (design.md amendment 3).
+   (design.md amendment 3). The CTA is the site's one button — a conversation,
+   nowhere else to go (R3, owner-directed).
 
    Usage
    -----
-   Light-hero pages: <Nav overHero tone="light" current="home" />
-   Dark-hero pages:  <Nav overHero current="cockpit" />   — nav floats over the
+   Light-hero pages: <Nav overHero tone="light" current="…" />
+   Dark-hero pages:  <Nav overHero current="home" />      — nav floats over the
                      hero; the hero must reserve its own top padding
                      (var(--nav-h)) so the headline never sits under the bar.
    Everything else:  <Nav current="trust" />           — nav is solid from the
@@ -165,8 +166,8 @@ export default function Nav({ overHero = false, tone = "dark", current }: NavPro
           </div>
 
           <div className="nav__actions">
-            <a className="nav__cta" {...DEMO_LINK_PROPS}>
-              Open the live demo
+            <a className="nav__cta" href={CONVERSATION_MAILTO}>
+              Request a conversation
             </a>
 
             <button
@@ -226,8 +227,8 @@ export default function Nav({ overHero = false, tone = "dark", current }: NavPro
             </li>
           </ul>
 
-          <a className="nav__sheet-cta" {...DEMO_LINK_PROPS} onClick={closeSheet}>
-            Open the live demo
+          <a className="nav__sheet-cta" href={CONVERSATION_MAILTO} onClick={closeSheet}>
+            Request a conversation
           </a>
         </div>
       </header>

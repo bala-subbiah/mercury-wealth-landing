@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { CONVERSATION_MAILTO, DEMO_LINK_PROPS } from "../../../links.ts";
+import { CONVERSATION_MAILTO } from "../../../links.ts";
 import "./home-cta.css";
 import "./Hero.css";
 
-/* Home hero — full-bleed Hong Kong footage desaturated and laid INTO the paper
-   ground at low opacity, blended top and bottom by gradient (amendment 3),
-   left-aligned grotesque display in two short lines, one grey line naming who
-   it is for, one primary CTA and one hairline secondary.
+/* Home hero — full-bleed Hong Kong night footage at full strength on a midnight
+   ground (R3, owner-directed), white display type over a midnight scrim, one
+   primary CTA. The band is dark: it publishes the .band--navy colourway, so the
+   button, the focus ring and ::selection all follow without further work.
 
    The video is decoration: it carries no information the copy does not, so it
    is aria-hidden and simply not rendered when the reader asks for reduced
-   motion. The plain paper ground beneath it is the static fallback, which is
-   also what shows while the file is still loading. */
+   motion. The midnight ground beneath it is the static fallback, which is also
+   what shows while the file is still loading — text contrast therefore never
+   depends on the video having arrived. */
 
 function prefersReducedMotion(): boolean {
   return (
@@ -26,7 +27,7 @@ export default function Hero() {
   const [reduced] = useState(prefersReducedMotion);
 
   return (
-    <section className="hero band band--paper">
+    <section className="hero band band--navy">
       <div className="hero__media" aria-hidden="true">
         {!reduced && (
           <video
@@ -42,7 +43,7 @@ export default function Hero() {
             <source src="/videos/hk-skyline-lo.mp4" type="video/mp4" />
           </video>
         )}
-        <div className="hero__grade" />
+        <div className="hero__scrim" />
       </div>
 
       <div className="container hero__inner">
@@ -57,15 +58,10 @@ export default function Hero() {
         </p>
 
         <div className="hero__actions">
-          <a className="home-cta" {...DEMO_LINK_PROPS}>
-            Open the live demo
-          </a>
-          <a className="home-quiet" href={CONVERSATION_MAILTO}>
-            request a conversation
+          <a className="home-cta" href={CONVERSATION_MAILTO}>
+            Request a conversation
           </a>
         </div>
-
-        <p className="hero__caption">NO FORM · NO SIGN-UP</p>
       </div>
     </section>
   );

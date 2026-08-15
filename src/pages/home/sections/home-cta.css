@@ -1,19 +1,19 @@
-/* The home page's two call-to-action shapes, shared by the hero and the final
-   band so the language is drawn once (design.md amendment 3).
+/* The site's call-to-action shape, drawn once and shared by every band that
+   carries the button (design.md amendment 3).
 
-   Primary   — sharp-cornered rectangle, --cta-ground fill, mono uppercase label
-               in --cta-label. On light bands that is ink-on-paper with a white
-               label; on midnight bands it inverts to a white ground with a
-               midnight label. The band publishes the colourway (base.css).
-   Secondary — the same rectangle, transparent, 1px --cta-hairline border, label
-               in the band's own ink.
+   There is exactly one shape now (R3, owner-directed): a sharp-cornered
+   rectangle, --cta-ground fill, mono uppercase label in --cta-label. On light
+   bands that is ink-on-paper with a white label; on midnight bands it inverts
+   to a white ground with a midnight label. The band publishes the colourway
+   (base.css), so a button is always right for its ground with no work from the
+   section. The amendment's hairline secondary is retired with the second CTA
+   it used to carry.
 
    Hover is the mockup's sweep: a ::after plane scaled from 0 to 1 across the
    button, transform-only, var(--ease-out). No `transition: all`, no scale on
    the button itself, and the label never moves. */
 
-.home-cta,
-.home-quiet {
+.home-cta {
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -23,6 +23,9 @@
   min-height: 48px;
   padding: 15px 32px;
   border-radius: 0;
+  border: 1px solid var(--cta-ground);
+  background: var(--cta-ground);
+  color: var(--cta-label);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
@@ -35,59 +38,31 @@
 
 /* The sweep plane. Negative z-index inside the button's own stacking context
    puts it over the ground and under the label. */
-.home-cta::after,
-.home-quiet::after {
+.home-cta::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
+  background: var(--cta-sweep);
   transform: scaleX(0);
   transform-origin: right center;
   transition: transform 500ms var(--ease-out);
 }
 
 .home-cta:hover::after,
-.home-cta:focus-visible::after,
-.home-quiet:hover::after,
-.home-quiet:focus-visible::after {
+.home-cta:focus-visible::after {
   transform: scaleX(1);
   transform-origin: left center;
 }
 
-/* ------------------------------------------------------------- primary --- */
-
-.home-cta {
-  border: 1px solid var(--cta-ground);
-  background: var(--cta-ground);
-  color: var(--cta-label);
-}
-
-.home-cta::after {
-  background: var(--cta-sweep);
-}
-
-/* ----------------------------------------------------------- secondary --- */
-
-.home-quiet {
-  border: 1px solid var(--cta-hairline);
-  background: transparent;
-  color: var(--cta-ink);
-}
-
-.home-quiet::after {
-  background: var(--cta-ghost-sweep);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .home-cta::after,
-  .home-quiet::after {
+  .home-cta::after {
     transition: none;
   }
 }
 
 @media (min-width: 768px) {
-  .home-cta,
-  .home-quiet {
+  .home-cta {
     padding: 16px 32px;
     font-size: 12px;
   }

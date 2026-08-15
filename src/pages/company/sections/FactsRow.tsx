@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import Reveal from "../../../chrome/Reveal.tsx";
-import { DEMO_LINK_PROPS } from "../../../links.ts";
 import "./FactsRow.css";
 
 /* Facts row — one compact band, icon-led, replacing v2's four separate
@@ -38,16 +37,7 @@ const FACTS: Fact[] = [
       </svg>
     ),
     title: "What exists",
-    body: (
-      <>
-        Six capabilities on one spine: briefing, documents, workflows, meetings, research,
-        compliance. The cockpit is live, and it is open.{" "}
-        <a className="facts__link" {...DEMO_LINK_PROPS}>
-          Open the live demo
-        </a>
-        .
-      </>
-    ),
+    body: "Six capabilities on one spine: briefing, documents, workflows, meetings, research, compliance. The cockpit is live.",
   },
   {
     icon: (

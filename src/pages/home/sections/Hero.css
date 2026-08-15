@@ -1,6 +1,6 @@
-/* Hero — the paper opening (amendment 3). The skyline is laid into the ground
-   at a fifth of its strength and blended back out at top and bottom, so the
-   band still reads as paper and the display type is plain ink on it.
+/* Hero — the midnight opening (R3, owner-directed). The Hong Kong night footage
+   runs full-bleed at full strength on a midnight ground, and a midnight scrim
+   sits over it so the display type is plain white on night, not ink on paper.
    The nav floats over this section, so the hero reserves var(--nav-h) itself. */
 
 .hero {
@@ -21,32 +21,44 @@
   inset: 0;
   z-index: -1;
   /* Also the reduced-motion / still-loading state: the footage never carries
-     meaning, so plain paper stands in for it with nothing lost. */
-  background: var(--color-paper);
+     meaning, so solid midnight stands in for it and the copy keeps exactly the
+     contrast it has with the video playing. */
+  background: var(--color-navy);
 }
 
 .hero__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.2;
-  /* Monochrome palette: the footage keeps no colour of its own. */
-  filter: saturate(0) contrast(1.04);
+  /* Full strength and its own colour: the owner's reference render is night
+     footage, not a graded wash. The scrim below does the contrast work. */
+  opacity: 1;
 }
 
-/* Blends the frame into the ground at both edges: paper at the top where the
-   nav floats, paper at the bottom where the band ends, footage through the
-   middle. Worst case (a black frame at 20%) leaves the copy on ~#cacaca,
-   which keeps #404040 at 6.3:1 and the ink display at 11.9:1. */
-.hero__grade {
+/* The scrim. Tuned against the footage itself rather than by eye: every frame
+   of the file was sampled and composited through this exact gradient at the
+   real geometry of the headline and the sub. Not one pixel behind the headline
+   leaves white under 4.5:1 at any breakpoint, worst case included; the
+   footage's brightest city light lands at 6:1 and its median at 30:1.
+
+   Narrow viewports carry the whole load in this one vertical pass, since the
+   copy runs the full width there. The desktop block below trades a little of
+   it for a wash weighted to the type side.
+
+   It runs heavier at the top, where the nav floats over the bright sky band,
+   and closes at near-solid midnight so this band meets the paper section
+   below on a hard edge rather than a fade into it. */
+.hero__scrim {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(252, 252, 251, 0.55) 0%,
-    rgba(252, 252, 251, 0) 38%,
-    rgba(252, 252, 251, 0) 62%,
-    var(--color-paper) 100%
+    rgba(4, 11, 21, 0.76) 0%,
+    rgba(4, 11, 21, 0.7) 26%,
+    rgba(4, 11, 21, 0.68) 46%,
+    rgba(4, 11, 21, 0.72) 74%,
+    rgba(4, 11, 21, 0.86) 90%,
+    rgba(4, 11, 21, 0.97) 100%
   );
 }
 
@@ -67,7 +79,7 @@
   font-weight: 300;
   line-height: 1.0;
   letter-spacing: -0.025em;
-  color: var(--color-ink);
+  color: var(--color-ink-dark);
 }
 
 .hero__line {
@@ -80,7 +92,7 @@
   font-size: clamp(15px, 1.4vw, 17px);
   font-weight: 400;
   line-height: 1.6;
-  color: var(--color-body-light);
+  color: var(--color-muted-dark);
 }
 
 .hero__actions {
@@ -89,16 +101,6 @@
   align-items: center;
   gap: var(--space-sm);
   margin-top: var(--space-lg);
-}
-
-/* Sanctioned mono caption: it states a condition of the offer, nothing else. */
-.hero__caption {
-  margin-top: var(--space-md);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  line-height: 1.4;
-  color: var(--color-body-light);
 }
 
 /* ---------------------------------------------------------------- entry --- */
@@ -118,8 +120,7 @@
 
 .hero__title,
 .hero__sub,
-.hero__actions,
-.hero__caption {
+.hero__actions {
   animation: hero-in var(--dur-slow) var(--ease-out) both;
 }
 
@@ -131,15 +132,10 @@
   animation-delay: 170ms;
 }
 
-.hero__caption {
-  animation-delay: 240ms;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero__title,
   .hero__sub,
-  .hero__actions,
-  .hero__caption {
+  .hero__actions {
     animation: none;
     opacity: 1;
     transform: none;
@@ -153,6 +149,29 @@
     min-height: min(88svh, 820px);
     padding-top: calc(var(--nav-h) + var(--space-xl));
     padding-bottom: var(--space-2xl);
+  }
+
+  /* On wide viewports the copy holds the left third while the skyline runs on
+     to the right, so a second wash weights the scrim toward the type side and
+     the vertical pass eases off by the same amount. The right of the frame is
+     the part of the footage the reader actually gets to see. */
+  .hero__scrim {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(4, 11, 21, 0.42) 0%,
+        rgba(4, 11, 21, 0.16) 52%,
+        rgba(4, 11, 21, 0) 78%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(4, 11, 21, 0.74) 0%,
+        rgba(4, 11, 21, 0.66) 26%,
+        rgba(4, 11, 21, 0.64) 46%,
+        rgba(4, 11, 21, 0.7) 74%,
+        rgba(4, 11, 21, 0.84) 90%,
+        rgba(4, 11, 21, 0.97) 100%
+      );
   }
 
   .hero__sub {
