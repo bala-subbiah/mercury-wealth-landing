@@ -1,10 +1,13 @@
 /* The six workflows — paper ground. Wave 3: the day, told as a scroll
    sequence instead of a card grid.
 
-   Two layouts, one markup. Below 1000px (and in the static fallback the
+   Two layouts, one markup. Below 900px (and in the static fallback the
    component switches on for reduced motion or a missing IntersectionObserver)
    each step is simply its copy followed by its fragment, hairline-separated,
-   revealed as it arrives. At 1000px and up the <li> steps go `display:
+   revealed as it arrives — the fragment plane centres itself instead of
+   left-hugging once it hits its width cap, and the step icon sits tight
+   above the headline rather than floating orphaned above it. At 900px and up
+   (the site's desktop breakpoint) the <li> steps go `display:
    contents` and their children are placed by hand into a two-column grid: all
    six copy blocks share one sticky grid area in column 1, and the six fragments
    stack down column 2, one tall row each. The copy block whose fragment is
@@ -62,7 +65,11 @@
 }
 
 .workflows__step-title {
-  margin-top: var(--space-md);
+  /* Tight by default: the icon sits immediately above with a hairline gap
+     rather than floating orphaned above a wider one. Both desktop contexts
+     (pinned sequence and the is-static two-column fallback, ≥900px) restore
+     the more spacious editorial gap in their own media queries below. */
+  margin-top: var(--space-xs);
   font-size: 22px;
   line-height: 1.25;
   color: var(--color-ink);
@@ -129,7 +136,13 @@
    corners, no border, no shadow — the tint is what separates it from the band. */
 .wf-plane {
   width: 100%;
-  max-width: 460px;
+  max-width: 560px;
+  /* Centres the plane whenever it hits its cap in a wider single column
+     (stacked <900px, and the is-static desktop fallback), instead of
+     left-hugging with dead space to its right. In the pinned two-column
+     sequence and any narrower column, width:100% already fills the track
+     before the cap engages, so this is a no-op there. */
+  margin-inline: auto;
   padding: var(--space-md);
   border-radius: 0;
   background: linear-gradient(
@@ -474,11 +487,11 @@
 /* The fallback layout the component switches on for reduced motion or a
    missing IntersectionObserver: no pinning, each step side by side with its
    own fragment, everything already resolved. */
-@media (min-width: 1000px) {
+@media (min-width: 900px) {
   .workflows__seq.is-static .workflows__step {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    column-gap: var(--space-2xl);
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+    column-gap: clamp(40px, 5vw, 104px);
     align-items: center;
     padding-block: var(--space-xl);
   }
@@ -486,16 +499,27 @@
   .workflows__seq.is-static .workflows__frag {
     margin-top: 0;
   }
+
+  /* Desktop two-column: restore the more spacious editorial gap between icon
+     and headline (the tight --space-xs default is for the stacked <900px
+     column, where the icon would otherwise float orphaned above it). */
+  .workflows__seq.is-static .workflows__step-title {
+    margin-top: var(--space-md);
+  }
 }
 
 /* ------------------------------------------------------- pinned sequence -- */
 
-@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
   .workflows__seq:not(.is-static) {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    /* A 280px floor keeps the copy column readable at the 900–1000px range,
+       where the site's desktop breakpoint now switches on the pinned layout
+       but the viewport is still narrow; the gap tightens over the same range
+       instead of holding the full --space-2xl. */
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
     grid-template-rows: repeat(6, auto);
-    column-gap: var(--space-2xl);
+    column-gap: clamp(40px, 5vw, 104px);
     margin-top: var(--space-2xl);
   }
 
@@ -531,6 +555,7 @@
   }
 
   .workflows__seq:not(.is-static) .workflows__step-title {
+    margin-top: var(--space-md);
     font-size: clamp(26px, 2.6vw, 34px);
     font-weight: 300;
     letter-spacing: -0.02em;

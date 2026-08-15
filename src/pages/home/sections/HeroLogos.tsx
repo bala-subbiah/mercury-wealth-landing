@@ -3,9 +3,10 @@ import "./HeroLogos.css";
 /* The partner strip that rides the hero's bottom edge.
 
    No label: the owner asked "Working with" removed entirely (2026-08-15) —
-   the four marks now speak for themselves.
+   the marks now speak for themselves. FactSet joined the set 2026-08-15 as
+   a fifth mark, same white-monochrome treatment as the rest.
 
-   Default presentation is a continuous marquee: the four marks repeat enough
+   Default presentation is a continuous marquee: the five marks repeat enough
    times to overfill even an ultrawide viewport, and the track — rendered as
    one half of the set followed by an exact duplicate of that half — slides
    -50%, precisely one half's width, so the loop has no visible seam (the same
@@ -14,9 +15,10 @@ import "./HeroLogos.css";
    purely to fill the track and is hidden from assistive tech. Hover or focus
    pauses it.
 
-   Reduced motion drops the marquee entirely for the original static row: four
-   marks, no animation, folding to a 2x2 grid below 640px — see the
-   `prefers-reduced-motion` block in HeroLogos.css. */
+   Reduced motion drops the marquee entirely for the original static row: five
+   marks, no animation, folding to a 2x2 grid (FactSet spanning alone on the
+   last row) below 640px — see the `prefers-reduced-motion` block in
+   HeroLogos.css. */
 
 type Partner = {
   src: string;
@@ -30,9 +32,14 @@ const PARTNERS: ReadonlyArray<Partner> = [
   { src: "/logos/lizen.svg", alt: "Lizen Asset Management", className: "hero-logos__mark--lizen" },
   { src: "/logos/cyberport.svg", alt: "Cyberport", className: "hero-logos__mark--cyberport" },
   { src: "/logos/solomon.svg", alt: "Solomon", className: "hero-logos__mark--solomon" },
+  {
+    src: "/logos/integrations/factset.svg",
+    alt: "FactSet",
+    className: "hero-logos__mark--factset",
+  },
 ];
 
-// One half of the track: four copies of the four-mark set reliably overfills
+// One half of the track: four copies of the five-mark set reliably overfills
 // even a very wide viewport. The track renders this half twice, back to back,
 // and the keyframe slides exactly -50% — one half's width — so the join is
 // invisible.

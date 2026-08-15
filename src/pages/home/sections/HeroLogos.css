@@ -79,7 +79,7 @@
 }
 
 /* Per-mark heights are eyeballed to a shared optical weight, not to a shared
-   box: the four source files carry very different internal padding, and the
+   box: the five source files carry very different internal padding, and the
    stacked lockups need more height than the wordmarks to read at the same
    size. `aspect-ratio` matches each file's viewBox so a mark occupies its
    final width before the SVG arrives — the track never shifts. */
@@ -103,6 +103,11 @@
   aspect-ratio: 600 / 160;
 }
 
+.hero-logos__mark--factset {
+  height: 22px;
+  aspect-ratio: 409.45 / 79.248;
+}
+
 /* ------------------------------------------------------ reduced motion --- */
 
 /* The pre-marquee static row: hidden by default, and the only version that
@@ -120,8 +125,10 @@
     transition: none;
   }
 
-  /* Two columns on phones: four wide wordmarks in one line would shrink to
-     illegibility long before 320px. */
+  /* Two columns on phones: five wide wordmarks in one line would shrink to
+     illegibility long before 320px. Five is odd, so the last mark (FactSet)
+     spans both columns to sit centred on its own row rather than stranded
+     on the left. */
   .hero-logos__row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -130,9 +137,13 @@
     gap: var(--space-md) var(--space-lg);
     width: 100%;
   }
+
+  .hero-logos__row .hero-logos__item:last-child {
+    grid-column: 1 / -1;
+  }
 }
 
-/* From 640px the four spread across one line, rogo-style: a capped row so the
+/* From 640px the five spread across one line, rogo-style: a capped row so the
    gaps stay company rather than becoming distance. */
 @media (prefers-reduced-motion: reduce) and (min-width: 640px) {
   .hero-logos__row {

@@ -18,9 +18,9 @@ import "./Workflows.css";
    DOM order is one <li> per step carrying its own copy and its own fragment, so
    a screen reader or a keyboard user always gets the six steps in order,
    whatever the scroll position is; the two-column pinning is pure CSS grid
-   placement applied at ≥1000px. Below that, and under reduced motion (or with
-   no IntersectionObserver), the same markup stacks: copy, then its fragment,
-   six times, all resolved.
+   placement applied at ≥900px (the site's desktop breakpoint). Below that, and
+   under reduced motion (or with no IntersectionObserver), the same markup
+   stacks: copy, then its fragment, six times, all resolved.
 
    Every figure inside a fragment is a category-A demo figure from fact source
    §9 and stays inside the fragment; none of it is a marketing claim, and none
