@@ -1,9 +1,21 @@
-/* The six workflows — paper ground, 2-col card grid, hairline separation
-   (no shadows, per design.md: panels/cards separate by step or rule, never
-   shadow, and that discipline holds for marketing cards too). */
+/* The six workflows — paper ground. Wave 3: the day, told as a scroll
+   sequence instead of a card grid.
+
+   Two layouts, one markup. Below 1000px (and in the static fallback the
+   component switches on for reduced motion or a missing IntersectionObserver)
+   each step is simply its copy followed by its fragment, hairline-separated,
+   revealed as it arrives. At 1000px and up the <li> steps go `display:
+   contents` and their children are placed by hand into a two-column grid: all
+   six copy blocks share one sticky grid area in column 1, and the six fragments
+   stack down column 2, one tall row each. The copy block whose fragment is
+   crossing the middle of the viewport is the one at full opacity; the others
+   are transparent but still in the DOM, in order, for assistive tech.
+
+   Panels separate by luminance step and hairline, never by shadow. Chromatic
+   colour and mono uppercase live inside the fragments and nowhere else. */
 
 .workflows {
-  padding-block: var(--space-2xl) var(--space-2xl);
+  padding-block: var(--space-2xl);
 }
 
 .workflows__head {
@@ -23,27 +35,67 @@
   color: var(--color-muted-light);
 }
 
-.workflows__grid {
-  display: grid;
-  grid-template-columns: 1fr;
+/* ------------------------------------------------------ the sequence --- */
+
+.workflows__seq {
   margin-top: var(--space-xl);
+}
+
+.workflows__step {
+  padding-block: var(--space-lg);
   border-top: 1px solid var(--rule-light);
 }
 
-.workflows__card {
-  padding: var(--space-lg) 0;
-  border-bottom: 1px solid var(--rule-light);
+/* Copy: the state the pinned column animates between. Transform and opacity
+   only; the block is never removed from the accessibility tree. */
+.workflows__text-inner {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.workflows__step.is-seen .workflows__text-inner {
+  opacity: 1;
+  transform: none;
+}
+
+.workflows__step-title {
+  margin-top: var(--space-md);
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.workflows__step-body {
+  margin-top: var(--space-xs);
+  max-width: 34em;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--color-muted-light);
+}
+
+.workflows__frag {
+  margin-top: var(--space-md);
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.workflows__step.is-seen .workflows__frag {
+  opacity: 1;
+  transform: none;
 }
 
 /* ----------------------------------------------------------------- icons -- */
 
-/* Wave 2: the icons draw themselves in as their card reveals, ~70ms apart
-   down the grid. Deliberately quiet — the headline is the point, the icon is
-   seasoning. Strokes carrying .wf-draw also carry pathLength="1", which
-   normalises every path to a length of 1 so a single dash rule draws all of
-   them; the solid dots and the one intentionally dashed stroke are excluded
-   and fade instead. Both end states are the icon exactly as it was drawn
-   before this change. */
+/* Wave 2's draw-in, carried over: the icon draws itself as its step arrives.
+   Strokes carrying .wf-draw also carry pathLength="1", so one dash rule draws
+   any of them; the solid dots and the one deliberately dashed stroke are
+   excluded and fade instead. Both end states are the icon exactly as drawn. */
 
 .workflows__icon {
   display: inline-flex;
@@ -52,36 +104,509 @@
   color: var(--color-ink);
 }
 
-.workflows__card:nth-child(1) { --icon-delay: 120ms; }
-.workflows__card:nth-child(2) { --icon-delay: 190ms; }
-.workflows__card:nth-child(3) { --icon-delay: 260ms; }
-.workflows__card:nth-child(4) { --icon-delay: 330ms; }
-.workflows__card:nth-child(5) { --icon-delay: 400ms; }
-.workflows__card:nth-child(6) { --icon-delay: 470ms; }
-
 .workflows__icon .wf-draw {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 700ms var(--ease-out) var(--icon-delay, 0ms);
+  transition: stroke-dashoffset 700ms var(--ease-out) 120ms;
 }
 
-.workflows__card.is-shown .workflows__icon .wf-draw {
+.workflows__step.is-seen .workflows__icon .wf-draw {
   stroke-dashoffset: 0;
 }
 
 .workflows__icon svg > :not(.wf-draw) {
   opacity: 0;
-  transition: opacity var(--dur-med) var(--ease-out)
-    calc(var(--icon-delay, 0ms) + 280ms);
+  transition: opacity var(--dur-med) var(--ease-out) 400ms;
 }
 
-.workflows__card.is-shown .workflows__icon svg > :not(.wf-draw) {
+.workflows__step.is-seen .workflows__icon svg > :not(.wf-draw) {
   opacity: 1;
 }
 
-/* The finished icon, immediately. */
+/* ------------------------------------------------------------ fragments -- */
+
+/* The steel plane, the same illustration idiom as the home fragments: sharp
+   corners, no border, no shadow — the tint is what separates it from the band. */
+.wf-plane {
+  width: 100%;
+  max-width: 460px;
+  padding: var(--space-md);
+  border-radius: 0;
+  background: linear-gradient(
+    180deg,
+    var(--tint-steel-a) 0%,
+    #c4d4e2 52%,
+    var(--tint-steel-b) 100%
+  );
+}
+
+/* The one white card every fragment is built from. */
+.wf-card {
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.wf-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wf-card__label {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+/* Timestamp / field register: mono, tracked, tabular. Ink on the steel
+   gradient (9.2:1 at its darkest), body grey inside a white card (10.1:1). */
+.wf-stamp {
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.wf-stamp--card {
+  padding-bottom: 12px;
+  border-bottom-color: var(--rule-light);
+  color: var(--color-body-light);
+}
+
+.wf-time {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  color: var(--color-body-light);
+}
+
+.wf-chip {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+}
+
+.wf-chip--rose {
+  background: var(--chip-rose-bg);
+  color: var(--chip-rose-ink);
+}
+
+.wf-chip--amber {
+  background: var(--chip-amber-bg);
+  color: var(--chip-amber-ink);
+}
+
+.wf-chip--slate {
+  background: var(--chip-slate-bg);
+  color: var(--chip-slate-ink);
+}
+
+.wf-tick {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  color: var(--chip-emerald-ink);
+}
+
+.wf-mark {
+  flex: none;
+  width: 16px;
+  height: 12px;
+  color: var(--color-ink);
+}
+
+/* --- 1 brief: the ranked rows --- */
+
+.wf-rows {
+  display: grid;
+  gap: 8px;
+  margin-top: var(--space-sm);
+}
+
+.wf-row {
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.wf-row__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wf-row__rank {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--color-body-light);
+}
+
+.wf-row__text {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--color-body-light);
+}
+
+/* --- 2 catch: the drift gauge --- */
+
+.wf-gauge {
+  position: relative;
+  display: block;
+  height: 6px;
+  margin-top: 12px;
+  border-radius: 3px;
+  background: var(--color-paper-3);
+}
+
+.wf-gauge__fill {
+  position: absolute;
+  inset: 0 31.6% 0 0;
+  border-radius: 3px;
+  background: var(--chip-rose-ink);
+}
+
+.wf-gauge__target {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  left: 60%;
+  width: 2px;
+  background: var(--color-ink);
+}
+
+.wf-nums {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  color: var(--color-body-light);
+}
+
+/* --- 3 draft: the proposal lines and its mandate check --- */
+
+.wf-lines {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.wf-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-body-light);
+}
+
+.wf-line span:last-child {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+}
+
+.wf-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule-light);
+}
+
+.wf-check__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+/* --- 4 clear: the two people and the signature --- */
+
+.wf-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-body-light);
+}
+
+.wf-person--sign {
+  padding-top: 12px;
+  border-top: 1px solid var(--rule-light);
+}
+
+/* The squiggle writes itself once, then stays written. */
+.wf-mark--sign .wf-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 700ms var(--ease-out) 420ms;
+}
+
+.workflows__step.is-seen .wf-mark--sign .wf-draw {
+  stroke-dashoffset: 0;
+}
+
+/* --- 5 execute: the order's status --- */
+
+.wf-states {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.wf-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+/* --- 6 log: the timeline writing itself --- */
+
+.wf-log {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.wf-log__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--color-body-light);
+}
+
+.wf-log__dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--color-ink);
+}
+
+.wf-log__item--open .wf-log__dot {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--color-body-light);
+}
+
+/* The next event, not yet written. */
+.wf-log__pending {
+  display: block;
+  width: 58%;
+  height: 6px;
+  margin-top: 6px;
+  border-radius: 3px;
+  background: var(--color-paper-3);
+}
+
+/* --- staggered arrival inside a fragment --- */
+
+.wf-rows > li,
+.wf-states > li,
+.wf-log > li {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--dur-med) var(--ease-out) var(--stagger, 0ms),
+    transform var(--dur-med) var(--ease-out) var(--stagger, 0ms);
+}
+
+.wf-rows > li:nth-child(1),
+.wf-states > li:nth-child(1),
+.wf-log > li:nth-child(1) {
+  --stagger: 140ms;
+}
+
+.wf-rows > li:nth-child(2),
+.wf-states > li:nth-child(2),
+.wf-log > li:nth-child(2) {
+  --stagger: 260ms;
+}
+
+.wf-rows > li:nth-child(3),
+.wf-states > li:nth-child(3),
+.wf-log > li:nth-child(3) {
+  --stagger: 380ms;
+}
+
+.workflows__step.is-seen .wf-rows > li,
+.workflows__step.is-seen .wf-states > li,
+.workflows__step.is-seen .wf-log > li {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------- static desktop -- */
+
+/* The fallback layout the component switches on for reduced motion or a
+   missing IntersectionObserver: no pinning, each step side by side with its
+   own fragment, everything already resolved. */
+@media (min-width: 1000px) {
+  .workflows__seq.is-static .workflows__step {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    column-gap: var(--space-2xl);
+    align-items: center;
+    padding-block: var(--space-xl);
+  }
+
+  .workflows__seq.is-static .workflows__frag {
+    margin-top: 0;
+  }
+}
+
+/* ------------------------------------------------------- pinned sequence -- */
+
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  .workflows__seq:not(.is-static) {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-rows: repeat(6, auto);
+    column-gap: var(--space-2xl);
+    margin-top: var(--space-2xl);
+  }
+
+  /* The step keeps its identity in the DOM and loses only its box, so its
+     copy and its fragment can be placed in different columns. */
+  .workflows__seq:not(.is-static) .workflows__step {
+    display: contents;
+  }
+
+  /* All six copy blocks share one grid area spanning the whole track, and
+     each pins inside it. Only the active one is opaque. The half-height pull
+     centres the block on the viewport whatever its length, so the copy always
+     sits level with the fragment crossing beside it. */
+  .workflows__seq:not(.is-static) .workflows__text {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    position: sticky;
+    top: 50vh;
+    align-self: start;
+    transform: translateY(-50%);
+  }
+
+  .workflows__seq:not(.is-static) .workflows__step .workflows__text-inner {
+    opacity: 0;
+    transform: translateY(14px);
+    pointer-events: none;
+  }
+
+  .workflows__seq:not(.is-static) .workflows__step.is-active .workflows__text-inner {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .workflows__seq:not(.is-static) .workflows__step-title {
+    font-size: clamp(26px, 2.6vw, 34px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .workflows__seq:not(.is-static) .workflows__step-body {
+    margin-top: var(--space-sm);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-body-light);
+  }
+
+  /* One tall row per fragment: roughly a viewport each, capped so a very tall
+     window does not stretch the section past reason. */
+  .workflows__seq:not(.is-static) .workflows__frag {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    min-height: clamp(440px, 80vh, 720px);
+    margin-top: 0;
+  }
+
+  .workflows__seq:not(.is-static) .workflows__step:nth-child(1) .workflows__frag { grid-row: 1; }
+  .workflows__seq:not(.is-static) .workflows__step:nth-child(2) .workflows__frag { grid-row: 2; }
+  .workflows__seq:not(.is-static) .workflows__step:nth-child(3) .workflows__frag { grid-row: 3; }
+  .workflows__seq:not(.is-static) .workflows__step:nth-child(4) .workflows__frag { grid-row: 4; }
+  .workflows__seq:not(.is-static) .workflows__step:nth-child(5) .workflows__frag { grid-row: 5; }
+  .workflows__seq:not(.is-static) .workflows__step:nth-child(6) .workflows__frag { grid-row: 6; }
+
+  /* One plane size for all six, so the stage holds still as the day advances
+     and nothing on screen resizes between steps. */
+  .workflows__seq:not(.is-static) .wf-plane {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 400px;
+    max-width: 520px;
+    padding: var(--space-lg);
+  }
+
+  /* The icon draws as its step takes the stage, not when the fragment first
+     scrolls into view — by then the copy is still transparent. */
+  .workflows__seq:not(.is-static) .workflows__step.is-seen .workflows__icon .wf-draw {
+    stroke-dashoffset: 1;
+  }
+
+  .workflows__seq:not(.is-static) .workflows__step.is-seen .workflows__icon svg > :not(.wf-draw) {
+    opacity: 0;
+  }
+
+  .workflows__seq:not(.is-static) .workflows__step.is-active .workflows__icon .wf-draw {
+    stroke-dashoffset: 0;
+  }
+
+  .workflows__seq:not(.is-static) .workflows__step.is-active .workflows__icon svg > :not(.wf-draw) {
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------------- reduced motion --- */
+
+/* Everything resolved, nothing pinned, nothing waiting on an observer. */
 @media (prefers-reduced-motion: reduce) {
-  .workflows__icon .wf-draw {
+  .workflows__text-inner,
+  .workflows__frag,
+  .wf-rows > li,
+  .wf-states > li,
+  .wf-log > li {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .workflows__icon .wf-draw,
+  .wf-mark--sign .wf-draw {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
     transition: none;
@@ -90,43 +615,5 @@
   .workflows__icon svg > :not(.wf-draw) {
     opacity: 1;
     transition: none;
-  }
-}
-
-.workflows__card-title {
-  margin-top: var(--space-md);
-  font-size: 22px;
-  line-height: 1.25;
-  color: var(--color-ink);
-}
-
-.workflows__card-body {
-  margin-top: var(--space-xs);
-  max-width: 40em;
-  font-size: 15.5px;
-  line-height: 1.55;
-  color: var(--color-muted-light);
-}
-
-@media (min-width: 768px) {
-  .workflows__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--space-xl);
-  }
-
-  /* Column rule between the two cards in each row; the shared top/bottom
-     rules keep doing the row separation. */
-  .workflows__card {
-    border-right: 1px solid transparent;
-    padding: var(--space-xl) 0;
-  }
-
-  .workflows__card:nth-child(odd) {
-    padding-right: var(--space-xl);
-    border-right-color: var(--rule-light);
-  }
-
-  .workflows__card:nth-child(even) {
-    padding-left: var(--space-xl);
   }
 }
